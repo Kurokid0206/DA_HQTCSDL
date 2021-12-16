@@ -63,6 +63,5 @@ app.get("/employee", function(req, res) {
     })
     //admin page
 app.get("/admin", function(req, res) {
-
     res.sendFile(__dirname + "/html/index.html")
 })
