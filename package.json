@@ -1,0 +1,24 @@
+{
+  "name": "hqtcsdl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kurokid0206/DA_HQTCSDL.git"
+  },
+  "author": "Mean-Sin, Kuro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kurokid0206/DA_HQTCSDL/issues"
+  },
+  "homepage": "https://github.com/Kurokid0206/DA_HQTCSDL#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mssql": "^7.3.0",
+    "nodemon": "^2.0.15"
+  }
+}
