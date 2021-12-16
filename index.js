@@ -110,3 +110,24 @@ app.get("/cus-view-order", function(req,res){
     })
 })
 
+app.post("/insert-order", function(req,res){
+    Promise.resolve('success')
+    .then(async function () {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .input('HTThanhToan', sql.NVarChar(10), 'Tiền')
+                .input('DiaChiGiaoHang', sql.NVarChar(10), 'HCM')
+                .input('MaKH', sql.NVarChar(10), 'KH001')
+                .input('MaDT', sql.NVarChar(10), 'DT001')
+                .execute('sp_Insert_DonHang')
+            pool.close()
+            res.send(result.recordset)
+            console.log(result)
+            return 
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
+})
