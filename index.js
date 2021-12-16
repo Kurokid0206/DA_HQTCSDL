@@ -72,7 +72,7 @@ app.get("/admin", function(req, res) {
 
 
 
-app.get("/view-order", function(req,res){
+app.get("/driver-view-order", function(req,res){
     Promise.resolve('success')
     .then(async function () {
         try {
@@ -90,3 +90,23 @@ app.get("/view-order", function(req,res){
         }
     })
 })
+
+app.get("/cus-view-order", function(req,res){
+    Promise.resolve('success')
+    .then(async function () {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .input('MaKH', sql.NVarChar(10), 'KH001')
+                .execute('sp_KH_XemDH')
+            pool.close()
+            res.send(result.recordset)
+            console.log(result)
+            return 
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
+})
+
