@@ -1,6 +1,21 @@
 
+function log_in(){
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
 
-function signup(){
+        // input.value="";
+        // var data=JSON.parse(this.responseText)
+        // console.log(data)
+
+    }
+
+    xhtml.open("POST", "log-in");
+    //xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send();
+
+    return false;
+}
+function sign_up(){
 
 }
 function insert_contract(){
@@ -68,3 +83,20 @@ function insert_order(){
 
     return false;
 }
+function insert_contract(){
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+
+        // input.value="";
+        // var data=JSON.parse(this.responseText)
+        // console.log(data)
+
+    }
+
+    xhtml.open("POST", "insert-contract");
+    xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send();
+
+    return false;
+}
+
