@@ -25,7 +25,7 @@ app.listen(3000, function() {
 //config mssql
 config = {
     user: 'sa',
-    password: '123456789',
+    password: '.',
     server: 'localhost',
     database: 'qlGH',
     port: 1433,
@@ -139,11 +139,12 @@ app.post("/insert-customer", function(req,res){
         try {
             let pool = await sql.connect(config);
             let result = await pool.request()
-                .input('MaKH', sql.VarChar(10), 'KH00000005')
                 .input('HoTen', sql.NVarChar(50), 'Nguyễn Văn A')
                 .input('SDT', sql.VarChar(12), '0123456789')
                 .input('DiaChi', sql.NVarChar(100), 'Đường Bất Kì, Quận Nào Đó, Tỉnh Này Nọ')
                 .input('Email', sql.VarChar(50), 'aloemyeu0502@gmail.com')
+                .input('TK', sql.VarChar(50), 'BCK')
+                .output('MaKH', sql.Char(10), '')
                 .execute('sp_Insert_KhackHang')
             pool.close()
             res.send(result.recordset)
@@ -163,8 +164,9 @@ app.post("/insert-staff", function(req,res){
         try {
             let pool = await sql.connect(config);
             let result = await pool.request()
-                .input('MaNV', sql.VarChar(10), 'NV00000005')
                 .input('TenNV', sql.NVarChar(50), 'Nguyễn Văn Hảo Hán')
+                .input('TK', sql.NVarChar(50), 'EUR')
+                .output('MaNV', sql.VarChar(10), '')
                 .execute('sp_Insert_NhanVien')
             pool.close()
             res.send(result.recordset)
@@ -184,8 +186,7 @@ app.post("/insert-driver", function(req,res){
         try {
             let pool = await sql.connect(config);
             let result = await pool.request()
-                .input('MaTX', sql.VarChar(10), 'TX00000005')
-                .input('HoTen', sl.NVarChar(50), 'Nguyễn Tài Linh')
+                .input('HoTen', sql.NVarChar(50), 'Nguyễn Tài Linh')
                 .input('CMND', sql.VarChar(15), '080187568974')
                 .input('SDT', sql.VarChar(12), '0975888643')
                 .input('DiaChi', sql.NVarChar(100), 'Phố Chăm Học, Phường Siêng Năng, Tỉnh Chuyên Cần')
@@ -193,6 +194,8 @@ app.post("/insert-driver", function(req,res){
                 .input('KhuVucHD', sql.NVarChar(50), 'TP Thủ Đức')
                 .input('Email', sql.VarChar(50), 'email15463@gmail.com')
                 .input('TKNganHang', sql.VarChar(50), '6580972486321195')
+                .input('TK', sql.VarChar(50), 'HNB')
+                .output('MaTX', sql.Char(10), '')
                 .execute('sp_Insert_TaiXe')
             pool.close()
             res.send(result.recordset)
@@ -212,7 +215,6 @@ app.post("/insert-partner", function(req,res){
         try {
             let pool = await sql.connect(config);
             let result = await pool.request()
-                .input('MaDT', sql.VarChar(10), 'DT00000005')
                 .input('TenDT', sql.NVarChar(50), 'Công Ty TNHH Dầu Ăn')
                 .input('NguoiDD', sql.NVarChar(50), 'Nguyễn Văn B')
                 .input('TP', sql.NVarChar(50), 'TP Hồ Chí Minh')
@@ -222,6 +224,8 @@ app.post("/insert-partner", function(req,res){
                 .input('DiaChi', sql.NVarChar(50), 'Phường 6, Quận 12, TP.HCM')
                 .input('SDT', sql.VarChar(12), '0555683472')
                 .input('Email', sql.VarChar(50), 'dauan_corp@gmail.com')
+                .input('TK', sql.VarChar(50), 'ELR')
+                .output('MaDT', sql.Char(10), '')
                 .execute('sp_Insert_DoiTac')
             pool.close()
             res.send(result.recordset)
@@ -241,10 +245,11 @@ app.post("/insert-branch", function(req,res){
         try {
             let pool = await sql.connect(config);
             let result = await pool.request()
-                .input('MaCN', sql.VarChar(10), 'CN00000001')
                 .input('MaDT', sql.VarChar(10), 'DT00000005')
                 .input('TenCN', sql.NVarChar(50), 'Chi Nhánh Số 1')
                 .input('DiaChi', sql.NVarChar(50), 'Phường Linh Trung, TP Thủ Đức, TP.HCM')
+                .output('MaCN', sql.Char(10), '')
+                .execute('sp_Insert_ChiNhanh')
             pool.close()
             res.send(result.recordset)
             console.log(result)
