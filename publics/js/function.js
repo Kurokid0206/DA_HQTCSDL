@@ -1,24 +1,23 @@
 
-function log_in(){
-    var xhtml = new XMLHttpRequest();
-    xhtml.onload = function() {
+// function log_in(){
+//     var login = document.querySelector("#login-form")
+//     console.log(login.text)
+//     var xhtml = new XMLHttpRequest();
+//     xhtml.onload = function() {
 
-        // input.value="";
-        // var data=JSON.parse(this.responseText)
-        // console.log(data)
+//         // input.value="";
+//         // var data=JSON.parse(this.responseText)
+//         // console.log(data)
+//         console.log("hi")
+//     }
 
-    }
+//     xhtml.open("POST", "log-in");
+//     //xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//     xhtml.send();
 
-    xhtml.open("POST", "log-in");
-    //xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhtml.send();
-
-    return false;
-}
+//     return false;
+// }
 function sign_up(){
-
-}
-function insert_contract(){
 
 }
 
@@ -36,11 +35,9 @@ function driver_view_order(){
 
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
-
         // input.value="";
         // var data=JSON.parse(this.responseText)
         // console.log(data)
-
     }
 
     xhtml.open("GET", "driver-view-order");
