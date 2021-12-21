@@ -13,6 +13,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
     <!-- style css -->
     <link rel="stylesheet" href="style.css">
+    <!-- bootrap 5 cdn -->
     <!-- modernizr js -->
     <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
     <!-- client interact script -->
@@ -70,11 +71,11 @@
                                     <div id="navbar" class="navbar-collapse collapse no-padding">
                                         <ul class="navbar-nav dropdown">
 
-                                            <li><a href="registration">Register</a></li>
+                                            <li><a href="/">Đăng nhập</a></li>
 
                                             <li>
                                                 <a href="javascript:viod(0)" class="dropdown-toggle" data-toggle="dropdown" title="Show contact">
-													Contact <i class="zmdi zmdi-chevron-down"></i>
+													Liên hệ <i class="zmdi zmdi-chevron-down"></i>
 												</a>
                                                 <ul class="dropdown-menu">
                                                     <li><a href="courses.html">Facebook</a></li>
@@ -104,30 +105,7 @@
                 <!-- /.container -->
             </div>
         </header>
-        <!-- Login Section Start -->
-        <section class="login-area section-padding white-bg" id="login-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-8 col-md-7 col-text-center">
-                        <div class="enter-box">
-                            <h3 class="mb-35">Login with your site account</h3>
-                            <form class="custom-input" action="#">
-                                <input type="text" name="username" placeholder="User Name" />
-                                <input type="password" name="password" placeholder="Password" />
-                                <div class="clearfix">
-                                    <h6 class="text-capitalize pull-left">
-                                        <input type="checkbox" name="remember" value="Remember Me"> Remember Me
-                                    </h6>
-                                    <a class="pull-right" href="#">Forget Password?</a>
-                                </div>
-                                <button class="btn" type="submit" name="submit">Sign In</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Login Section End -->
+
         <!-- Header Section End -->
 
         <!-- Registration Section Start -->
@@ -136,10 +114,29 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-md-7 col-text-center">
                         <div class="enter-box">
-                            <h3 class="mb-35">Registration</h3>
+                            <h3 class="mb-35">Đăng ký tài khoản</h3>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                  Khách hàng
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                  Đối tác
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                  Tài xế
+                                </label>
+                            </div>
+
                             <form class="custom-input" action="#">
-                                <input type="text" name="first-name" placeholder="First Name" />
-                                <input type="text" name="last-name" placeholder="Last Name" />
+                                <input type="text" name="name" placeholder="Họ và tên" />
+                                <input type="text" name="city" placeholder="Thành phố" />
                                 <input type="email" name="email" placeholder="Email" />
                                 <input type="password" name="password" placeholder="Password" />
                                 <input type="password" name="password" placeholder="Confirm Password" />

@@ -17,10 +17,12 @@
   },
   "homepage": "https://github.com/Kurokid0206/DA_HQTCSDL#readme",
   "dependencies": {
+    "cookie-session": "^2.0.0",
     "express": "^4.17.1",
+    "install": "^0.13.0",
     "mssql": "^7.3.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "snpm": "^0.1.1"
   },
-  "devDependencies": {},
   "description": ""
 }
