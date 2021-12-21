@@ -4,6 +4,8 @@ function show_customer_form() {
     document.getElementById("driver-form").style.display = "none";
 }
 
+show_customer_form();
+
 function show_partner_form() {
     document.getElementById("customer-form").style.display = "none";
     document.getElementById("partner-form").style.display = "block";
