@@ -115,36 +115,74 @@
                     <div class="col-xs-12 col-sm-8 col-md-7 col-text-center">
                         <div class="enter-box">
                             <h3 class="mb-35">Đăng ký tài khoản</h3>
+                            <h6>Chọn loại tài khoản</h6>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked onclick="show_customer_form();">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                   Khách hàng
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onclick="show_partner_form();">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                   Đối tác
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onclick="show_driver_form();">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                   Tài xế
                                 </label>
                             </div>
+                            <br><br>
 
-                            <form class="custom-input" action="#">
+                            <form class="custom-input" action="#" id="customer-form">
+                                <h6> Thông tin khách hàng</h6>
                                 <input type="text" name="name" placeholder="Họ và tên" />
-                                <input type="text" name="city" placeholder="Thành phố" />
-                                <input type="email" name="email" placeholder="Email" />
-                                <input type="password" name="password" placeholder="Password" />
-                                <input type="password" name="password" placeholder="Confirm Password" />
-                                <h6 class="text-capitalize">
-                                    <input type="checkbox" name="agree-terms" value="I Agree.."> I Agree The User Agreement and Terms & Condition
-                                </h6>
-                                <button class="btn" type="submit" name="submit">Create Account</button>
+                                <input type="text" name="province" placeholder="Thành phố" />
+                                <input type="text" name="district" placeholder="Quận" />
+                                <input type="text" name="phone" placeholder="Số điện thoại" />
+                                <h6> Thông tin đăng nhập</h6>
+                                <input type="text" name="username" placeholder="Tên đăng nhập" />
+                                <input type="password" name="password" placeholder="Mật khẩu" />
+
+                                <button class="btn" type="submit" name="submit">Tạo tài khoản</button>
                             </form>
+                            <form class="custom-input" action="#" id="partner-form">
+                                <h6> Thông tin đối tác</h6>
+                                <input type="text" name="name" placeholder="Tên công ty" />
+                                <input type="text" name="representative" placeholder="Người đại diện" />
+                                <input type="text" name="province" placeholder="Thành phố" />
+                                <input type="text" name="district" placeholder="Quận" />
+                                <input type="number" name="number_of_branch" placeholder="Số chi nhánh" />
+                                <input type="number" name="max_order" placeholder="Số đơn tối đa" />
+                                <input type="text" name="type_tranfer" placeholder="Loại hàng vận chuyển" />
+                                <input type="text" name="address" placeholder="Địa chỉ kinh doanh" />
+                                <input type="text" name="phone" placeholder="Số điện thoại" />
+                                <input type="email" name="email" placeholder="Email" />
+                                <h6> Thông tin đăng nhập</h6>
+                                <input type="text" name="username" placeholder="Tên đăng nhập" />
+                                <input type="password" name="password" placeholder="Mật khẩu" />
+
+                                <button class="btn" type="submit" name="submit">Tạo tài khoản</button>
+                            </form>
+                            <form class="custom-input" action="#" id="driver-form">
+                                <h6> Thông tin tài xế</h6>
+                                <input type="text" name="name" placeholder="Họ và tên" />
+                                <input type="text" name="CMND" placeholder="CMND" />
+                                <input type="text" name="car_number" placeholder="Biển số xe" />
+                                <input type="text" name="phone" placeholder="Số điện thoại" />
+                                <input type="text" name="bank" placeholder="Thông tin ngân hàng" />
+                                <input type="text" name="address" placeholder="Địa chỉ" />
+                                <input type="text" name="area" placeholder="Khu vực hoạt động" />
+                                <input type="email" name="email" placeholder="Email" />
+                                <h6> Thông tin đăng nhập</h6>
+                                <input type="text" name="username" placeholder="Tên đăng nhập" />
+                                <input type="password" name="password" placeholder="Mật khẩu" />
+
+                                <button class="btn" type="submit" name="submit">Tạo tài khoản</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>
