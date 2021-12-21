@@ -66,6 +66,9 @@ app.get("/admin", function(req, res) {
     res.sendFile(__dirname + "/html/index.html")
 })
 
+app.get("/registration", function(req, res) {
+    res.sendFile(__dirname + "/html/registration.html")
+})
 
 
 
