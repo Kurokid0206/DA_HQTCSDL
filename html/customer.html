@@ -10,14 +10,14 @@
     <meta name="author" content="regaltheme.com">
     <title>Dịch vụ giao hàng C4</title>
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
     <!-- style css -->
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/style.css">
     <!-- modernizr js -->
-    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="/assets/js/vendor/modernizr-2.8.3.min.js"></script>
     <!-- client interact script -->
-    <script src="./js/homepage.js"></script>
-    <script src="./js/function.js"></script>
+    <script src="/js/homepage.js"></script>
+    <script src="/js/function.js"></script>
 </head>
 
 <body>
@@ -59,7 +59,7 @@
                         <div class="col-xs-12">
                             <div class="d-flex justify-end">
                                 <div class="logo mr-auto" style="width:auto;">
-                                    <a href="http://localhost:3000"><img src="images/home-logo.png" alt="Home Page" style="width: 80px;display:inline" />
+                                    <a href="http://localhost:3000"><img src="/images/home-logo.png" alt="Home Page" style="width: 80px;display:inline" />
                                         <p style="display:inline">GIAO HÀNG C4</p>
                                     </a>
 
@@ -70,7 +70,7 @@
                                     <div id="navbar" class="navbar-collapse collapse no-padding">
                                         <ul class="navbar-nav dropdown">
 
-                                            <li><a href="/">Đặt hàng</a></li>
+                                            <li><a href="/" onclick="">Đặt hàng</a></li>
                                             <li><a href="/">Theo dõi đơn hàng</a></li>
                                             <li><a href="/">Đăng xuất</a></li>
 
@@ -106,8 +106,11 @@
                 <!-- /.container -->
             </div>
         </header>
+
+        <!-- Header Section End -->
+
         <!-- Order section Start -->
-        <section class="register-area section-padding white-bg">
+        <section class="register-area section-padding white-bg" id="order-section">
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-md-7 col-text-center">
@@ -117,24 +120,24 @@
                             <form class="custom-input" action="#" id="order-form">
                                 <h6 style="margin:5px 0 0 0;">Đối tác:</h6>
                                 <select name="partner" id="select-partner" placeholder="Chọn đối tác">
-                                    <option selected>Chọn đối tác</option>
-                                    <option value="Mã đối tác">Tên đối tác</option>
-                                </select>
+                            <option selected>Chọn đối tác</option>
+                            <option value="Mã đối tác">Tên đối tác</option>
+                        </select>
 
                                 <h6 style="margin:5px 0 0 0;">Sản phẩm:</h6>
                                 <select name="product" id="select-product" placeholder="Chọn đối tác">
-                                    <option selected>Chọn sản phẩm</option>
-                                    <option value="Mã sp">Tên sản phẩm</option>
-                                </select>
+                            <option selected>Chọn sản phẩm</option>
+                            <option value="Mã sp">Tên sản phẩm</option>
+                        </select>
                                 <h6 style="margin:5px 0 0 0;">Số lượng:</h6>
                                 <input type="number" name="quantity" placeholder="Số lượng" />
                                 <h6 style="margin:5px 0 0 0;">Địa chỉ nhận hàng:</h6>
                                 <input type="text" name="address" placeholder="Địa chỉ nhận hàng" />
                                 <h6 style="margin:5px 0 0 0;">Hình thức thanh toán:</h6>
                                 <select name="product" id="select-product" placeholder="Chọn đối tác">
-                                    <option selected>Chọn sản phẩm</option>
-                                    <option value="Mã sp">Tên sản phẩm</option>
-                                </select>
+                            <option selected>Chọn sản phẩm</option>
+                            <option value="Mã sp">Tên sản phẩm</option>
+                        </select>
                                 <table class="table ">
                                     <thead>
                                         <tr>
@@ -187,9 +190,103 @@
             </div>
         </section>
         <!-- Order section End -->
-        <!-- Header Section End -->
+
+        <!-- View bill section Start -->
+        <section class="register-area section-padding white-bg" id="order-section">
+            <div class="container">
+                <div class="row">
+                    <div class="" style="margin: 0 auto; width: auto;">
+                        <div class="enter-box" style="padding: 87px;width: 900px; margin: 0 auto;">
+                            <h3 class="mb-35">Quản lý đơn hàng</h3>
+                            <table class="table ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="width: 120px;">
+                                            <h6 style="margin:5px 0 0 0;">Mã đơn hàng</h6>
+                                        </th>
+                                        <th scope="col" style="width: 200px;">
+                                            <h6 style="margin:5px 0 0 0;">Sản phẩm</h6>
+                                        </th>
+                                        <th scope="col" style="width: 100px;">
+                                            <h6 style="margin:5px 0 0 0;">Tổng tiền</h6>
+                                        </th>
+                                        <th scope="col" style="width: 100px;">
+                                            <h6 style="margin:5px 0 0 0;">Tình trạng</h6>
+                                        </th>
+                                        <th scope="col" style="width: 100px;">
+                                            <h6 style="margin:5px 0 0 0;">Hủy đơn</h6>
+                                        </th>
+                                    </tr>
 
 
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td scope="col" style="width: 100px;">
+                                            <h6 style="margin:5px 0 0 0;">#123456</h6>
+                                        </td>
+                                        <td scope="col" style="width: 200px;">
+                                            <h6 style="margin:5px 0 0 0;">Sữa dê dừa</h6>
+                                        </td>
+                                        <td scope="col" style="width: 100px;">
+                                            <h6 style="margin:5px 0 0 0;">500000vnd</h6>
+                                        </td>
+                                        <td scope="col" style="width: 100px;">
+                                            <h6 style="margin:5px 0 0 0;">Chưa giao</h6>
+                                        </td>
+                                        <td scope="col" style="width: 100px;">
+                                            <button class="btn-primary"><h6 style="margin:5px 0 0 0; color: aliceblue;">Hủy đơn</h6></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col" style="width: 100px;">
+                                            <h6 style="margin:5px 0 0 0;">#123456</h6>
+                                        </td>
+                                        <td scope="col" style="width: 200px;">
+                                            <h6 style="margin:5px 0 0 0;">Sữa dê dừa</h6>
+                                        </td>
+                                        <td scope="col" style="width: 100px;">
+                                            <h6 style="margin:5px 0 0 0;">500000vnd</h6>
+                                        </td>
+                                        <td scope="col" style="width: 100px;">
+                                            <h6 style="margin:5px 0 0 0;">Chưa giao</h6>
+                                        </td>
+                                        <td scope="col" style="width: 100px;">
+                                            <button class="btn-danger"><h6 style="margin:5px 0 0 0; color: aliceblue;">Hủy đơn</h6></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="col" style="width: 100px;">
+                                            <h6 style="margin:5px 0 0 0;">#123456</h6>
+                                        </td>
+                                        <td scope="col" style="width: 200px;">
+                                            <h6 style="margin:5px 0 0 0;">Sữa dê dừa</h6>
+                                        </td>
+                                        <td scope="col" style="width: 100px;">
+                                            <h6 style="margin:5px 0 0 0;">500000vnd</h6>
+                                        </td>
+                                        <td scope="col" style="width: 100px;">
+                                            <h6 style="margin:5px 0 0 0;">Chưa giao</h6>
+                                        </td>
+                                        <td scope="col" style="width: 100px;">
+                                            <button class="btn-danger"><h6 style="margin:5px 0 0 0; color: aliceblue;">Hủy đơn</h6></button>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- View bill section END -->
 
 
         <!-- Footer Section Start -->
