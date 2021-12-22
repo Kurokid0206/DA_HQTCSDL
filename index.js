@@ -55,6 +55,12 @@ app.get("/supplier", function(req, res) {
     res.sendFile(__dirname + "/html/supplier.html")
 })
 
+//errr
+app.get("/supplier123", function(req, res) {
+
+    res.sendFile(__dirname + "/html/supplier123.html")
+})
+
 //driver page
 app.get("/driver", function(req, res) {
 
