@@ -55,23 +55,19 @@ app.get("/supplier", function(req, res) {
     res.sendFile(__dirname + "/html/supplier.html")
 })
 
-app.get("/supplier123", function(req, res) {
-
-        res.sendFile(__dirname + "/html/supplier123.html")
-    })
-    //driver page
+//driver page
 app.get("/driver", function(req, res) {
 
-        res.sendFile(__dirname + "/html/index.html")
+        res.sendFile(__dirname + "/html/driver.html")
     })
     //employee page
 app.get("/employee", function(req, res) {
 
-        res.sendFile(__dirname + "/html/index.html")
+        res.sendFile(__dirname + "/html/employee.html")
     })
     //admin page
 app.get("/admin", function(req, res) {
-    res.sendFile(__dirname + "/html/index.html")
+    res.sendFile(__dirname + "/html/admin.html")
 })
 
 app.get("/registration", function(req, res) {
