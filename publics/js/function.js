@@ -80,6 +80,24 @@ function insert_order(){
 
     return false;
 }
+
+function insert_order_detail(){
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+
+        // input.value="";
+        // var data=JSON.parse(this.responseText)
+        // console.log(data)
+
+    }
+
+    xhtml.open("POST", "insert-order");
+    xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send();
+
+    return false;
+}
+
 function insert_contract(){
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
