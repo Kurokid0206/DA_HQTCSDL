@@ -74,9 +74,6 @@ app.get("/registration", function(req, res) {
 })
 
 
-
-
-
 app.post("/insert-order", function(req, res) {
     Promise.resolve('success')
         .then(async function() {
@@ -116,6 +113,7 @@ async function insert_order_detail(data) {
         return error.message
     }
 }
+
 app.post("/insert-contract", function(req, res) {
     Promise.resolve('success')
         .then(async function() {
@@ -200,7 +198,7 @@ app.get("/cus-view-order", function(req, res) {
         try {
             let pool = await sql.connect(config);
             let result = await pool.request()
-                .input('MaKH', sql.NVarChar(10), 'KH001')
+                .input('MaKH', sql.NVarChar(10), 'KH00000001')
                 .execute('sp_KH_XemDH')
             pool.close()
             res.send(result.recordset)
@@ -218,8 +216,8 @@ app.get("/cus-view-order-detail", function(req, res) {
         try {
             let pool = await sql.connect(config);
             let result = await pool.request()
-                .input('MaKH', sql.NVarChar(10), 'KH001')
-                .execute('sp_KH_XemDH')
+                .input('MaDH', sql.NVarChar(10), 'DH00000000')
+                .execute('sp_KH_XemCTDH')
             pool.close()
             res.send(result.recordset)
             console.log(result)
