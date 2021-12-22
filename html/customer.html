@@ -20,7 +20,7 @@
     <script src="/js/function.js"></script>
 </head>
 
-<body>
+<body onload="show('new-order-section')">
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -70,9 +70,9 @@
                                     <div id="navbar" class="navbar-collapse collapse no-padding">
                                         <ul class="navbar-nav dropdown">
 
-                                            <li><a href="/" onclick="">Đặt hàng</a></li>
-                                            <li><a href="/">Theo dõi đơn hàng</a></li>
-                                            <li><a href="/">Đăng xuất</a></li>
+                                            <li><a onclick="show('new-order-section')">Đặt hàng</a></li>
+                                            <li><a onclick="show('view-order-section');customer_view_order();">Theo dõi đơn hàng</a></li>
+                                            <li><a onclick="show('')">Đăng xuất</a></li>
 
                                             <li>
                                                 <a href="javascript:viod(0)" class="dropdown-toggle" data-toggle="dropdown" title="Show contact">
@@ -110,7 +110,7 @@
         <!-- Header Section End -->
 
         <!-- Order section Start -->
-        <section class="register-area section-padding white-bg" id="order-section">
+        <section class="register-area section-padding white-bg" id="new-order-section">
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-md-7 col-text-center">
@@ -192,13 +192,13 @@
         <!-- Order section End -->
 
         <!-- View bill section Start -->
-        <section class="register-area section-padding white-bg" id="order-section">
+        <section class="register-area section-padding white-bg" id="view-order-section">
             <div class="container">
                 <div class="row">
                     <div class="" style="margin: 0 auto; width: auto;">
                         <div class="enter-box" style="padding: 87px;width: 900px; margin: 0 auto;">
                             <h3 class="mb-35">Quản lý đơn hàng</h3>
-                            <table class="table ">
+                            <table class="table " id="bill">
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width: 120px;">
@@ -222,58 +222,7 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">#123456</h6>
-                                        </td>
-                                        <td scope="col" style="width: 200px;">
-                                            <h6 style="margin:5px 0 0 0;">Sữa dê dừa</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">500000vnd</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">Chưa giao</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <button class="btn-primary"><h6 style="margin:5px 0 0 0; color: aliceblue;">Hủy đơn</h6></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">#123456</h6>
-                                        </td>
-                                        <td scope="col" style="width: 200px;">
-                                            <h6 style="margin:5px 0 0 0;">Sữa dê dừa</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">500000vnd</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">Chưa giao</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <button class="btn-danger"><h6 style="margin:5px 0 0 0; color: aliceblue;">Hủy đơn</h6></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">#123456</h6>
-                                        </td>
-                                        <td scope="col" style="width: 200px;">
-                                            <h6 style="margin:5px 0 0 0;">Sữa dê dừa</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">500000vnd</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">Chưa giao</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <button class="btn-danger"><h6 style="margin:5px 0 0 0; color: aliceblue;">Hủy đơn</h6></button>
-                                        </td>
-                                    </tr>
-
+                                    
                                 </tbody>
                             </table>
 
