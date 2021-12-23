@@ -1,4 +1,4 @@
-const ids=["new-order-section","view-order-section"]
+const ids=["new-order-section","view-order-section","view-order-detail-section"]
 
 function show(id){
     
@@ -41,6 +41,7 @@ function driver_view_order(){
 }
 
 function customer_view_order(){
+    show('view-order-section');
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
 
@@ -55,19 +56,20 @@ function customer_view_order(){
     return false;
 }
 
-function customer_view_order_detail(){
+function customer_view_order_detail(MaDH){
+    show('view-order-detail-section')
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
-
+        render_view_order_detail(JSON.parse(this.responseText))
         // input.value="";
         // var data=JSON.parse(this.responseText)
         // console.log(data)
 
     }
 
-    xhtml.open("GET", "cus-view-order-detail");
-    //xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhtml.send();
+    xhtml.open("POST", "cus-view-order-detail");
+    xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send('MaDH='+MaDH);
 
     return false;
 }
@@ -139,9 +141,35 @@ function render_view_order(data){
         <td scope="col" style="width: 100px;">
         <h6 style="margin:5px 0 0 0;">${element.TinhTrang}</h6>
         </td>
-        <td>
-        <button class="btn-danger" onclick="function(${element.MaDH})">
+        <td><button class="btn-danger" onclick="customer_view_order_detail('${element.MaDH}')">
+        <h6 style="margin:5px 0 0 0; color: aliceblue;">Xem đơn</h6></button></td>
+        <td><button class="btn-danger" onclick="function(${element.MaDH})">
         <h6 style="margin:5px 0 0 0; color: aliceblue;">Hủy đơn</h6></button></td></tr>`
+    });
+    bill.innerHTML=tr
+}
+
+function render_view_order_detail(data){
+    var bill = document.querySelector("#bill-detail tbody")
+    var tr=``
+    data.forEach(element => {
+        tr=tr+`<tr>
+        <th scope="col" style="width: 120px;">
+            <h6 style="margin:5px 0 0 0;">${element.MaSP}</h6>
+        </th>
+        <th scope="col" style="width: 200px;">
+            <h6 style="margin:5px 0 0 0;">${element.TenSP}</h6>
+        </th>
+        <th scope="col" style="width: 100px;">
+            <h6 style="margin:5px 0 0 0;">${element.GiaBan}</h6>
+        </th>
+        <th scope="col" style="width: 100px;">
+            <h6 style="margin:5px 0 0 0;">${element.SoLuong}</h6>
+        </th>
+        <th scope="col" style="width: 10px;">
+            <h6 style="margin:5px 0 0 0;">${element.ThanhTien}</h6>
+        </th>
+    </tr>`
     });
     bill.innerHTML=tr
 }

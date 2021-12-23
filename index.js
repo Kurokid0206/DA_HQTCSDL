@@ -15,6 +15,7 @@ app.use(express.json())
 //app.set("view engine","ejs");
 
 const sql = require('mssql');
+const { json } = require("express/lib/response");
 //const { config } = require("nodemon");
 
 
@@ -55,11 +56,6 @@ app.get("/supplier", function(req, res) {
     res.sendFile(__dirname + "/html/supplier.html")
 })
 
-//errr
-app.get("/supplier123", function(req, res) {
-
-    res.sendFile(__dirname + "/html/supplier123.html")
-})
 
 //driver page
 app.get("/driver", function(req, res) {
@@ -209,7 +205,7 @@ app.get("/cus-view-order", function(req, res) {
                     .execute('sp_KH_XemDH')
                 pool.close()
                 res.send(result.recordset)
-                console.log(result)
+                //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -217,13 +213,14 @@ app.get("/cus-view-order", function(req, res) {
             }
         })
 })
-app.get("/cus-view-order-detail", function(req, res) {
+app.post("/cus-view-order-detail", function(req, res) {
+    console.log(req.body.MaDH)
     Promise.resolve('success')
         .then(async function() {
             try {
                 let pool = await sql.connect(config);
                 let result = await pool.request()
-                    .input('MaDH', sql.NVarChar(10), 'DH00000000')
+                    .input('MaDH', sql.NVarChar(10), req.body.MaDH)
                     .execute('sp_KH_XemCTDH')
                 pool.close()
                 res.send(result.recordset)
@@ -255,12 +252,28 @@ app.post("/log-in", function(req, res) {
                 let result = await pool.request()
                     .input('tk', sql.VARCHAR(10), `${req.body.username}`)
                     .input('mk', sql.VarChar(10), `${req.body.password}`)
-                    .output('matk', sql.VarChar(10))
-                    .execute('sp_login')
+                    .output('ma', sql.Char(10))
+                    .execute('sp_TK_Login')
                 pool.close()
-                res.redirect("/")
-                    //res.send(result)
-                console.log(result)
+               
+                let type = JSON.stringify(result.output)
+                if(type.indexOf("KH")>-1){
+                   
+                    res.redirect("/customer")
+                }
+                else if(type.indexOf("TX")>-1){
+                   
+                    res.redirect("/driver")
+                }
+                else if(type.indexOf("DT")>-1){
+                   
+                    res.redirect("/supplier")
+                }
+                else if(type.indexOf("QTV")>-1){
+                   
+                    res.redirect("/admin")
+                }
+                
                 return
             } catch (error) {
                 console.log(error.message);

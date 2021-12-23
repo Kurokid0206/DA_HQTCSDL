@@ -71,7 +71,7 @@
                                         <ul class="navbar-nav dropdown">
 
                                             <li><a onclick="show('new-order-section')">Đặt hàng</a></li>
-                                            <li><a onclick="show('view-order-section');customer_view_order();">Theo dõi đơn hàng</a></li>
+                                            <li><a onclick="customer_view_order();">Theo dõi đơn hàng</a></li>
                                             <li><a onclick="show('')">Đăng xuất</a></li>
 
                                             <li>
@@ -205,13 +205,16 @@
                                             <h6 style="margin:5px 0 0 0;">Mã đơn hàng</h6>
                                         </th>
                                         <th scope="col" style="width: 200px;">
-                                            <h6 style="margin:5px 0 0 0;">Sản phẩm</h6>
+                                            <h6 style="margin:5px 0 0 0;">Địa chỉ</h6>
                                         </th>
                                         <th scope="col" style="width: 100px;">
                                             <h6 style="margin:5px 0 0 0;">Tổng tiền</h6>
                                         </th>
                                         <th scope="col" style="width: 100px;">
                                             <h6 style="margin:5px 0 0 0;">Tình trạng</h6>
+                                        </th>
+                                        <th scope="col" style="width: 100px;">
+                                            <h6 style="margin:5px 0 0 0;">Xem đơn</h6>
                                         </th>
                                         <th scope="col" style="width: 100px;">
                                             <h6 style="margin:5px 0 0 0;">Hủy đơn</h6>
@@ -237,6 +240,52 @@
         </section>
         <!-- View bill section END -->
 
+
+        <!-- View bill-detail section Start -->
+        <section class="register-area section-padding white-bg" id="view-order-detail-section">
+            <div class="container">
+                <div class="row">
+                    <div class="" style="margin: 0 auto; width: auto;">
+                        <div class="enter-box" style="padding: 87px;width: 900px; margin: 0 auto;">
+                            <h3 class="mb-35">Quản lý đơn hàng</h3>
+                            <table class="table " id="bill-detail">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="width: 120px;">
+                                            <h6 style="margin:5px 0 0 0;">Mã Sản Phẩm</h6>
+                                        </th>
+                                        <th scope="col" style="width: 200px;">
+                                            <h6 style="margin:5px 0 0 0;">Sản Phẩm</h6>
+                                        </th>
+                                        <th scope="col" style="width: 100px;">
+                                            <h6 style="margin:5px 0 0 0;">Đơn Giá</h6>
+                                        </th>
+                                        <th scope="col" style="width: 100px;">
+                                            <h6 style="margin:5px 0 0 0;">Số Lương</h6>
+                                        </th>
+                                        <th scope="col" style="width: 10px;">
+                                            <h6 style="margin:5px 0 0 0;">Thành Tiền</h6>
+                                        </th>
+                                    </tr>
+
+
+                                </thead>
+
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- View bill-detail section END -->
 
         <!-- Footer Section Start -->
         <footer class="section-pt bg-color-5">
