@@ -408,22 +408,3 @@ app.post("/dri-recv-order", function(req, res) {
             }
         })
 })
-
-app.post("/dri123-son", function(req, res) {
-    Promise.resolve('success')
-        .then(async function() {
-            try {
-                let pool = await sql.connect(config);
-                let result = await pool.request()
-                    .input('MaDH', sql.Char(10), 'DH0000001')
-                    .input('MaTX', sql.Char(10), 'TX0000001')
-                    .execute('sp_TX_NhanDH')
-                pool.close()
-                res.send(result.recordset)
-                console.log(result)
-                return
-            } catch (error) {
-
-            }
-        })
-})
