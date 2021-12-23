@@ -24,8 +24,8 @@ app.listen(3000, function() {
 
 //config mssql
 config = {
-    user: 'sa',
-    password: '.',
+    user: 'user',
+    password: '111101',
     server: 'localhost',
     database: 'qlGH',
     port: 1433,
@@ -283,6 +283,7 @@ app.post("/log-in", function(req, res) {
 
 app.get("/supplier-data", function(req, res) {
     Promise.resolve('success')
+<<<<<<< HEAD
         .then(async function() {
             try {
                 let pool = await sql.connect(config);
@@ -316,4 +317,125 @@ app.post("/supplier-data", function(req, res) {
                 return error.message
             }
         })
+=======
+    .then(async function () {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .input('HTThanhToan', sql.NVarChar(10), 'Tiền')
+                .input('DiaChiGiaoHang', sql.NVarChar(10), 'HCM')
+                .input('MaKH', sql.NVarChar(10), 'KH001')
+                .input('MaDT', sql.NVarChar(10), 'DT001')
+                .execute('sp_Insert_DonHang')
+            pool.close()
+            res.send(result.recordset)
+            console.log(result)
+            return 
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
+})
+
+app.post("/insert-product", function(req,res){
+    Promise.resolve('success')
+    .then(async function () {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .output('MaSP', sql.Char(10))
+                .input('TenSP', sql.NVarChar(50), 'Sản Phẩm A')
+                .input('GiaBan', sql.Int, '10000')
+                .execute('sp_Insert_SanPham')
+            pool.close()
+            res.send(result.recordset)
+            console.log(result)
+            return 
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
+})
+
+app.post("/insert-product_branch", function(req,res){
+    Promise.resolve('success')
+    .then(async function () {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .input('MaSP', sql.Char(10), 'SP0000001')
+                .input('MaDT', sql.Char(10), 'DT0000001')
+                .input('MaCN', sql.Char(10), 'CN0000001')
+                .execute('sp_Insert_SP_CN')
+            pool.close()
+            res.send(result.recordset)
+            console.log(result)
+            return 
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
+})
+
+app.post("/dri-update-order-stat", function(req,res){
+    Promise.resolve('success')
+    .then(async function () {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .input('MaDH', sql.Char(10), 'DH0000001')
+                .input('Option', sql.Int, 1)
+                .execute('sp_Update_TinhTrang')
+            pool.close()
+            res.send(result.recordset)
+            console.log(result)
+            return 
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
+})
+
+app.post("/dri-recv-order", function(req,res){
+    Promise.resolve('success')
+    .then(async function () {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .input('MaDH', sql.Char(10), 'DH0000001')
+                .input('MaTX', sql.Char(10), 'TX0000001')
+                .execute('sp_TX_NhanDH')
+            pool.close()
+            res.send(result.recordset)
+            console.log(result)
+            return 
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
+})
+
+app.post("/cancel-order", function(req,res){
+    Promise.resolve('success')
+    .then(async function () {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .input('MaDH', sql.Char(10), 'DH0000001')
+                .execute('sp_HuyDH')
+            pool.close()
+            res.send(result.recordset)
+            console.log(result)
+            return 
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
+>>>>>>> Son
 })
