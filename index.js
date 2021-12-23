@@ -24,8 +24,8 @@ app.listen(3000, function() {
 
 //config mssql
 config = {
-    user: 'user',
-    password: '111101',
+    user: 'sa',
+    password: '.',
     server: 'localhost',
     database: 'qlGH',
     port: 1433,
@@ -76,6 +76,45 @@ app.get("/registration", function(req, res) {
 })
 
 
+
+app.post("/log-in", function(req, res) {
+    //console.log(req.body)
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool.request()
+                    .input('tk', sql.VARCHAR(10), `${req.body.username}`)
+                    .input('mk', sql.VarChar(10), `${req.body.password}`)
+                    .output('ma', sql.Char(10))
+                    .execute('sp_TK_Login')
+                pool.close()
+               
+                let type = JSON.stringify(result.output)
+                if(type.indexOf("KH")>-1){
+                   
+                    res.redirect("/customer")
+                }
+                else if(type.indexOf("TX")>-1){
+                   
+                    res.redirect("/driver")
+                }
+                else if(type.indexOf("DT")>-1){
+                   
+                    res.redirect("/supplier")
+                }
+                else if(type.indexOf("QTV")>-1){
+                   
+                    res.redirect("/admin")
+                }
+                
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        })
+})
 app.post("/insert-order", function(req, res) {
     Promise.resolve('success')
         .then(async function() {
@@ -97,7 +136,6 @@ app.post("/insert-order", function(req, res) {
             }
         })
 })
-
 async function insert_order_detail(data) {
     try {
         let pool = await sql.connect(config);
@@ -115,6 +153,100 @@ async function insert_order_detail(data) {
         return error.message
     }
 }
+app.get("/cus-view-order", function(req, res) {
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool.request()
+                    .input('MaKH', sql.NVarChar(10), 'KH00000001')
+                    .execute('sp_KH_XemDH')
+                pool.close()
+                res.send(result.recordset)
+                //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        })
+})
+app.post("/cus-view-order-detail", function(req, res) {
+    console.log(req.body.MaDH)
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool.request()
+                    .input('MaDH', sql.NVarChar(10), req.body.MaDH)
+                    .execute('sp_KH_XemCTDH')
+                pool.close()
+                res.send(result.recordset)
+                //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        })
+})
+app.post("/cancel-order", function(req,res){
+    Promise.resolve('success')
+    .then(async function () {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .input('MaDH', sql.VarChar(10), req.body.MaDH)
+                .execute('sp_KH_HuyDH')
+            pool.close()
+            res.send(result.recordset)
+            //console.log(result)
+            return 
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
+})
+app.get("/supplier-data", function(req, res) {
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool.request()
+                    .execute('sp_get_DT')
+                pool.close()
+                res.send(result.recordset)
+                //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        })
+})
+
+app.post("/product-data", function(req, res) {
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool.request()
+                    .input("MaDT",sql.VarChar(10),req.body.MaDT)
+                    .execute('sp_KH_XemSP')
+                pool.close()
+                res.send(result.recordset)
+                //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        })
+})
+
+
+
 
 app.post("/insert-contract", function(req, res) {
     Promise.resolve('success')
@@ -168,6 +300,59 @@ app.post("/insert-product-branch", function(req, res) {
 
 
 
+
+
+
+
+
+
+
+
+app.post("/insert-product", function(req,res){
+    Promise.resolve('success')
+    .then(async function () {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .output('MaSP', sql.Char(10))
+                .input('TenSP', sql.NVarChar(50), 'Sản Phẩm A')
+                .input('GiaBan', sql.Int, '10000')
+                .execute('sp_Insert_SanPham')
+            pool.close()
+            res.send(result.recordset)
+            console.log(result)
+            return 
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
+})
+
+app.post("/insert-product_branch", function(req,res){
+    Promise.resolve('success')
+    .then(async function () {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .input('MaSP', sql.Char(10), 'SP0000001')
+                .input('MaDT', sql.Char(10), 'DT0000001')
+                .input('MaCN', sql.Char(10), 'CN0000001')
+                .execute('sp_Insert_SP_CN')
+            pool.close()
+            res.send(result.recordset)
+            console.log(result)
+            return 
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
+})
+
+
+
+
 app.get("/driver-view-order", function(req, res) {
     Promise.resolve('success')
         .then(async function() {
@@ -187,133 +372,43 @@ app.get("/driver-view-order", function(req, res) {
         })
 })
 
-
-app.post("/driver-get-order", function(req, res) {
-
-
-
-})
-
-app.get("/cus-view-order", function(req, res) {
+app.post("/dri-update-order-stat", function(req,res){
     Promise.resolve('success')
-        .then(async function() {
-            try {
-                let pool = await sql.connect(config);
-                let result = await pool.request()
-                    .input('MaKH', sql.NVarChar(10), 'KH00000001')
-                    .execute('sp_KH_XemDH')
-                pool.close()
-                res.send(result.recordset)
-                //console.log(result)
-                return
-            } catch (error) {
-                console.log(error.message);
-                return error.message
-            }
-        })
+    .then(async function () {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .input('MaDH', sql.Char(10), 'DH0000001')
+                .input('Option', sql.Int, 1)
+                .execute('sp_Update_TinhTrang')
+            pool.close()
+            res.send(result.recordset)
+            console.log(result)
+            return 
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
 })
-app.post("/cus-view-order-detail", function(req, res) {
-    console.log(req.body.MaDH)
+
+app.post("/dri-recv-order", function(req,res){
     Promise.resolve('success')
-        .then(async function() {
-            try {
-                let pool = await sql.connect(config);
-                let result = await pool.request()
-                    .input('MaDH', sql.NVarChar(10), req.body.MaDH)
-                    .execute('sp_KH_XemCTDH')
-                pool.close()
-                res.send(result.recordset)
-                //console.log(result)
-                return
-            } catch (error) {
-                console.log(error.message);
-                return error.message
-            }
-        })
+    .then(async function () {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .input('MaDH', sql.Char(10), 'DH0000001')
+                .input('MaTX', sql.Char(10), 'TX0000001')
+                .execute('sp_TX_NhanDH')
+            pool.close()
+            res.send(result.recordset)
+            console.log(result)
+            return 
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
 })
 
-
-
-app.post("/customer-cancel-order", function(req, res) {
-
-
-
-})
-
-
-
-app.post("/log-in", function(req, res) {
-    //console.log(req.body)
-    Promise.resolve('success')
-        .then(async function() {
-            try {
-                let pool = await sql.connect(config);
-                let result = await pool.request()
-                    .input('tk', sql.VARCHAR(10), `${req.body.username}`)
-                    .input('mk', sql.VarChar(10), `${req.body.password}`)
-                    .output('ma', sql.Char(10))
-                    .execute('sp_TK_Login')
-                pool.close()
-               
-                let type = JSON.stringify(result.output)
-                if(type.indexOf("KH")>-1){
-                   
-                    res.redirect("/customer")
-                }
-                else if(type.indexOf("TX")>-1){
-                   
-                    res.redirect("/driver")
-                }
-                else if(type.indexOf("DT")>-1){
-                   
-                    res.redirect("/supplier")
-                }
-                else if(type.indexOf("QTV")>-1){
-                   
-                    res.redirect("/admin")
-                }
-                
-                return
-            } catch (error) {
-                console.log(error.message);
-                return error.message
-            }
-        })
-})
-
-app.get("/supplier-data", function(req, res) {
-    Promise.resolve('success')
-        .then(async function() {
-            try {
-                let pool = await sql.connect(config);
-                let result = await pool.request()
-                    .execute('sp_get_DT')
-                pool.close()
-                res.send(result.recordset)
-                //console.log(result)
-                return
-            } catch (error) {
-                console.log(error.message);
-                return error.message
-            }
-        })
-})
-
-app.post("/supplier-data", function(req, res) {
-    Promise.resolve('success')
-        .then(async function() {
-            try {
-                let pool = await sql.connect(config);
-                let result = await pool.request()
-                    .input("MaDT",sql.VarChar(10),req.body.MaDT)
-                    .execute('sp_KH_XemSP')
-                pool.close()
-                res.send(result.recordset)
-                //console.log(result)
-                return
-            } catch (error) {
-                console.log(error.message);
-                return error.message
-            }
-        })
-})

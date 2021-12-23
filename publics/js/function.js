@@ -143,11 +143,13 @@ function render_view_order(data){
         </td>
         <td><button class="btn-danger" onclick="customer_view_order_detail('${element.MaDH}')">
         <h6 style="margin:5px 0 0 0; color: aliceblue;">Xem đơn</h6></button></td>
-        <td><button class="btn-danger" onclick="function(${element.MaDH})">
-        <h6 style="margin:5px 0 0 0; color: aliceblue;">Hủy đơn</h6></button></td></tr>`
+        <td><button class="btn-danger" onclick="cancel_order('${element.MaDH}')">
+        <h6 style="margin:5px 0 0 0; color: aliceblue;">Hủy đơn</h6>
+        </button></td></tr>`
     });
     bill.innerHTML=tr
 }
+
 
 function render_view_order_detail(data){
     var bill = document.querySelector("#bill-detail tbody")
@@ -194,7 +196,7 @@ function render_supplier(data){
     });
     supplier.innerHTML=opt
 }
-    
+
 function get_product(){
     let MaDT=document.querySelector("#select-partner").value
     var xhtml = new XMLHttpRequest();
@@ -202,7 +204,7 @@ function get_product(){
         render_product(JSON.parse(this.responseText))
     }
 
-    xhtml.open("POST", "supplier-data");
+    xhtml.open("POST", "product-data");
     xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhtml.send("MaDT="+MaDT);
 }
@@ -216,4 +218,70 @@ function render_product(data){
             .toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}(vnd)</option>`
     });
     product.innerHTML=opt
+}
+
+function insert_product_branch(){
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+
+        // input.value="";
+        // var data=JSON.parse(this.responseText)
+        // console.log(data)
+
+    }
+
+    xhtml.open("POST", "insert-product_branch");
+    xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send();
+
+    return false;
+}
+
+function dri_update_order(){
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+
+        // input.value="";
+        // var data=JSON.parse(this.responseText)
+        // console.log(data)
+
+    }
+
+    xhtml.open("POST", "dri-update-order-stat");
+    xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send();
+
+    return false;
+}
+
+function dri_recv_order(){
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+
+        // input.value="";
+        // var data=JSON.parse(this.responseText)
+        // console.log(data)
+
+    }
+
+    xhtml.open("POST", "dri-recv-order");
+    xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send();
+
+    return false;
+}
+
+function cancel_order(MaDH){
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+
+        customer_view_order();
+
+    }
+
+    xhtml.open("POST", "cancel-order");
+    xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send("MaDH="+MaDH);
+
+    return false;
 }
