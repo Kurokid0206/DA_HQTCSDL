@@ -24,8 +24,8 @@ app.listen(3000, function() {
 
 //config mssql
 config = {
-    user: 'sa',
-    password: '.',
+    user: 'user',
+    password: '111101',
     server: 'localhost',
     database: 'qlGH',
     port: 1433,

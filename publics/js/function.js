@@ -1,6 +1,6 @@
 const ids=["new-order-section","view-order-section","view-order-detail-section"]
 
-function show(id){
+function cus_show(id){
     
     ids.forEach(id=>{
         var div = document.querySelector("#"+id);
@@ -41,7 +41,7 @@ function driver_view_order(){
 }
 
 function customer_view_order(){
-    show('view-order-section');
+    cus_show('view-order-section');
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
 
@@ -57,7 +57,7 @@ function customer_view_order(){
 }
 
 function customer_view_order_detail(MaDH){
-    show('view-order-detail-section')
+    cus_show('view-order-detail-section')
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
         render_view_order_detail(JSON.parse(this.responseText))
@@ -194,7 +194,7 @@ function render_supplier(data){
     });
     supplier.innerHTML=opt
 }
-
+    
 function get_product(){
     let MaDT=document.querySelector("#select-partner").value
     var xhtml = new XMLHttpRequest();
