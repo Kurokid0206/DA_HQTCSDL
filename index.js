@@ -3,7 +3,6 @@ const express = require("express");
 const app = express();
 const path = require("path")
 
-
 //set stactic folder
 app.use(express.static('./publics/'))
 
@@ -90,7 +89,7 @@ app.post("/insert-order", function(req, res) {
                     .execute('sp_Insert_DonHang')
                 pool.close()
                 res.send(result.recordset)
-                console.log(result)
+                //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -108,8 +107,8 @@ async function insert_order_detail(data) {
             .input('SoLuong', sql.Int, data.SoLuong)
             .execute('sp_Insert_CT_DonHang')
         pool.close()
-            //res.send(result.recordset)
-        console.log(result)
+        res.send(result.recordset)
+        //console.log(result)
         return
     } catch (error) {
         console.log(error.message);
@@ -131,7 +130,7 @@ app.post("/insert-contract", function(req, res) {
                     .execute('sp_Insert_HopDong')
                 pool.close()
                 res.send(result.recordset)
-                console.log(result)
+                //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -150,7 +149,7 @@ async function insert_contract_detail(data) {
             .execute('sp_Insert_CT_HopDong')
         pool.close()
             //res.send(result.recordset)
-        console.log(result)
+        //console.log(result)
         return
     } catch (error) {
         console.log(error.message);
@@ -179,7 +178,7 @@ app.get("/driver-view-order", function(req, res) {
                     .execute('sp_TX_XemDH')
                 pool.close()
                 res.send(result.recordset)
-                console.log(result)
+                //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -224,7 +223,7 @@ app.post("/cus-view-order-detail", function(req, res) {
                     .execute('sp_KH_XemCTDH')
                 pool.close()
                 res.send(result.recordset)
-                console.log(result)
+                //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -274,6 +273,43 @@ app.post("/log-in", function(req, res) {
                     res.redirect("/admin")
                 }
                 
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        })
+})
+
+app.get("/supplier-data", function(req, res) {
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool.request()
+                    .execute('sp_get_DT')
+                pool.close()
+                res.send(result.recordset)
+                //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        })
+})
+
+app.post("/supplier-data", function(req, res) {
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool.request()
+                    .input("MaDT",sql.VarChar(10),req.body.MaDT)
+                    .execute('sp_KH_XemSP')
+                pool.close()
+                res.send(result.recordset)
+                //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);

@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Cultura is a Education HTML Template">
-    <meta name="keywords" content="	classes, college, course, courses, educational, learning, online courses, revolution slider, school, seminar, tutorials, university, workshop">
+    <meta name="keywords"
+        content="	classes, college, course, courses, educational, learning, online courses, revolution slider, school, seminar, tutorials, university, workshop">
     <meta name="author" content="regaltheme.com">
     <title>Dịch vụ giao hàng C4</title>
     <!-- favicon -->
@@ -20,7 +21,7 @@
     <script src="/js/function.js"></script>
 </head>
 
-<body onload="show('new-order-section')">
+<body onload="show('new-order-section'); get_supplier();">
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -59,7 +60,8 @@
                         <div class="col-xs-12">
                             <div class="d-flex justify-end">
                                 <div class="logo mr-auto" style="width:auto;">
-                                    <a href="http://localhost:3000"><img src="/images/home-logo.png" alt="Home Page" style="width: 80px;display:inline" />
+                                    <a href="http://localhost:3000"><img src="/images/home-logo.png" alt="Home Page"
+                                            style="width: 80px;display:inline" />
                                         <p style="display:inline">GIAO HÀNG C4</p>
                                     </a>
 
@@ -75,9 +77,10 @@
                                             <li><a onclick="show('')">Đăng xuất</a></li>
 
                                             <li>
-                                                <a href="javascript:viod(0)" class="dropdown-toggle" data-toggle="dropdown" title="Show contact">
-													Contact <i class="zmdi zmdi-chevron-down"></i>
-												</a>
+                                                <a href="javascript:viod(0)" class="dropdown-toggle"
+                                                    data-toggle="dropdown" title="Show contact">
+                                                    Contact <i class="zmdi zmdi-chevron-down"></i>
+                                                </a>
                                                 <ul class="dropdown-menu">
                                                     <li><a href="courses.html">Facebook</a></li>
                                                     <li><a href="courses-list-view.html">EMail</a></li>
@@ -119,25 +122,26 @@
 
                             <form class="custom-input" action="#" id="order-form">
                                 <h6 style="margin:5px 0 0 0;">Đối tác:</h6>
-                                <select name="partner" id="select-partner" placeholder="Chọn đối tác">
-                            <option selected>Chọn đối tác</option>
-                            <option value="Mã đối tác">Tên đối tác</option>
-                        </select>
+                                <select name="partner" id="select-partner" placeholder="Chọn đối tác" onchange="get_product()">
+                                    <option selected>Chọn đối tác</option>
+
+
+                                </select>
 
                                 <h6 style="margin:5px 0 0 0;">Sản phẩm:</h6>
                                 <select name="product" id="select-product" placeholder="Chọn đối tác">
-                            <option selected>Chọn sản phẩm</option>
-                            <option value="Mã sp">Tên sản phẩm</option>
-                        </select>
+                                    <option selected>Chọn sản phẩm</option>
+                                    <option value="Mã sp">Tên sản phẩm</option>
+                                </select>
                                 <h6 style="margin:5px 0 0 0;">Số lượng:</h6>
                                 <input type="number" name="quantity" placeholder="Số lượng" />
                                 <h6 style="margin:5px 0 0 0;">Địa chỉ nhận hàng:</h6>
                                 <input type="text" name="address" placeholder="Địa chỉ nhận hàng" />
                                 <h6 style="margin:5px 0 0 0;">Hình thức thanh toán:</h6>
                                 <select name="product" id="select-product" placeholder="Chọn đối tác">
-                            <option selected>Chọn sản phẩm</option>
-                            <option value="Mã sp">Tên sản phẩm</option>
-                        </select>
+                                    <option selected>Chọn sản phẩm</option>
+                                    <option value="Mã sp">Tên sản phẩm</option>
+                                </select>
                                 <table class="table ">
                                     <thead>
                                         <tr>
@@ -225,7 +229,7 @@
                                 </thead>
 
                                 <tbody>
-                                    
+
                                 </tbody>
                             </table>
 
@@ -272,7 +276,7 @@
                                 </thead>
 
                                 <tbody>
-                                    
+
                                 </tbody>
                             </table>
 
@@ -299,9 +303,11 @@
                                 </div>
                                 <ul>
                                     <li class="mb-10"><span>Address:</span> 10 North 10 Street,
-                                        <br /> Office 120 Barinai UK 200</li>
+                                        <br /> Office 120 Barinai UK 200
+                                    </li>
                                     <li><span>Phone:</span> <a href="tel:+895245485565">+89 524 5485 565</a></li>
-                                    <li><span>Email:</span> <a href="mailto:cultura@email.com">cultura@email.com</a></li>
+                                    <li><span>Email:</span> <a href="mailto:cultura@email.com">cultura@email.com</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -355,17 +361,22 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <div class="left">
-                                <p>Copyright &copy; 2018 <a href="https://themeforest.net/user/regaltheme/portfolio">Regaltheme</a>.</p>
+                                <p>Copyright &copy; 2018 <a
+                                        href="https://themeforest.net/user/regaltheme/portfolio">Regaltheme</a>.</p>
                             </div>
                             <!-- Change your Copyright -->
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="social-icon text-right">
                                 <ul class="clearfix d-inblock">
-                                    <li><a href="https://www.facebook.com/regaltheme/" target="_blank"><i class="zmdi zmdi-facebook"></i></a></li>
-                                    <li><a href="https://twitter.com/regaltheme" target="_blank"><i class="zmdi zmdi-twitter"></i></a></li>
-                                    <li><a href="https://www.pinterest.com/regaltheme/" target="_blank"><i class="zmdi zmdi-pinterest"></i></a></li>
-                                    <li><a href="http://www.instagram.com" target="_blank"><i class="zmdi zmdi-instagram"></i></a></li>
+                                    <li><a href="https://www.facebook.com/regaltheme/" target="_blank"><i
+                                                class="zmdi zmdi-facebook"></i></a></li>
+                                    <li><a href="https://twitter.com/regaltheme" target="_blank"><i
+                                                class="zmdi zmdi-twitter"></i></a></li>
+                                    <li><a href="https://www.pinterest.com/regaltheme/" target="_blank"><i
+                                                class="zmdi zmdi-pinterest"></i></a></li>
+                                    <li><a href="http://www.instagram.com" target="_blank"><i
+                                                class="zmdi zmdi-instagram"></i></a></li>
                                 </ul>
                             </div>
                             <!-- Change your social media link -->

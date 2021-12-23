@@ -173,3 +173,47 @@ function render_view_order_detail(data){
     });
     bill.innerHTML=tr
 }
+
+
+function get_supplier(){
+
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+        render_supplier(JSON.parse(this.responseText))
+    }
+
+    xhtml.open("GET", "supplier-data");
+    xhtml.send();
+}
+
+function render_supplier(data){
+    var supplier = document.querySelector("#select-partner")
+    var opt=`<option selected>Chọn đối tác</option>`
+    data.forEach(element => {
+        opt=opt+`<option value='${element.MaDT}'>${element.TenDT}</option>`
+    });
+    supplier.innerHTML=opt
+}
+
+function get_product(){
+    let MaDT=document.querySelector("#select-partner").value
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+        render_product(JSON.parse(this.responseText))
+    }
+
+    xhtml.open("POST", "supplier-data");
+    xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send("MaDT="+MaDT);
+}
+
+function render_product(data){
+    var product = document.querySelector("#select-product")
+    var opt=`<option selected>Chọn Sản Phẩm</option>`
+    data.forEach(element => {
+        opt=opt+`<option onclick="">${element.TenSP}-
+        ${(element.GiaBan)
+            .toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}(vnd)</option>`
+    });
+    product.innerHTML=opt
+}
