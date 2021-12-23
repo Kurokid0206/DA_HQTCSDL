@@ -16,7 +16,7 @@
     <!-- modernizr js -->
     <script src="/assets/js/vendor/modernizr-2.8.3.min.js"></script>
     <!-- client interact script -->
-    <script src="/js/customer.js"></script>
+    <script src="/js/homepage.js"></script>
     <script src="/js/function.js"></script>
 </head>
 
@@ -70,9 +70,10 @@
                                     <div id="navbar" class="navbar-collapse collapse no-padding">
                                         <ul class="navbar-nav dropdown">
 
-                                            <li><a>Lập hợp đồng</a></li>
-                                            <li><a>Quản lý sản phẩm</a></li>
                                             <li><a>Quản lý đơn hàng</a></li>
+                                            <li><a>Quản lý sản phẩm</a></li>
+                                            <li><a>Quản lý chi nhánh</a></li>
+                                            <li><a>Lập hợp đồng</a></li>
                                             <li><a>Đăng xuất</a></li>
 
 
@@ -111,68 +112,90 @@
 
         <!-- Header Section End -->
 
-        <!-- Order section Start -->
-        <section class="register-area section-padding white-bg" id="order-section">
+        <!-- Create contract section Start -->
+        <section class="register-area section-padding white-bg" id="create-contract-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-8 col-md-7 col-text-center">
+                    <div class="">
                         <div class="enter-box">
                             <h3 class="mb-35">Lập hợp đồng</h3>
 
                             <form class="custom-input" action="#" id="order-form">
 
                                 <h6 style="margin:5px 0 0 0;">Mã số thuế:</h6>
-                                <input type="text" name="masothue" placeholder="Mã số thuế" />
+                                <input type="text" name="masothue" placeholder="Mã số thuế" style="max-width:50%;" />
                                 <h6 style="margin:5px 0 0 0;">Người đại diện:</h6>
-                                <input type="text" name="nguoidaidien" placeholder="Tên người đại diện" />
+                                <input type="text" name="nguoidaidien" placeholder="Tên người đại diện" style="max-width:50%;" />
+                                <br>
+                                <br>
                                 <h6 style="margin:5px 0 0 0;">Chọn các chi nhánh:</h6>
-                                <select name="product" id="select-product" placeholder="Chọn đối tác">
-                                    <option selected>Chọn sản phẩm</option>
-                                    <option value="Mã sp">Tên sản phẩm</option>
-                                </select>
-                                <table class="table ">
+                                <br>
+                                <table class="table " id="select-branch-for-contract">
                                     <thead>
                                         <tr>
-
-                                            <th scope="col" style="width: 300px;">
-                                                <h6 style="margin:5px 0 0 0;">Thành tiền:</h6>
+                                            <th scope="col" style="width: 120px;">
+                                                <h6 style="margin:5px 0 0 0;">Tên chi nhánh</h6>
                                             </th>
-
-                                            <th scope="col" style="width: 400px;">
-                                                <h6 style="margin:5px 0 0 0;" id="price">1234568 vnd</h6>
+                                            <th scope="col" style="width: 200px;">
+                                                <h6 style="margin:5px 0 0 0;">Địa chỉ</h6>
                                             </th>
-                                        </tr>
-                                        <tr>
-
-                                            <th scope="col" style="width: 300px;">
-                                                <h6 style="margin:5px 0 0 0;">Phí vận chuyển:</h6>
-                                            </th>
-
-                                            <th scope="col" style="width: 400px;">
-                                                <h6 style="margin:5px 0 0 0;" id="shiping-cost">1234568 vnd</h6>
+                                            <th scope="col" style="width: 100px;">
+                                                <h6 style="margin:5px 0 0 0;">Thêm vào hợp đồng</h6>
                                             </th>
                                         </tr>
+
 
                                     </thead>
 
                                     <tbody>
-
                                         <tr>
-
-                                            <td scope="col" style="width: 300px;">
-                                                <h4 style="margin:5px 0 0 0;">Tổng tiền:</h4>
+                                            <td scope="col" style="width: 100px;">
+                                                <h6 style="margin:5px 0 0 0;">Chi nhánh HCM</h6>
                                             </td>
-
-                                            <td scope="col" style="width: 400px;">
-                                                <h6 style="margin:5px 0 0 0;" id="total-price">123456vnd</h6>
+                                            <td scope="col" style="width: 200px;">
+                                                <h6 style="margin:5px 0 0 0;">Hai Bà Trưng, Q1, TPHCM</h6>
                                             </td>
-
+                                            <td scope="col" style="width: 100px;">
+                                                <button class="btn-primary" onclick="hàm_thêm_xóa_chi_nhánh('mã chi nhánh');">
+                                                    <h6 style="margin:5px 0 0 0; color: aliceblue;" >Thêm</h6>
+                                                </button>
+                                            </td>
 
                                         </tr>
+                                        <tr>
+                                            <td scope="col" style="width: 100px;">
+                                                <h6 style="margin:5px 0 0 0;">Chi nhánh HCM</h6>
+                                            </td>
+                                            <td scope="col" style="width: 200px;">
+                                                <h6 style="margin:5px 0 0 0;">Hai Bà Trưng, Q1, TPHCM</h6>
+                                            </td>
+                                            <td scope="col" style="width: 100px;">
+                                                <button class="btn-primary" onclick="hàm_thêm_xóa_chi_nhánh('mã chi nhánh');">
+                                                    <h6 style="margin:5px 0 0 0; color: aliceblue;" >Thêm</h6>
+                                                </button>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td scope="col" style="width: 100px;">
+                                                <h6 style="margin:5px 0 0 0;">Chi nhánh HCM</h6>
+                                            </td>
+                                            <td scope="col" style="width: 200px;">
+                                                <h6 style="margin:5px 0 0 0;">Hai Bà Trưng, Q1, TPHCM</h6>
+                                            </td>
+                                            <td scope="col" style="width: 100px;">
+                                                <button class="btn-primary" onclick="hàm_thêm_xóa_chi_nhánh('mã chi nhánh');">
+                                                    <h6 style="margin:5px 0 0 0; color: aliceblue;" >Thêm</h6>
+                                                </button>
+                                            </td>
+
+                                        </tr>
+
                                     </tbody>
                                 </table>
 
-                                <button class="btn" type="submit" name="submit">Đặt hàng</button>
+
+                                <button class="btn" type="submit" name="submit">Lập hợp đồng</button>
                             </form>
 
 
@@ -181,157 +204,424 @@
                 </div>
             </div>
         </section>
-        <!-- Order section End -->
+        <!-- create contract section End -->
 
-        <!-- View bill section Start -->
-        <section class="register-area section-padding white-bg" id="order-section">
+        <!-- manager products section Start -->
+        <section class="register-area section-padding white-bg" id="manager-product-section">
             <div class="container">
                 <div class="row">
                     <div class="" style="margin: 0 auto; width: auto;">
-                        <div class="enter-box" style="padding: 87px;width: 900px; margin: 0 auto;">
+                        <div class="enter-box" style="padding: 87px;width: 1100px; margin: 0 auto;">
+                            <h3 class="mb-35">Quản lý sản phẩm</h3>
+                            <form class="custom-input">
+                                <h4 style="margin:5px 0 0 0;">Chọn chi nhánh:</h4>
+                                <select name="branch" id="select-branch-for-edit-product" onchange="do_something_like_oẳng()" style="max-width: 50%;">
+                                    <option selected>Chọn chi nhánh</option>
+                                </select>
+
+                                <br><br>
+                                <table class="table " id="product-of-branch-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="width: 100px;">
+                                                <h6 style="margin:5px 0 0 0;">Mã sản phẩm</h6>
+                                            </th>
+                                            <th scope="col" style="width: 300px;">
+                                                <h6 style="margin:5px 0 0 0;">Tên sản phẩm</h6>
+                                            </th>
+                                            <th scope="col" style="width: 100px;">
+                                                <h6 style="margin:5px 0 0 0;">Giá bán (vnd)</h6>
+                                            </th>
+                                            <th scope="col" style="width: 100px;">
+                                                <h6 style="margin:5px 0 0 0;">Số lượng tồn</h6>
+                                            </th>
+
+                                            <th scope="col" style="width: 100px;">
+                                                <h6 style="margin:5px 0 0 0;">Cập nhật</h6>
+                                            </th>
+                                        </tr>
+
+
+                                    </thead>
+
+                                    <tbody>
+
+                                        <tr id="12345">
+                                            <td scope="col">
+                                                <input type="text" name="productID" value="#12345" disabled style="margin:0;" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="text" name="productName" value="Dê dừa" disabled style="margin:0;" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="number" name="productPrice" value="500000" disabled style="margin:0;" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="number" name="productRemaining" value="30" disabled style="margin:0;" />
+                                            </td>
+                                            <td scope="col" style=" padding-top: 15px;">
+
+                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)" id="delete-product-btn">
+                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Xóa</h6>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr id="12345">
+                                            <td scope="col">
+                                                <input type="text" name="productID" value="#12345" disabled style="margin:0;" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="text" name="productName" value="Dê dừa" disabled style="margin:0;" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="number" name="productPrice" value="500000" disabled style="margin:0;" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="number" name="productRemaining" value="30" disabled style="margin:0;" />
+                                            </td>
+                                            <td scope="col" style=" padding-top: 15px;">
+
+                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)" id="delete-product-btn">
+                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Xóa</h6>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr id="12345">
+                                            <td scope="col">
+                                                <input type="text" name="productID" value="#12345" disabled style="margin:0;" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="text" name="productName" value="Dê dừa" disabled style="margin:0;" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="number" name="productPrice" value="500000" disabled style="margin:0;" />
+                                            </td>
+                                            <td scope="col">
+                                                <input type="number" name="productRemaining" value="30" disabled style="margin:0;" />
+                                            </td>
+                                            <td scope="col" style=" padding-top: 15px;">
+
+                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)" id="delete-product-btn">
+                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Xóa</h6>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                                <button class="btn " id="add-product-btn">Thêm sản phẩm</button>
+                                <br><br>
+
+                            </form>
+                            <div id="add-product-container" class="enter-box">
+                                <!-- <form>
+
+                                    <h4>Sản phẩm này đã tồn tại chưa?</h4>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked onclick="show_customer_form();">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            <h6>Sản phẩm đã có lưu thông tin</h6>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onclick="show_partner_form();">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            <h6>Thêm sản một phẩm mới</h6>
+                                        </label>
+                                    </div>
+                                </form>
+                                <br>
+                                <form action="" class="custom-input" id="add-new-product-form">
+                                    <h4>Khai báo sản phẩm mới và thêm vào chi nhánh</h4>
+
+                                    <h6 style="margin:5px 0 0 0;">Tên sản phẩm:</h6>
+                                    <input type="text" name="productName" placeholder="Tên sản phẩm" style="max-width: 50%;" />
+                                    <h6 style="margin:5px 0 0 0;">Giá bán:</h6>
+                                    <input type="number" name="productPrice" placeholder="Giá bán" style="max-width: 50%;" />
+                                    <h6 style="margin:5px 0 0 0;">Chọn chi nhánh:</h6>
+                                    <select name="branch" id="select-branch-for-add-product" style="max-width: 50%;">
+                                        <option selected>Chọn chi nhánh</option>
+                                    </select>
+                                    <h6 style="margin:5px 0 0 0;">Số lượng tồn:</h6>
+                                    <input type="number" name="productRemaining" placeholder="Số lượng tồn" style="max-width: 50%;" />
+                                    <br>
+                                    <button class="btn " name="submit" type="submit">Lưu</button>
+                                </form>
+                                <br> -->
+                                <form action="" class="custom-input" id="add-old-product-form">
+                                    <h4>Thêm sản phẩm đã được lưu thông tin vào chi nhánh</h4>
+                                    <br>
+                                    <h6 style="margin:5px 0 0 0;">Chọn sản phẩm:</h6>
+                                    <select name="productID" id="select-add-old-product" style="max-width: 50%;">
+                                        <option selected>Tên sản phẩm</option>
+                                    </select>
+
+                                    <h6 style="margin:5px 0 0 0;">Chọn chi nhánh:</h6>
+                                    <select name="branch" id="select-branch-for-add-product" style="max-width: 50%;">
+                                        <option selected>Chọn chi nhánh</option>
+                                    </select>
+                                    <h6 style="margin:5px 0 0 0;">Số lượng tồn:</h6>
+                                    <input type="number" name="productRemaining" placeholder="Số lượng tồn" style="max-width: 50%;" />
+                                    <br>
+                                    <button class="btn " name="submit" type="submit">Lưu</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- manager products section END -->
+
+        <!-- manager branchs section Start -->
+        <section class="register-area section-padding white-bg" id="manager-branchs-section">
+            <div class="container">
+                <div class="row">
+                    <div class="" style="margin: 0 auto; width: auto;">
+                        <div class="enter-box" style="padding: 87px;width: 1100px; margin: 0 auto;">
+                            <h3 class="mb-35">Quản lý chi nhánh</h3>
+                            <form class="custom-input">
+
+                                <br>
+                                <table class="table " id="edit-branchs-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="width: 100px;">
+                                                <h6 style="margin:5px 0 0 0;">Mã chi nhánh</h6>
+                                            </th>
+                                            <th scope="col" style="width: 300px;">
+                                                <h6 style="margin:5px 0 0 0;">Tên chi nhánh</h6>
+                                            </th>
+                                            <th scope="col" style="width: 300px;">
+                                                <h6 style="margin:5px 0 0 0;">Địa chỉ</h6>
+                                            </th>
+                                            <th scope="col" style="width: 100px;">
+                                                <h6 style="margin:5px 0 0 0;">Cập nhật</h6>
+                                            </th>
+                                        </tr>
+
+
+                                    </thead>
+
+                                    <tbody>
+
+                                        <tr>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">#123456</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">Chi nhánh miền nam</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">277, Hai Bà Trưng, Q1, TPHCM</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)" id="delete-branchs-btn">
+                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Xóa</h6>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">#123456</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">Chi nhánh miền nam</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">277, Hai Bà Trưng, Q1, TPHCM</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)" id="delete-branchs-btn">
+                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Xóa</h6>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">#123456</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">Chi nhánh miền nam</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">277, Hai Bà Trưng, Q1, TPHCM</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)" id="delete-branchs-btn">
+                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Xóa</h6>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+
+                                <button class="btn " id="add-branchs-btn">Thêm chi nhánh</button>
+                                <br><br>
+
+                            </form>
+                            <div id="add-branchs-container" class="enter-box">
+
+                                <form action="" class="custom-input" id="add-branchs-form">
+                                    <h4>Thêm chi nhánh</h4>
+                                    <br>
+                                    <h6 style="margin:5px 0 0 0;">Tên chi nhánh:</h6>
+                                    <input type="text" name="branchName" placeholder="Nhập tên chi nhánh" style="max-width: 90%;" />
+
+                                    <h6 style="margin:5px 0 0 0;">Địa chỉ:</h6>
+                                    <input type="text" name="branchAddress" placeholder="Nhập địa chỉ" style="max-width: 90%;" />
+                                    <br>
+                                    <button class="btn " name="submit" type="submit">Lưu</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- manager branchs section END -->
+        <!-- manager order section Start -->
+        <section class="register-area section-padding white-bg" id="manager-order-section">
+            <div class="container">
+                <div class="row">
+                    <div class="" style="margin: 0 auto; width: auto;">
+                        <div class="enter-box" style="padding: 87px;width: 1100px; margin: 0 auto;">
                             <h3 class="mb-35">Quản lý đơn hàng</h3>
-                            <table class="table ">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" style="width: 120px;">
-                                            <h6 style="margin:5px 0 0 0;">Mã đơn hàng</h6>
-                                        </th>
-                                        <th scope="col" style="width: 200px;">
-                                            <h6 style="margin:5px 0 0 0;">Địa chỉ</h6>
-                                        </th>
-                                        <th scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">Tổng tiền</h6>
-                                        </th>
-                                        <th scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">Tình trạng</h6>
-                                        </th>
-                                        <th scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">Hủy đơn</h6>
-                                        </th>
-                                    </tr>
+                            <form class="custom-input">
+
+                                <br>
+                                <table class="table " id="view-order-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="width: 100px;">
+                                                <h6 style="margin:5px 0 0 0;">Mã đơn hàng</h6>
+                                            </th>
+                                            <th scope="col" style="width: 200px;">
+                                                <h6 style="margin:5px 0 0 0;">Sản phẩm</h6>
+                                            </th>
+                                            <th scope="col" style="width: 100px;">
+                                                <h6 style="margin:5px 0 0 0;">Tổng tiền</h6>
+                                            </th>
+                                            <th scope="col" style="width: 200px;">
+                                                <h6 style="margin:5px 0 0 0;">Địa chỉ giao hàng</h6>
+                                            </th>
+                                        </tr>
 
 
-                                </thead>
+                                    </thead>
 
-                                <tbody>
-                                    <tr>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">#123456</h6>
-                                        </td>
-                                        <td scope="col" style="width: 200px;">
-                                            <h6 style="margin:5px 0 0 0;">Sữa dê dừa</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">500000vnd</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">Chưa giao</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <button class="btn-primary">
-                                                <h6 style="margin:5px 0 0 0; color: aliceblue;">Hủy đơn</h6>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">#123456</h6>
-                                        </td>
-                                        <td scope="col" style="width: 200px;">
-                                            <h6 style="margin:5px 0 0 0;">Sữa dê dừa</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">500000vnd</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">Chưa giao</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <button class="btn-danger">
-                                                <h6 style="margin:5px 0 0 0; color: aliceblue;">Hủy đơn</h6>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">#123456</h6>
-                                        </td>
-                                        <td scope="col" style="width: 200px;">
-                                            <h6 style="margin:5px 0 0 0;">Sữa dê dừa</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">500000vnd</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <h6 style="margin:5px 0 0 0;">Chưa giao</h6>
-                                        </td>
-                                        <td scope="col" style="width: 100px;">
-                                            <button class="btn-danger">
-                                                <h6 style="margin:5px 0 0 0; color: aliceblue;">Hủy đơn</h6>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    <tbody>
 
-                                </tbody>
-                            </table>
+
+                                        <tr>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">#123456</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">Sữa dê dừa</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">500,000 vnd</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">Liên Nghĩa, Đức Trọng, Lâm Đồng</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">#123456</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">Sữa dê dừa</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">500,000 vnd</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">Liên Nghĩa, Đức Trọng, Lâm Đồng</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">#123456</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">Sữa dê dừa</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">500,000 vnd</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">Liên Nghĩa, Đức Trọng, Lâm Đồng</h6>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
 
 
 
-
+                            </form>
 
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- View bill section END -->
+        <!-- manager order section END -->
 
 
         <!-- Footer Section Start -->
-        <footer class="section-pt bg-color-5">
-            <div class="footer-widget-area pb-100">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-3 mobi-mb-50 tab-mb-50">
-                            <div class="footer-widget address">
-                                <div class="title mb-40">
-                                    <a href="index.html"><img src="assets/img/white-logo.png" alt="Cultura" /></a>
+        <footer class="section-pt bg-color-5 ">
+            <div class="footer-widget-area pb-100 ">
+                <div class="container ">
+                    <div class="row ">
+                        <div class="col-xs-12 col-sm-6 col-md-3 mobi-mb-50 tab-mb-50 ">
+                            <div class="footer-widget address ">
+                                <div class="title mb-40 ">
+                                    <a href="index.html "><img src="assets/img/white-logo.png " alt="Cultura " /></a>
                                 </div>
                                 <ul>
-                                    <li class="mb-10"><span>Address:</span> 10 North 10 Street,
+                                    <li class="mb-10 "><span>Address:</span> 10 North 10 Street,
                                         <br /> Office 120 Barinai UK 200
                                     </li>
-                                    <li><span>Phone:</span> <a href="tel:+895245485565">+89 524 5485 565</a></li>
-                                    <li><span>Email:</span> <a href="mailto:cultura@email.com">cultura@email.com</a>
+                                    <li><span>Phone:</span> <a href="tel:+895245485565 ">+89 524 5485 565</a></li>
+                                    <li><span>Email:</span> <a href="mailto:cultura@email.com ">cultura@email.com</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <!-- /.Widget end -->
-                        <div class="col-xs-12 col-sm-6 col-md-3 mobi-mb-50 tab-mb-50">
-                            <div class="footer-widget links">
-                                <div class="title mb-40">
-                                    <h4 class="text-capitalize">Author <span class="theme-color">Links</span></h4>
-                                    <div class="horizontal-line">
-                                        <hr class="top">
-                                        <hr class="bottom">
+                        <div class="col-xs-12 col-sm-6 col-md-3 mobi-mb-50 tab-mb-50 ">
+                            <div class="footer-widget links ">
+                                <div class="title mb-40 ">
+                                    <h4 class="text-capitalize ">Author <span class="theme-color ">Links</span></h4>
+                                    <div class="horizontal-line ">
+                                        <hr class="top ">
+                                        <hr class="bottom ">
                                     </div>
                                 </div>
-                                <ul class="pull-left" style="width: 100%">
+                                <ul class="pull-left " style="width: 100% ">
                                     <li>
-                                        <h4 class="text-capitalize">Bộ môn Hệ quản trị CSDL</h4>
+                                        <h4 class="text-capitalize ">Bộ môn Hệ quản trị CSDL</h4>
                                     </li>
                                     <li>
-                                        <h4 class="text-capitalize">Trần Minh Sơn</h4>
+                                        <h4 class="text-capitalize ">Trần Minh Sơn</h4>
                                     </li>
                                     <li>
-                                        <h4 class="text-capitalize">Phạm Tân Tị</h4>
+                                        <h4 class="text-capitalize ">Phạm Tân Tị</h4>
                                     </li>
                                     <li>
-                                        <h4 class="text-capitalize">Hồ Minh Quân</h4>
+                                        <h4 class="text-capitalize ">Hồ Minh Quân</h4>
                                     </li>
                                     <li>
-                                        <h4 class="text-capitalize">Lê Nam Thái Sơn</h4>
+                                        <h4 class="text-capitalize ">Lê Nam Thái Sơn</h4>
                                     </li>
 
                                 </ul>
@@ -346,32 +636,32 @@
                 <!-- /.container -->
             </div>
             <!-- /.Widget Area End -->
-            <div class="divide">
-                <div class="container">
-                    <hr class="line" />
+            <div class="divide ">
+                <div class="container ">
+                    <hr class="line " />
                 </div>
             </div>
             <!-- /.Divede Line -->
-            <div class="copyright">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6">
-                            <div class="left">
-                                <p>Copyright &copy; 2018 <a href="https://themeforest.net/user/regaltheme/portfolio">Regaltheme</a>.</p>
+            <div class="copyright ">
+                <div class="container ">
+                    <div class="row ">
+                        <div class="col-xs-12 col-sm-6 ">
+                            <div class="left ">
+                                <p>Copyright &copy; 2018 <a href="https://themeforest.net/user/regaltheme/portfolio ">Regaltheme</a>.</p>
                             </div>
                             <!-- Change your Copyright -->
                         </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <div class="social-icon text-right">
-                                <ul class="clearfix d-inblock">
-                                    <li><a href="https://www.facebook.com/regaltheme/" target="_blank"><i
-                                                class="zmdi zmdi-facebook"></i></a></li>
-                                    <li><a href="https://twitter.com/regaltheme" target="_blank"><i
-                                                class="zmdi zmdi-twitter"></i></a></li>
-                                    <li><a href="https://www.pinterest.com/regaltheme/" target="_blank"><i
-                                                class="zmdi zmdi-pinterest"></i></a></li>
-                                    <li><a href="http://www.instagram.com" target="_blank"><i
-                                                class="zmdi zmdi-instagram"></i></a></li>
+                        <div class="col-xs-12 col-sm-6 ">
+                            <div class="social-icon text-right ">
+                                <ul class="clearfix d-inblock ">
+                                    <li><a href="https://www.facebook.com/regaltheme/ " target="_blank "><i
+                                                class="zmdi zmdi-facebook "></i></a></li>
+                                    <li><a href="https://twitter.com/regaltheme " target="_blank "><i
+                                                class="zmdi zmdi-twitter "></i></a></li>
+                                    <li><a href="https://www.pinterest.com/regaltheme/ " target="_blank "><i
+                                                class="zmdi zmdi-pinterest "></i></a></li>
+                                    <li><a href="http://www.instagram.com " target="_blank "><i
+                                                class="zmdi zmdi-instagram "></i></a></li>
                                 </ul>
                             </div>
                             <!-- Change your social media link -->
@@ -386,23 +676,23 @@
 
     <!-- All JS Here -->
     <!-- jQuery Latest Version -->
-    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="assets/js/vendor/jquery-1.12.4.min.js "></script>
     <!-- Bootstrap JS -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.min.js "></script>
     <!-- Form Validate -->
-    <script src="assets/js/jquery.validate.min.js"></script>
+    <script src="assets/js/jquery.validate.min.js "></script>
     <!-- Slick Slider JS -->
-    <script src="assets/js/slick.min.js"></script>
+    <script src="assets/js/slick.min.js "></script>
     <!-- Swiper JS -->
-    <script src="assets/js/swiper.min.js"></script>
+    <script src="assets/js/swiper.min.js "></script>
     <!-- Isotope JS -->
-    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js "></script>
     <!-- Plugins JS -->
-    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/plugins.js "></script>
     <!-- Progressbar JS -->
-    <script src="assets/js/progressbar.js"></script>
+    <script src="assets/js/progressbar.js "></script>
     <!-- main JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.js "></script>
 </body>
 
 </html>
