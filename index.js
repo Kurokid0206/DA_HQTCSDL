@@ -95,8 +95,9 @@ app.post("/log-in", function(req, res) {
                     .output('ma', sql.Char(10))
                     .execute('sp_TK_Login')
                 pool.close()
-                //console.log(result)
+                
                 req.session.user=result.output.ma
+                //console.log(result.output.ma)
                 //console.log(req.session.user)
                 let type = JSON.stringify(result.output)
                 if (type.indexOf("KH") > -1) {
@@ -127,19 +128,21 @@ app.get("/log-out",function(req,res){
 })
 
 app.post("/insert-order", function(req, res) {
+    //console.log(req.session.user)
     Promise.resolve('success')
         .then(async function() {
             try {
                 let pool = await sql.connect(config);
                 let result = await pool.request()
-                    .input('HTThanhToan', sql.NVarChar(10), 'Tiền')
-                    .input('DiaChiGiaoHang', sql.NVarChar(10), 'HCM')
-                    .input('MaKH', sql.NVarChar(10), 'KH001')
-                    .input('MaDT', sql.NVarChar(10), 'DT001')
+                    .input('HTThanhToan', sql.NVarChar(50), req.body.Httt)
+                    .input('DiaChiGiaoHang', sql.NVarChar(50), req.body.DiaChi)
+                    .input('MaKH', sql.NVarChar(10), req.session.user)
+                    .input('MaDT', sql.NVarChar(10), req.body.MaDT)
+                    .output('MaDH',sql.Char(10))
                     .execute('sp_Insert_DonHang')
                 pool.close()
                 res.send(result.recordset)
-                    //console.log(result)
+                //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -170,7 +173,7 @@ app.get("/cus-view-order", function(req, res) {
             try {
                 let pool = await sql.connect(config);
                 let result = await pool.request()
-                    .input('MaKH', sql.NVarChar(10), 'KH00000001')
+                    .input('MaKH', sql.NVarChar(10), req.session.user)
                     .execute('sp_KH_XemDH')
                 pool.close()
                 res.send(result.recordset)
@@ -236,7 +239,6 @@ app.get("/supplier-data", function(req, res) {
             }
         })
 })
-
 app.post("/product-data", function(req, res) {
     Promise.resolve('success')
         .then(async function() {
