@@ -73,7 +73,7 @@
                                             <li><a onclick="supp_show('manager-order-section')">Quản lý đơn hàng</a></li>
                                             <li><a onclick="supp_show('manager-product-section')">Quản lý sản phẩm</a></li>
                                             <li><a onclick="supp_show('manager-branchs-section')">Quản lý chi nhánh</a></li>
-                                            <li><a onclick="supp_show('create-contract-section')">Lập hợp đồng</a></li>
+                                            <li><a onclick="get_branches_for_contract()">Lập hợp đồng</a></li>
                                             <li><a>Đăng xuất</a></li>
 
 
@@ -148,7 +148,7 @@
                                     </thead>
 
                                     <tbody>
-                                        <tr>
+                                        <!-- <tr>
                                             <td scope="col" style="width: 100px;">
                                                 <h6 style="margin:5px 0 0 0;">Chi nhánh HCM</h6>
                                             </td>
@@ -189,7 +189,7 @@
                                                 </button>
                                             </td>
 
-                                        </tr>
+                                        </tr> -->
 
                                     </tbody>
                                 </table>
@@ -310,11 +310,11 @@
                                     </tbody>
                                 </table>
 
-                                <button class="btn " id="add-product-btn">Thêm sản phẩm</button>
+                                <button type="button" class="btn " id="add-product-btn" onclick="show_form('add-product-container')">Thêm sản phẩm</button>
                                 <br><br>
 
                             </form>
-                            <div id="add-product-container" class="enter-box">
+                            <div id="add-product-container" class="enter-box" style="display: none;">
                                 <!-- <form>
 
                                     <h4>Sản phẩm này đã tồn tại chưa?</h4>
@@ -460,11 +460,11 @@
                                     </tbody>
                                 </table>
 
-                                <button class="btn " id="add-branchs-btn">Thêm chi nhánh</button>
+                                <button type="button" class="btn" id="add-branchs-btn" onclick="show_form('add-branchs-container')">Thêm chi nhánh</button>
                                 <br><br>
 
                             </form>
-                            <div id="add-branchs-container" class="enter-box">
+                            <div id="add-branchs-container" class="enter-box" style="display: none;">
 
                                 <form action="" class="custom-input" id="add-branchs-form">
                                     <h4>Thêm chi nhánh</h4>

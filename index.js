@@ -241,10 +241,6 @@ app.post("/product-data", function(req, res) {
             }
         })
 })
-
-
-
-
 app.post("/insert-contract", function(req, res) {
     Promise.resolve('success')
         .then(async function() {
@@ -296,8 +292,25 @@ app.post("/insert-product-branch", function(req, res) {
 })
 
 
-
-
+app.get("/get-branches",function(req,res){
+    Promise.resolve('success')
+    .then(async function(){
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool
+            .query("SELECT * FROM CHINHANH WHERE MADT='DT00000000'")
+            pool.close()
+            
+            res.send(result.recordset)
+            //console.log(result)
+            return
+        }catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
+}
+)
 
 
 
