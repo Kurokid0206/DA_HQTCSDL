@@ -120,6 +120,12 @@ app.post("/log-in", function(req, res) {
             }
         })
 })
+
+app.get("/log-out",function(req,res){
+	req.session.destroy();
+	res.redirect("/")
+})
+
 app.post("/insert-order", function(req, res) {
     Promise.resolve('success')
         .then(async function() {
