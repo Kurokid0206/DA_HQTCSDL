@@ -1,5 +1,6 @@
 // use node express
 const express = require("express");
+const session = require("express-session")
 const app = express();
 const path = require("path")
 
@@ -11,11 +12,17 @@ app.use(express.urlencoded({ extended: false }))
     // parse application/json
 app.use(express.json())
 
+app.use(session({ secret: "SquadC4", resave: false, saveUninitialized: true }))
 //app.set("view engine","ejs");
 
 const sql = require('mssql');
 const { json } = require("express/lib/response");
 //const { config } = require("nodemon");
+
+app.use((req, res, next) => {
+    res.locals.user = req.session.user
+    next()
+})
 
 
 app.listen(3000, function() {
@@ -38,7 +45,6 @@ config = {
 
 //home page
 app.get("/", function(req, res) {
-
         res.sendFile(__dirname + "/html/index.html")
     })
     //customer page
@@ -90,6 +96,8 @@ app.post("/log-in", function(req, res) {
                     .execute('sp_TK_Login')
                 pool.close()
                 //console.log(result)
+                req.session.user=result.output.ma
+                //console.log(req.session.user)
                 let type = JSON.stringify(result.output)
                 if (type.indexOf("KH") > -1) {
 
