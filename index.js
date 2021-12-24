@@ -89,7 +89,7 @@ app.post("/log-in", function(req, res) {
                     .output('ma', sql.Char(10))
                     .execute('sp_TK_Login')
                 pool.close()
-
+                //console.log(result)
                 let type = JSON.stringify(result.output)
                 if (type.indexOf("KH") > -1) {
 
