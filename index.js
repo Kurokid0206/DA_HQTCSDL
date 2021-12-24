@@ -367,21 +367,21 @@ app.post("/insert-product_branch", function(req, res) {
 
 app.get("/driver-view-order", function(req, res) {
     Promise.resolve('success')
-        .then(async function() {
-            try {
-                let pool = await sql.connect(config);
-                let result = await pool.request()
-                    .input('MaTX', sql.NVarChar(10), 'TX001')
-                    .execute('sp_TX_XemDH')
-                pool.close()
-                res.send(result.recordset)
-                    //console.log(result)
-                return
-            } catch (error) {
-                console.log(error.message);
-                return error.message
-            }
-        })
+    .then(async function() {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .input('MaTX', sql.NVarChar(10), req.session.user)
+                .execute('sp_TX_XemDH')
+            pool.close()
+            res.send(result.recordset)
+            //console.log(result)
+            return
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
 })
 
 app.post("/dri-update-order-stat", function(req, res) {

@@ -24,21 +24,7 @@ function update_product(){
 
 }
 
-function driver_view_order(){
 
-    var xhtml = new XMLHttpRequest();
-    xhtml.onload = function() {
-        // input.value="";
-        // var data=JSON.parse(this.responseText)
-        // console.log(data)
-    }
-
-    xhtml.open("GET", "driver-view-order");
-    //xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhtml.send();
-
-    return false;
-}
 
 function customer_view_order(){
     cus_show('view-order-section');
@@ -236,39 +222,6 @@ function insert_product_branch(){
     return false;
 }
 
-function dri_update_order(){
-    var xhtml = new XMLHttpRequest();
-    xhtml.onload = function() {
-
-        // input.value="";
-        // var data=JSON.parse(this.responseText)
-        // console.log(data)
-
-    }
-
-    xhtml.open("POST", "dri-update-order-stat");
-    xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhtml.send();
-
-    return false;
-}
-
-function dri_recv_order(){
-    var xhtml = new XMLHttpRequest();
-    xhtml.onload = function() {
-
-        // input.value="";
-        // var data=JSON.parse(this.responseText)
-        // console.log(data)
-
-    }
-
-    xhtml.open("POST", "dri-recv-order");
-    xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhtml.send();
-
-    return false;
-}
 
 function cancel_order(MaDH){
     var xhtml = new XMLHttpRequest();

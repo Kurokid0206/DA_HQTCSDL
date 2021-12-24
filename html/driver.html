@@ -17,10 +17,11 @@
     <script src="/assets/js/vendor/modernizr-2.8.3.min.js"></script>
     <!-- client interact script -->
     <script src="/js/homepage.js"></script>
-    <script src="/js/function.js"></script>
+    <script src="/js/dri-function.js"></script>
 </head>
 
-<body>
+
+<body onload="driver_view_order();">
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -62,19 +63,16 @@
                                     <a href="http://localhost:3000"><img src="/images/home-logo.png" alt="Home Page" style="width: 80px;display:inline" />
                                         <p style="display:inline">GIAO HÀNG C4</p>
                                     </a>
-
                                 </div>
                                 <!-- Static navbar -->
                                 <nav class="mainmenu">
 
                                     <div id="navbar" class="navbar-collapse collapse no-padding">
                                         <ul class="navbar-nav dropdown">
-
-                                            <li><a onclick="">Nhận đơn hàng</a></li>
-                                            <li><a onclick="">Xác nhận giao hàng</a></li>
-                                            <li><a onclick="">Theo dõi thu nhập</a></li>
+                                            <li><a onclick="driver_view_order();">Nhận đơn hàng</a></li>
+                                            <li><a onclick="dri_show('driver-confirm-section')">Xác nhận giao hàng</a></li>
+                                            <li><a onclick="dri_show('driver-salary-section')">Theo dõi thu nhập</a></li>
                                             <li><a href="/log-out">Đăng xuất</a></li>
-
                                             <li>
                                                 <a href="javascript:viod(0)" class="dropdown-toggle" data-toggle="dropdown" title="Show contact">
                                                     Contact <i class="zmdi zmdi-chevron-down"></i>
@@ -127,7 +125,7 @@
                                                 <h6 style="margin:5px 0 0 0;">Mã đơn hàng</h6>
                                             </th>
                                             <th scope="col" style="width: 300px;">
-                                                <h6 style="margin:5px 0 0 0;">Sản phẩm</h6>
+                                                <h6 style="margin:5px 0 0 0;">Tên người nhận</h6>
                                             </th>
                                             <th scope="col" style="width: 100px;">
                                                 <h6 style="margin:5px 0 0 0;">Giá trị</h6>
