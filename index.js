@@ -423,3 +423,20 @@ app.post("/dri-recv-order", function(req, res) {
             }
         })
 })
+
+app.post("/find-user", function(req, res) {
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool.query(`select* from TaiKhoan where NguoiDung like '%'+N'${req.body.user}'+'%'`)
+                pool.close()
+                res.send(result.recordset)
+                //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        })
+})

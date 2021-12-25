@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Cultura is a Education HTML Template">
-    <meta name="keywords" content="	classes, college, course, courses, educational, learning, online courses, revolution slider, school, seminar, tutorials, university, workshop">
+    <meta name="keywords"
+        content="	classes, college, course, courses, educational, learning, online courses, revolution slider, school, seminar, tutorials, university, workshop">
     <meta name="author" content="regaltheme.com">
     <title>Dịch vụ giao hàng C4</title>
     <!-- favicon -->
@@ -17,10 +18,10 @@
     <script src="/assets/js/vendor/modernizr-2.8.3.min.js"></script>
     <!-- client interact script -->
     <script src="/js/homepage.js"></script>
-    <script src="/js/supp-function.js"></script>
+    <script src="/js/ad-function.js"></script>
 </head>
 
-<body onload="">
+<body onload="get_user();">
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -45,7 +46,6 @@
                                         <li>Open hours: 24/7</li>
                                     </ul>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -59,7 +59,8 @@
                         <div class="col-xs-12">
                             <div class="d-flex justify-end">
                                 <div class="logo mr-auto" style="width:auto;">
-                                    <a href="http://localhost:3000"><img src="/images/home-logo.png" alt="Home Page" style="width: 80px;display:inline" />
+                                    <a href="http://localhost:3000"><img src="/images/home-logo.png" alt="Home Page"
+                                            style="width: 80px;display:inline" />
                                         <p style="display:inline">GIAO HÀNG C4</p>
                                     </a>
 
@@ -69,14 +70,12 @@
 
                                     <div id="navbar" class="navbar-collapse collapse no-padding">
                                         <ul class="navbar-nav dropdown">
-
-                                            <li><a onclick="">Thêm nhân viên</a></li>
-                                            <li><a onclick="">Quản lý tài khoản</a></li>
+                                            <li><a onclick="ad_show('add-employee-section')">Thêm nhân viên</a></li>
+                                            <li><a onclick="get_user();">Quản lý tài khoản</a></li>
                                             <li><a href="/log-out">Đăng xuất</a></li>
-
-
                                             <li>
-                                                <a href="javascript:viod(0)" class="dropdown-toggle" data-toggle="dropdown" title="Show contact">
+                                                <a href="javascript:viod(0)" class="dropdown-toggle"
+                                                    data-toggle="dropdown" title="Show contact">
                                                     Contact <i class="zmdi zmdi-chevron-down"></i>
                                                 </a>
                                                 <ul class="dropdown-menu">
@@ -148,12 +147,13 @@
                 <div class="row">
                     <div class="" style="margin: 0 auto; width: auto;">
                         <div class="enter-box" style="padding: 87px;width: 1100px; margin: 0 auto;">
-                            <h3 class="mb-35">Khóa tài khoản</h3>
+                            <h3 class="mb-35">Quản lí tài khoản</h3>
                             <form class="custom-input">
                                 <!-- lọc theo tên tài khoản, ko biết tên tài khoản thì khỏi vọc -->
                                 <h6 style="margin:5px 0 0 0;">Tìm kiếm tài khoản:</h6>
-                                <input type="text" id="username-for-seach-lock" placeholder="Nhập tài khoản" style="max-width:30%;" />
-                                <button class="btn-primary" onclick="do_sthing()">Tìm kiếm</button>
+                                <input type="text" id="username-for-seach-lock" placeholder="Nhập tài khoản"
+                                    style="max-width:30%;" />
+                                <button type="button" class="btn-primary" onclick="get_user();">Tìm kiếm</button>
                                 <br><br>
 
                                 <table class="table " id="manager-account-table">
@@ -175,80 +175,9 @@
                                                 <h6 style="margin:5px 0 0 0;">Quản lý</h6>
                                             </th>
                                         </tr>
-
-
                                     </thead>
 
                                     <tbody>
-
-                                        <tr>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">MeanSun</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Mean Sun</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Supplier</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Active</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <button class="btn-primary" onclick="do_sthing_like_oẳng(#id_sp)">
-                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Mở khóa</h6>
-                                                </button>
-                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)">
-                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Khóa</h6>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">MeanSun</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Mean Sun</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Supplier</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Active</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <button class="btn-primary" onclick="do_sthing_like_oẳng(#id_sp)">
-                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Mở khóa</h6>
-                                                </button>
-                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)">
-                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Khóa</h6>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">MeanSun</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Mean Sun</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Supplier</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Active</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <button class="btn-primary" onclick="do_sthing_like_oẳng(#id_sp)">
-                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Mở khóa</h6>
-                                                </button>
-                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)">
-                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Khóa</h6>
-                                                </button>
-                                            </td>
-                                        </tr>
-
-
                                     </tbody>
                                 </table>
 
@@ -333,7 +262,8 @@
                     <div class="row ">
                         <div class="col-xs-12 col-sm-6 ">
                             <div class="left ">
-                                <p>Copyright &copy; 2018 <a href="https://themeforest.net/user/regaltheme/portfolio ">Regaltheme</a>.</p>
+                                <p>Copyright &copy; 2018 <a
+                                        href="https://themeforest.net/user/regaltheme/portfolio ">Regaltheme</a>.</p>
                             </div>
                             <!-- Change your Copyright -->
                         </div>
