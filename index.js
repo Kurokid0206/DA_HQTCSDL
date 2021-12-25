@@ -98,8 +98,10 @@ app.post("/log-in", function(req, res) {
                 res.redirect("/supplier")
             } else if (type.indexOf("NV") > -1) {
                 res.redirect("/employee")
-            } else{
+            } else if (type.indexOf("QTV") > -1){
                 res.redirect("/admin")
+            }else{
+                res.redirect("/")
             }
             return
         } catch (error) {
