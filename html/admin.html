@@ -71,8 +71,7 @@
                                         <ul class="navbar-nav dropdown">
 
                                             <li><a onclick="">Thêm nhân viên</a></li>
-                                            <li><a onclick="">Khóa tài khoản</a></li>
-                                            <li><a onclick="">Mở khóa tài khoản</a></li>
+                                            <li><a onclick="">Quản lý tài khoản</a></li>
                                             <li><a href="/log-out">Đăng xuất</a></li>
 
 
@@ -143,8 +142,8 @@
         <!-- Add employee section End -->
 
 
-        <!-- lock account section Start -->
-        <section class="register-area section-padding white-bg" id="lock-account-section">
+        <!-- manager account section Start -->
+        <section class="register-area section-padding white-bg" id="manager-account-section">
             <div class="container">
                 <div class="row">
                     <div class="" style="margin: 0 auto; width: auto;">
@@ -157,7 +156,7 @@
                                 <button class="btn-primary" onclick="do_sthing()">Tìm kiếm</button>
                                 <br><br>
 
-                                <table class="table " id="lock-account-table">
+                                <table class="table " id="manager-account-table">
                                     <thead>
                                         <tr>
                                             <th scope="col" style="width: 200px;">
@@ -172,117 +171,8 @@
                                             <th scope="col" style="width: 150px;">
                                                 <h6 style="margin:5px 0 0 0;">Trạng thái</h6>
                                             </th>
-                                            <th scope="col" style="width: 150px;">
-                                                <h6 style="margin:5px 0 0 0;">Khóa</h6>
-                                            </th>
-                                        </tr>
-
-
-                                    </thead>
-
-                                    <tbody>
-
-                                        <tr>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">MeanSun</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Mean Sun</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Supplier</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Active</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)">
-                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Khóa</h6>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">MeanSun</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Mean Sun</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Supplier</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Active</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)">
-                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Khóa</h6>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">MeanSun</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Mean Sun</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Supplier</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Active</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)">
-                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Khóa</h6>
-                                                </button>
-                                            </td>
-                                        </tr>
-
-
-                                    </tbody>
-                                </table>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- lock account section END -->
-
-        <!-- unlock account section Start -->
-        <section class="register-area section-padding white-bg" id="unlock-account-section">
-            <div class="container">
-                <div class="row">
-                    <div class="" style="margin: 0 auto; width: auto;">
-                        <div class="enter-box" style="padding: 87px;width: 1100px; margin: 0 auto;">
-                            <h3 class="mb-35">Mở khóa tài khoản</h3>
-                            <form class="custom-input">
-                                <!-- lọc theo tên tài khoản, ko biết tên tài khoản thì khỏi vọc -->
-                                <h6 style="margin:5px 0 0 0;">Tìm kiếm tài khoản:</h6>
-                                <input type="text" id="username-for-seach-unlock" placeholder="Nhập tài khoản" style="max-width:30%;" />
-                                <button class="btn-primary" onclick="do_sthing()">Tìm kiếm</button>
-                                <br><br>
-
-                                <table class="table " id="unlock-account-table">
-                                    <thead>
-                                        <tr>
                                             <th scope="col" style="width: 200px;">
-                                                <h6 style="margin:5px 0 0 0;">Tên tài khoản</h6>
-                                            </th>
-                                            <th scope="col" style="width: 300px;">
-                                                <h6 style="margin:5px 0 0 0;">Tên người dùng</h6>
-                                            </th>
-                                            <th scope="col" style="width: 150px;">
-                                                <h6 style="margin:5px 0 0 0;">Vai trò</h6>
-                                            </th>
-                                            <th scope="col" style="width: 150px;">
-                                                <h6 style="margin:5px 0 0 0;">Trạng thái</h6>
-                                            </th>
-                                            <th scope="col" style="width: 150px;">
-                                                <h6 style="margin:5px 0 0 0;">Mở khóa</h6>
+                                                <h6 style="margin:5px 0 0 0;">Quản lý</h6>
                                             </th>
                                         </tr>
 
@@ -308,24 +198,8 @@
                                                 <button class="btn-primary" onclick="do_sthing_like_oẳng(#id_sp)">
                                                     <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Mở khóa</h6>
                                                 </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">MeanSun</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Mean Sun</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Supplier</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">Active</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <button class="btn-primary" onclick="do_sthing_like_oẳng(#id_sp)">
-                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Mở khóa</h6>
+                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)">
+                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Khóa</h6>
                                                 </button>
                                             </td>
                                         </tr>
@@ -346,9 +220,33 @@
                                                 <button class="btn-primary" onclick="do_sthing_like_oẳng(#id_sp)">
                                                     <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Mở khóa</h6>
                                                 </button>
+                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)">
+                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Khóa</h6>
+                                                </button>
                                             </td>
                                         </tr>
-
+                                        <tr>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">MeanSun</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">Mean Sun</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">Supplier</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <h6 style="margin:5px 0 0 0;">Active</h6>
+                                            </td>
+                                            <td scope="col">
+                                                <button class="btn-primary" onclick="do_sthing_like_oẳng(#id_sp)">
+                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Mở khóa</h6>
+                                                </button>
+                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)">
+                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Khóa</h6>
+                                                </button>
+                                            </td>
+                                        </tr>
 
 
                                     </tbody>
@@ -360,7 +258,9 @@
                 </div>
             </div>
         </section>
-        <!-- unlock account section END -->
+        <!-- manager account section END -->
+
+
 
 
         <!-- Footer Section Start -->
