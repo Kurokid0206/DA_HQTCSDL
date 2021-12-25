@@ -3,7 +3,7 @@ const express = require("express");
 const session = require("express-session")
 const app = express();
 const path = require("path")
-//set stactic folder
+    //set stactic folder
 app.use(express.static('./publics/'))
 
 // parse application/x-www-form-urlencoded
@@ -11,15 +11,15 @@ app.use(express.urlencoded({ extended: false }))
     // parse application/json
 app.use(express.json())
 
-app.use(session({ 
-    secret: "SquadC4", 
-    resave: false, 
-    saveUninitialized: true,
-    cookie: {
-        secure: false,
-        maxAge: 600000
-    }
-}))
+app.use(session({
+        secret: "SquadC4",
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            secure: false,
+            maxAge: 600000
+        }
+    }))
     //app.set("view engine","ejs");
 
 const sql = require('mssql');
@@ -50,7 +50,7 @@ config = {
 //home page
 app.get("/", function(req, res) {
     //console.log(req.session.user)
-    if(req.session.user){
+    if (req.session.user) {
         //console.log(req.session.user)
         let type = req.session.user
         if (type.indexOf("KH") > -1) {
@@ -64,13 +64,13 @@ app.get("/", function(req, res) {
         } else if (type.indexOf("NV") > -1) {
             //res.redirect("/employee")
             res.sendFile(__dirname + "/html/employee.html")
-        } else if (type.indexOf("QTV") > -1){
+        } else if (type.indexOf("QTV") > -1) {
             //res.redirect("/admin")
             res.sendFile(__dirname + "/html/admin.html")
-        } else{
+        } else {
             res.sendFile(__dirname + "/html/index.html")
         }
-    }else{res.sendFile(__dirname + "/html/index.html")}
+    } else { res.sendFile(__dirname + "/html/index.html") }
 })
 
 // //customer page
@@ -94,7 +94,7 @@ app.get("/", function(req, res) {
 // app.get("/admin", function(req, res) {
 //     //console.log(req.session)
 //     res.sendFile(__dirname + "/html/admin.html")
-    
+
 // })
 
 app.get("/registration", function(req, res) {
@@ -104,38 +104,38 @@ app.get("/registration", function(req, res) {
 app.post("/log-in", function(req, res) {
     //console.log(req.body)
     Promise.resolve('success')
-    .then(async function() {
-        try {
-            let pool = await sql.connect(config);
-            let result = await pool.request()
-                .input('tk', sql.VARCHAR(10), `${req.body.username}`)
-                .input('mk', sql.VarChar(10), `${req.body.password}`)
-                .output('ma', sql.Char(10))
-                .execute('sp_TK_Login')
-            pool.close()
-            req.session.user=result.output.ma
-            res.redirect("/")
-            //console.log(result.output.ma)
-            //console.log(req.session.user)
-            // let type = JSON.stringify(result.output)
-            // if (type.indexOf("KH") > -1) {
-            //     res.redirect("/customer")
-            // } else if (type.indexOf("TX") > -1) {
-            //     res.redirect("/driver")
-            // } else if (type.indexOf("DT") > -1) {
-            //     res.redirect("/supplier")
-            // } else if (type.indexOf("NV") > -1) {
-            //     res.redirect("/employee")
-            // } else if (type.indexOf("QTV") > -1){
-            //     res.redirect("/admin")
-            // } else{
-            //     res.redirect("/")
-            // }
-        } catch (error) {
-            console.log(error.message);
-            return error.message
-        }
-    })
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool.request()
+                    .input('tk', sql.VARCHAR(10), `${req.body.username}`)
+                    .input('mk', sql.VarChar(10), `${req.body.password}`)
+                    .output('ma', sql.Char(10))
+                    .execute('sp_TK_Login')
+                pool.close()
+                req.session.user = result.output.ma
+                res.redirect("/")
+                    //console.log(result.output.ma)
+                    //console.log(req.session.user)
+                    // let type = JSON.stringify(result.output)
+                    // if (type.indexOf("KH") > -1) {
+                    //     res.redirect("/customer")
+                    // } else if (type.indexOf("TX") > -1) {
+                    //     res.redirect("/driver")
+                    // } else if (type.indexOf("DT") > -1) {
+                    //     res.redirect("/supplier")
+                    // } else if (type.indexOf("NV") > -1) {
+                    //     res.redirect("/employee")
+                    // } else if (type.indexOf("QTV") > -1){
+                    //     res.redirect("/admin")
+                    // } else{
+                    //     res.redirect("/")
+                    // }
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        })
 })
 
 app.get("/log-out", function(req, res) {
@@ -509,90 +509,90 @@ app.post("/add-emp", function(req, res) {
 
 app.post("/add-KH", function(req, res) {
     Promise.resolve('success')
-    .then(async function() {
-        try {
-            let pool = await sql.connect(config);
-            let result = await pool.request()
-                .input('HoTen',sql.NVarChar(50),req.body.name)
-                .input('DiaChi',sql.VarChar(100),req.body.addr)
-                .input('SDT',sql.Char(10),req.body.phone)
-                .input('Email',sql.VarChar(50),req.body.email)
-                .input('TK',sql.VarChar(50),req.body.username)
-                .input('MK',sql.VarChar(50),req.body.pass)
-                .output('MaKH',sql.VarChar(10))
-                .execute('sp_Insert_KhackHang')
-            pool.close()
-            res.send(result.recordset)
-            //console.log(result)
-            return
-        } catch (error) {
-            console.log(error.message);
-            return error.message
-        }
-    })
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool.request()
+                    .input('HoTen', sql.NVarChar(50), req.body.name)
+                    .input('DiaChi', sql.VarChar(100), req.body.addr)
+                    .input('SDT', sql.Char(10), req.body.phone)
+                    .input('Email', sql.VarChar(50), req.body.email)
+                    .input('TK', sql.VarChar(50), req.body.username)
+                    .input('MK', sql.VarChar(50), req.body.pass)
+                    .output('MaKH', sql.VarChar(10))
+                    .execute('sp_Insert_KhackHang')
+                pool.close()
+                res.send(result.recordset)
+                    //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        })
 })
 
 
 
 app.post("/add-TX", function(req, res) {
     Promise.resolve('success')
-    .then(async function() {
-        try {
-            let pool = await sql.connect(config);
-            let result = await pool.request()
-                .input('HoTen',sql.NVarChar(50),req.body.name)
-                .input('DiaChi',sql.VarChar(100),req.body.addr)
-                .input('SDT',sql.VarChar(12),req.body.phone)
-                .input('Email',sql.VarChar(50),req.body.email)
-                .input('CMND',sql.VarChar(12),req.body.cmnd)
-                .input('BienSoXe',sql.VarChar(9),req.body.bsx)
-                .input('KhuVucHD',sql.NVarChar(50),req.body.kvhd)
-                .input('TKNganHang',sql.VarChar(15),req.body.tknh)
-                .input('TK',sql.VarChar(50),req.body.username)
-                .input('MK',sql.VarChar(50),req.body.pass)
-                .output('MaTX',sql.VarChar(10))
-                .execute('sp_Insert_TaiXe')
-            pool.close()
-            res.send(result.recordset)
-            //console.log(result)
-            return
-        } catch (error) {
-            console.log(error.message);
-            return error.message
-        }
-    })
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool.request()
+                    .input('HoTen', sql.NVarChar(50), req.body.name)
+                    .input('DiaChi', sql.VarChar(100), req.body.addr)
+                    .input('SDT', sql.VarChar(12), req.body.phone)
+                    .input('Email', sql.VarChar(50), req.body.email)
+                    .input('CMND', sql.VarChar(12), req.body.cmnd)
+                    .input('BienSoXe', sql.VarChar(9), req.body.bsx)
+                    .input('KhuVucHD', sql.NVarChar(50), req.body.kvhd)
+                    .input('TKNganHang', sql.VarChar(15), req.body.tknh)
+                    .input('TK', sql.VarChar(50), req.body.username)
+                    .input('MK', sql.VarChar(50), req.body.pass)
+                    .output('MaTX', sql.VarChar(10))
+                    .execute('sp_Insert_TaiXe')
+                pool.close()
+                res.send(result.recordset)
+                    //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        })
 })
 
 app.post("/add-DT", function(req, res) {
     Promise.resolve('success')
-    .then(async function() {
-        try {
-            let pool = await sql.connect(config);
-            let result = await pool.request()
-                .input('TenDT',sql.NVarChar(50),req.body.name)
-                .input('NguoiDD',sql.NVarChar(50),req.body.namedd)
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool.request()
+                    .input('TenDT', sql.NVarChar(50), req.body.name)
+                    .input('NguoiDD', sql.NVarChar(50), req.body.namedd)
 
-                .input('TP',sql.NVarChar(50),req.body.tp)
-                .input('Quan',sql.NVarChar(50),req.body.quan)
-                .input('SoLuongDon',sql.Int,req.body.sld)
-                .input('LoaiHangVC',sql.NVarChar(50),req.body.lhvc)
-                .input('DiaChi',sql.NVarChar(50),req.body.addr)
-                .input('SDT',sql.VarChar(10),req.body.phone)
-                .input('Email',sql.VarChar(50),req.body.email)
-                .input('TK',sql.VarChar(50),req.body.username)
-                .input('MK',sql.VarChar(50),req.body.pass)
+                .input('TP', sql.NVarChar(50), req.body.tp)
+                    .input('Quan', sql.NVarChar(50), req.body.quan)
+                    .input('SoLuongDon', sql.Int, req.body.sld)
+                    .input('LoaiHangVC', sql.NVarChar(50), req.body.lhvc)
+                    .input('DiaChi', sql.NVarChar(50), req.body.addr)
+                    .input('SDT', sql.VarChar(10), req.body.phone)
+                    .input('Email', sql.VarChar(50), req.body.email)
+                    .input('TK', sql.VarChar(50), req.body.username)
+                    .input('MK', sql.VarChar(50), req.body.pass)
 
-                .output('MaDT',sql.VarChar(10))
-                .execute('sp_Insert_DoiTac')
-            pool.close()
-            res.send(result.recordset)
-            console.log(result)
-            return
-        } catch (error) {
-            console.log(error.message);
-            return error.message
-        }
-    })
+                .output('MaDT', sql.VarChar(10))
+                    .execute('sp_Insert_DoiTac')
+                pool.close()
+                res.send(result.recordset)
+                console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        })
 })
 
 app.get("/find-notconfirm-contract", function(req, res) {
@@ -612,7 +612,7 @@ app.get("/find-notconfirm-contract", function(req, res) {
         })
 })
 app.get("/view-contract", function(req, res) {
-    let MaNV = 'NV00000001'; //thay bang sesstion
+    let MaNV = req.session.user; //thay bang sesstion
     Promise.resolve('success')
         .then(async function() {
             try {
@@ -629,7 +629,7 @@ app.get("/view-contract", function(req, res) {
         })
 })
 app.post("/confirm-contract", function(req, res) {
-    let MaNV = 'NV00000001'; //thay bang sesstion
+    let MaNV = req.session.user; //thay bang sesstion
     //console.log(req.body);
     Promise.resolve('success')
         .then(async function() {

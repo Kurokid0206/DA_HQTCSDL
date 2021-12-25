@@ -1,4 +1,4 @@
-const ids = ["confirm-contract-section", "view-contract-section"]
+var ids = ["confirm-contract-section", "view-contract-section"]
 
 
 function emp_show(id) {
