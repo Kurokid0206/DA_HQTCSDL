@@ -493,7 +493,7 @@ app.post("/add-emp", function(req, res) {
                 let result = await pool.request()
                     .input('TK', sql.VarChar(50), req.body.username)
                     .input('MK', sql.VarChar(50), req.body.pass)
-                    .input('TenNV', sql.VarChar(50), req.body.name)
+                    .input('TenNV', sql.NVarChar(50), req.body.name)
                     .output('MaNV', sql.Char(10))
                     .execute('sp_Insert_NhanVien')
                 pool.close()
