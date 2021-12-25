@@ -57,8 +57,7 @@ app.get("/supplier", function(req, res) {
 })
 //driver page
 app.get("/driver", function(req, res) {
-
-        res.sendFile(__dirname + "/html/driver.html")
+    res.sendFile(__dirname + "/html/driver.html")
 })
 //employee page
 app.get("/employee", function(req, res) {
@@ -98,10 +97,12 @@ app.post("/log-in", function(req, res) {
 
                 res.redirect("/driver")
             } else if (type.indexOf("DT") > -1) {
-
                 res.redirect("/supplier")
-            } else if (type.indexOf("QTV") > -1) {
-
+            } 
+            else if (type.indexOf("QTV") > -1) {
+                res.redirect("/employee")
+            }
+            else{
                 res.redirect("/admin")
             }
 
