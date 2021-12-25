@@ -99,7 +99,7 @@ app.post("/log-in", function(req, res) {
             } else if (type.indexOf("DT") > -1) {
                 res.redirect("/supplier")
             } 
-            else if (type.indexOf("QTV") > -1) {
+            else if (type.indexOf("NV") > -1) {
                 res.redirect("/employee")
             }
             else{
