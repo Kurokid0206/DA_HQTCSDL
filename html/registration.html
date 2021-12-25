@@ -18,11 +18,9 @@
     <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
     <!-- client interact script -->
     <script src="/js/homepage.js"></script>
-    <script src="/js/function.js"></script>
-
 </head>
 
-<body onload="show_customer_form();">
+<body onload="show('customer-form');">
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -47,7 +45,6 @@
                                         <li>Open hours: 24/7</li>
                                     </ul>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -118,20 +115,20 @@
                             <h3 class="mb-35">Đăng ký tài khoản</h3>
                             <h4>Chọn loại tài khoản</h4>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked onclick="show_customer_form();">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked onclick="show('customer-form');">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                   <h6>Khách hàng</h6> 
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onclick="show_partner_form();">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onclick="show('partner-form');">
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     <h6>Đối tác</h6>
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onclick="show_driver_form();">
-                                <label class="form-check-label" for="flexRadioDefault1">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" onclick="show('driver-form');">
+                                <label class="form-check-label" for="flexRadioDefault3">
                                     <h6>Tài xế</h6>
                                 </label>
                             </div>
@@ -143,10 +140,10 @@
                                 <input type="text" name="province" placeholder="Thành phố" />
                                 <input type="text" name="district" placeholder="Quận" />
                                 <input type="text" name="phone" placeholder="Số điện thoại" />
+                                <input type="text" name="email" placeholder="Email" />
                                 <h4> Thông tin đăng nhập</h4>
                                 <input type="text" name="username" placeholder="Tên đăng nhập" />
                                 <input type="password" name="password" placeholder="Mật khẩu" />
-
                                 <button class="btn" type="submit" name="submit">Tạo tài khoản</button>
                             </form>
                             <form class="custom-input" action="#" id="partner-form">
@@ -155,7 +152,7 @@
                                 <input type="text" name="representative" placeholder="Người đại diện" />
                                 <input type="text" name="province" placeholder="Thành phố" />
                                 <input type="text" name="district" placeholder="Quận" />
-                                <input type="number" name="number_of_branch" placeholder="Số chi nhánh" />
+                                <!-- <input type="number" name="number_of_branch" placeholder="Số chi nhánh" /> -->
                                 <input type="number" name="max_order" placeholder="Số đơn tối đa" />
                                 <input type="text" name="type_tranfer" placeholder="Loại hàng vận chuyển" />
                                 <input type="text" name="address" placeholder="Địa chỉ kinh doanh" />
@@ -164,9 +161,9 @@
                                 <h4> Thông tin đăng nhập</h4>
                                 <input type="text" name="username" placeholder="Tên đăng nhập" />
                                 <input type="password" name="password" placeholder="Mật khẩu" />
-
                                 <button class="btn" type="submit" name="submit">Tạo tài khoản</button>
                             </form>
+
                             <form class="custom-input" action="#" id="driver-form">
                                 <h4> Thông tin tài xế</h4>
                                 <input type="text" name="name" placeholder="Họ và tên" />

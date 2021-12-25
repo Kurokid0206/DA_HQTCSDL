@@ -40,23 +40,70 @@ function render_user(users){
     <td scope="col">
     <h6 style="margin:5px 0 0 0;">${user.VaiTro}</h6></td>
     <td scope="col">
-    <h6 style="margin:5px 0 0 0;">${user.TrangThai}</h6></td>
-    <td scope="col">`
+    <h6 style="margin:5px 0 0 0;">${user.TrangThai}</h6></td>`
     if(user.TrangThai=='Disabled'){
         tr+=
-        `<button class="btn-primary" onclick="Enable('${user.TaiKhoan}')">
-        <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Mở khóa</h6>
+        `<td scope="col" id="btn-${user.TaiKhoan}"><button class="btn-primary" onclick="Enable('${user.TaiKhoan}')">
+        <h6 style="width:100px; margin:5px 0 0 0; color: aliceblue; ">Mở khóa</h6>
         </button></td></tr>`
     }
     else{
         tr+=
-        `<button class="btn-danger" onclick="Disable('${user.TaiKhoan}')">
-        <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Khóa</h6>
+        `<td scope="col" id="btn-${user.TaiKhoan}"><button class="btn-danger" onclick="Disable('${user.TaiKhoan}')">
+        <h6 style="width:100px; margin:5px 0 0 0; color: aliceblue; ">Khóa</h6>
         </button></td></tr>`
     }
-    
     })
     return tr
-    
 }
 
+function Enable(TK){
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+
+    let data = JSON.parse(this.responseText)
+    document.querySelector(`#btn-${TK}`).innerHTML=
+    `<td scope="col" id="btn-${TK}">
+    <button class="btn-danger" onclick="Disable('${TK}')">
+    <h6 style="width:100px; margin:5px 0 0 0; color: aliceblue; ">Khóa</h6>
+    </button></td></tr>`
+    }
+
+    xhtml.open("POST", "manage-user");
+    xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send("TK="+TK);
+}
+
+function Disable(TK){
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+
+    let data = JSON.parse(this.responseText)
+    document.querySelector(`#btn-${TK}`).innerHTML=
+    `<td scope="col" id="btn-${TK}">
+    <button class="btn-danger" onclick="Enable('${TK}')">
+    <h6 style="width:100px; margin:5px 0 0 0; color: aliceblue; ">Mở khóa</h6>
+    </button></td></tr>`
+    }
+
+    xhtml.open("POST", "manage-user");
+    xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send("TK="+TK);
+}
+function add_emp(){
+    let name = document.querySelector(`#empName`)
+    let username = document.querySelector(`#empUsername`)
+    let pass = document.querySelector(`#empPassword`)
+
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+        name.value=''
+        username.value=''
+        pass.value=''
+        get_user();
+    }
+
+    xhtml.open("POST", "add-emp");
+    xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send(`name=${name.value}&username=${username.value}&pass=${pass.value}`);
+}
