@@ -1,4 +1,4 @@
-const ids=["add-employee-section","manager-account-section"]
+var ids=["add-employee-section","manager-account-section"]
 
 function ad_show(id){
     
