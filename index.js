@@ -45,29 +45,43 @@ config = {
 
 //home page
 app.get("/", function(req, res) {
-        res.sendFile(__dirname + "/html/index.html")
+    res.sendFile(__dirname + "/html/index.html")
 })
 //customer page
-app.get("/customer", function(req, res) {
-    res.sendFile(__dirname + "/html/customer.html")
+app.get("/customer", function(req, res) {  
+    if(req.session.user==null){
+        res.redirect("/")
+    }else{
+        res.sendFile(__dirname + "/html/customer.html")
+    }
 })
 //supplier page
 app.get("/supplier", function(req, res) {
-    res.sendFile(__dirname + "/html/supplier.html")
+    if(req.session.user==null){
+        res.redirect("/")
+    }else{
+    res.sendFile(__dirname + "/html/supplier.html")}
 })
 //driver page
 app.get("/driver", function(req, res) {
-
-        res.sendFile(__dirname + "/html/driver.html")
+    if(req.session.user==null){
+        res.redirect("/")
+    }else{
+        res.sendFile(__dirname + "/html/driver.html")}
 })
 //employee page
 app.get("/employee", function(req, res) {
-
-        res.sendFile(__dirname + "/html/employee.html")
+    if(req.session.user==null){
+        res.redirect("/")
+    }else{
+        res.sendFile(__dirname + "/html/employee.html")}
 })
 //admin page
 app.get("/admin", function(req, res) {
-    res.sendFile(__dirname + "/html/admin.html")
+    if(req.session.user==null){
+        res.redirect("/")
+    }else{
+    res.sendFile(__dirname + "/html/admin.html")}
 })
 
 app.get("/registration", function(req, res) {
