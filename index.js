@@ -100,7 +100,7 @@ app.post("/log-in", function(req, res) {
                 res.redirect("/employee")
             } else if (type.indexOf("QTV") > -1){
                 res.redirect("/admin")
-            }else{
+            } else{
                 res.redirect("/")
             }
             return
@@ -481,25 +481,88 @@ app.post("/add-emp", function(req, res) {
 
 app.post("/add-KH", function(req, res) {
     Promise.resolve('success')
-        .then(async function() {
-            try {
-                let pool = await sql.connect(config);
-                let result = await pool.request()
-                    .input('',sql.VarChar(50),req.body.name)
-                    .input('',sql.VarChar(50),req.body.addr)
-                    .input('',sql.VarChar(50),req.body.phone)
-                    .input('',sql.VarChar(50),req.body.email)
-                    .input('',sql.VarChar(50),req.body.username)
-                    .input('',sql.VarChar(50),req.body.pass)
-                    .execute('sp_Insert_KhackHang')
-                pool.close()
-                res.send(result.recordset)
-                console.log(result)
-                return
-            } catch (error) {
-                console.log(error.message);
-                return error.message
-            }
-        })
+    .then(async function() {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .input('HoTen',sql.NVarChar(50),req.body.name)
+                .input('DiaChi',sql.VarChar(100),req.body.addr)
+                .input('SDT',sql.Char(10),req.body.phone)
+                .input('Email',sql.VarChar(50),req.body.email)
+                .input('TK',sql.VarChar(50),req.body.username)
+                .input('MK',sql.VarChar(50),req.body.pass)
+                .output('MaKH',sql.VarChar(10))
+                .execute('sp_Insert_KhackHang')
+            pool.close()
+            res.send(result.recordset)
+            //console.log(result)
+            return
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
 })
 
+
+
+app.post("/add-TX", function(req, res) {
+    Promise.resolve('success')
+    .then(async function() {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .input('HoTen',sql.NVarChar(50),req.body.name)
+                .input('DiaChi',sql.VarChar(100),req.body.addr)
+                .input('SDT',sql.VarChar(12),req.body.phone)
+                .input('Email',sql.VarChar(50),req.body.email)
+                .input('CMND',sql.VarChar(12),req.body.cmnd)
+                .input('BienSoXe',sql.VarChar(9),req.body.bsx)
+                .input('KhuVucHD',sql.NVarChar(50),req.body.kvhd)
+                .input('TKNganHang',sql.VarChar(15),req.body.tknh)
+                .input('TK',sql.VarChar(50),req.body.username)
+                .input('MK',sql.VarChar(50),req.body.pass)
+                .output('MaTX',sql.VarChar(10))
+                .execute('sp_Insert_TaiXe')
+            pool.close()
+            res.send(result.recordset)
+            //console.log(result)
+            return
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
+})
+
+app.post("/add-DT", function(req, res) {
+    Promise.resolve('success')
+    .then(async function() {
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .input('TenDT',sql.NVarChar(50),req.body.name)
+                .input('NguoiDD',sql.NVarChar(50),req.body.namedd)
+
+                .input('TP',sql.NVarChar(50),req.body.tp)
+                .input('Quan',sql.NVarChar(50),req.body.quan)
+                .input('SoLuongDon',sql.Int,req.body.sld)
+                .input('LoaiHangVC',sql.NVarChar(50),req.body.lhvc)
+                .input('DiaChi',sql.NVarChar(50),req.body.addr)
+                .input('SDT',sql.VarChar(10),req.body.phone)
+                .input('Email',sql.VarChar(50),req.body.email)
+                .input('TK',sql.VarChar(50),req.body.username)
+                .input('MK',sql.VarChar(50),req.body.pass)
+
+                .output('MaDT',sql.VarChar(10))
+                .execute('sp_Insert_DoiTac')
+            pool.close()
+            res.send(result.recordset)
+            console.log(result)
+            return
+        } catch (error) {
+            console.log(error.message);
+            return error.message
+        }
+    })
+})
