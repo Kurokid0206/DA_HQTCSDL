@@ -20,7 +20,7 @@
     <script src="/js/cus-function.js"></script>
 </head>
 
-<body onload="cus_show('new-order-section'); get_supplier();">
+<body onload="cus_show('new-order-section'); get_supplier('CTDH0');">
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -118,17 +118,35 @@
                             <h3 class="mb-35">Tạo đơn hàng</h3>
 
                             <form class="custom-input" id="order-form" onsubmit="return insert_order();">
-                                <h6 style="margin:5px 0 0 0;">Đối tác:</h6>
-                                <select name="partner" id="select-partner" placeholder="Chọn đối tác" onchange="get_product()">
-                                    <option selected>Chọn đối tác</option>
-                                </select>
-                                <h6 style="margin:5px 0 0 0;">Sản phẩm:</h6>
-                                <select name="product" id="select-product" placeholder="Chọn đối tác">
-                                    <option selected>Chọn sản phẩm</option>
-                                    <option value="Mã sp">Tên sản phẩm</option>
-                                </select>
-                                <h6 style="margin:5px 0 0 0;">Số lượng:</h6>
-                                <input type="number" name="quantity" placeholder="Số lượng" />
+                                <div id="order_detail-container">
+
+
+                                    <div class="CT_donhang enter-box" id="CTDH0">
+                                        <h4 style="margin:5px 0 0 0; display: inline-block;">Sản phẩm 1:</h4>
+                                        <button class="btn-danger" type="button" onclick="delete_componentbyID('CTDH0')" style="display: inline-block; margin-left: 50%;">
+                                            <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Xóa</h6>
+                                        </button>
+                                        <br><br>
+                                        <h6 style="margin:5px 0 0 0;">Đối tác:</h6>
+                                        <select name="partner" id="select-partner" placeholder="Chọn đối tác" onchange="get_product('CTDH0')">
+                                            <option selected>Chọn đối tác</option>
+                                        </select>
+                                        <h6 style="margin:5px 0 0 0;">Sản phẩm:</h6>
+                                        <select name="product" id="select-product" placeholder="Chọn đối tác">
+                                            <option selected>Chọn sản phẩm</option>
+                                            <option value="Mã sp">Tên sản phẩm</option>
+                                        </select>
+                                        <h6 style="margin:5px 0 0 0;">Số lượng:</h6>
+                                        <input type="number" name="quantity" placeholder="Số lượng" />
+
+                                    </div>
+
+                                </div>
+                                <button class="btn-primary" type="button" onclick="add_order_detail()">
+                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Thêm sản phẩm</h6>
+                                </button>
+                                <br><br>
+
                                 <h6 style="margin:5px 0 0 0;">Địa chỉ nhận hàng:</h6>
                                 <input type="text" id="address" placeholder="Địa chỉ nhận hàng" />
                                 <h6 style="margin:5px 0 0 0;">Hình thức thanh toán:</h6>
