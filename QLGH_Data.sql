@@ -21,7 +21,7 @@ GO
 -- Create backup folder
 --
 IF OBJECT_ID('xp_create_subdir') IS NOT NULL
-  EXEC xp_create_subdir N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup'
+  EXEC xp_create_subdir N'D:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup'
 --
 -- Backup database to the file with the name: <database_name>_<yyyy>_<mm>_<dd>_<hh>_<mi>.bak
 --
@@ -30,7 +30,7 @@ SET @db_name = N'QLGH'
 
 DECLARE @filepath NVARCHAR(4000)
 SET @filepath =
-/*define base part*/ N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup\' + @db_name + '_' +
+/*define base part*/ N'D:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup\' + @db_name + '_' +
 /*append date*/ REPLACE(CONVERT(NVARCHAR(10), GETDATE(), 102), '.', '_') + '_' +
 /*append time*/ REPLACE(CONVERT(NVARCHAR(5), GETDATE(), 108), ':', '_') + '.bak'
 
