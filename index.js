@@ -533,7 +533,7 @@ app.post("/add-KH", function(req, res) {
                 let pool = await sql.connect(config);
                 let result = await pool.request()
                     .input('HoTen', sql.NVarChar(50), req.body.name)
-                    .input('DiaChi', sql.VarChar(100), req.body.addr)
+                    .input('DiaChi', sql.NVarChar(100), req.body.addr)
                     .input('SDT', sql.Char(10), req.body.phone)
                     .input('Email', sql.VarChar(50), req.body.email)
                     .input('TK', sql.VarChar(50), req.body.username)
