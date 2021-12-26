@@ -410,14 +410,15 @@ app.get("/driver-view-order", function(req, res) {
 })
 
 app.post("/dri-update-order-stat", function(req, res) {
+    console.log(req.body)
     Promise.resolve('success')
         .then(async function() {
             try {
                 let pool = await sql.connect(config);
                 let result = await pool.request()
-                    .input('MaDH', sql.Char(10), 'DH0000001')
-                    .input('Option', sql.Int, 1)
-                    .execute('sp_Update_TinhTrang')
+                    .input('MaDH', sql.Char(10), req.body.MaDH)
+                    .input('Option', sql.Int, req.body.opt)
+                    .execute('sp_TX_Update_TinhTrang')
                 pool.close()
                 res.send(result.recordset)
                 console.log(result)
@@ -435,12 +436,12 @@ app.post("/dri-recv-order", function(req, res) {
             try {
                 let pool = await sql.connect(config);
                 let result = await pool.request()
-                    .input('MaDH', sql.Char(10), 'DH0000001')
-                    .input('MaTX', sql.Char(10), 'TX0000001')
+                    .input('MaDH', sql.Char(10), req.body.MaDH)
+                    .input('MaTX', sql.Char(10), req.session.user)
                     .execute('sp_TX_NhanDH')
                 pool.close()
                 res.send(result.recordset)
-                console.log(result)
+                //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -448,7 +449,25 @@ app.post("/dri-recv-order", function(req, res) {
             }
         })
 })
-
+app.get("/dri-my-order", function(req, res) {
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool.query(
+                    `select MaDH, HoTen,  TongTien,HTThanhToan, DiaChiGiaoHang 
+                    from DonHang DH join KhachHang KH on DH.MaKH = KH.MaKH
+                    where DH.MaTX='${req.session.user}' AND DH.TinhTrang != N'Đã Giao'`)
+                pool.close()
+                res.send(result.recordset)
+                //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        })
+})
 app.post("/find-user", function(req, res) {
     Promise.resolve('success')
         .then(async function() {

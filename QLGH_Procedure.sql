@@ -410,7 +410,7 @@ begin tran
 	begin try
 		declare @KhuVuc as nvarchar(50) = (select KhuVucHoatDong from TaiXe where MaTX = @MaTX)
 		select MaDH, HoTen,  TongTien,HTThanhToan, DiaChiGiaoHang from DonHang DH join KhachHang KH on DH.MaKH = KH.MaKH
-		where DiaChiGiaoHang like '%' + @KhuVuc + '%'
+		where DiaChiGiaoHang like '%' + @KhuVuc + '%' and DH.MaTX is null
 	end try
 	begin catch
 		select  error_number() as errornumber,
@@ -595,7 +595,7 @@ if @@trancount > 0
     commit tran; 
 
 go
-
+--drop proc sp_TK_Login
 create procedure sp_TK_Login @TK varchar(50), @MK varchar(30), @Ma char(10) output
 as
 begin tran

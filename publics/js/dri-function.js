@@ -1,4 +1,6 @@
-const ids=["driver-order-section","driver-confirm-section","driver-salary-section"]
+var ids=["driver-order-section",
+"driver-confirm-section",
+"driver-salary-section"]
 
 
 function dri_show(id){
@@ -43,7 +45,10 @@ function dri_update_order(){
 }
 
 function render_order(orders){
-
+    // if(orders){
+    //     return `<tr><p>Không có đơn hàng phù hợp</p></tr>`
+    // }
+    
     var tr=''
     orders.forEach(order=>{
         tr=tr+`
@@ -61,7 +66,7 @@ function render_order(orders){
         <h6 style="margin:5px 0 0 0;">${order.DiaChiGiaoHang}</h6>
         </td>
         <td scope="col">
-        <button class="btn-primary" onclick="do_sthing_like_oẳng(#id_order)" id="take-order-btn">
+        <button type="button" class="btn-primary" onclick="dri_recv_order('${order.MaDH}')" id="take-order-btn">
         <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Nhận đơn</h6>
         </button>
         </td>
@@ -70,19 +75,66 @@ function render_order(orders){
     })
     return tr
 }
-function dri_recv_order(){
+function dri_recv_order(MaDH){
+    dri_confirm(MaDH,2);
+    
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
 
         // input.value="";
         // var data=JSON.parse(this.responseText)
         // console.log(data)
+        dri_show('driver-confirm-section')
 
     }
 
     xhtml.open("POST", "dri-recv-order");
     xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhtml.send();
+    xhtml.send('MaDH='+MaDH);
 
     return false;
+}
+function dri_my_order(){
+    dri_show('driver-confirm-section')
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+
+        let orders = JSON.parse(this.responseText)
+        document.querySelector("#driver-confirm-section tbody").innerHTML
+        =render_my_order(orders)
+
+    }
+
+    xhtml.open("get", "dri-my-order");
+    //xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send();
+}
+
+
+function render_my_order(orders){
+    tr=``
+    orders.forEach(order=>{
+        tr+=
+        `<tr><td scope="col"><h6 style="margin:5px 0 0 0;">${order.MaDH}</h6></td>
+        <td scope="col"><h6 style="margin:5px 0 0 0;">${order.HoTen}</h6></td>
+        <td scope="col"><h6 style="margin:5px 0 0 0;">${order.TongTien}</h6></td>
+        <td scope="col"><h6 style="margin:5px 0 0 0;">${order.DiaChiGiaoHang}</h6></td>
+        <td scope="col">
+        <button class="btn-primary" onclick="dri_confirm('${order.MaDH},0')">
+        <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Đã giao</h6></button></td></tr>`
+    })
+    return tr
+}
+
+function dri_confirm(MaDH,opt){
+    //dri_show('driver-confirm-section')
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+
+    }
+
+    xhtml.open("post", "dri-update-order-stat");
+    xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send(`MaDH=${MaDH}&opt=${opt}`);
+
 }
