@@ -434,6 +434,7 @@ as
 begin tran
 	begin try
 		select MaDH, HTThanhToan, DiaChiGiaoHang, TongTien, NgayLap, TinhTrang from DonHang where MaDH = @MaDH
+		select * from CT_DonHang where MaDH = @MaDH
 	end try
 	begin catch
 		select  error_number() as errornumber,
