@@ -421,7 +421,7 @@ app.post("/dri-update-order-stat", function(req, res) {
                     .execute('sp_TX_Update_TinhTrang')
                 pool.close()
                 res.send(result.recordset)
-                console.log(result)
+                //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -455,9 +455,9 @@ app.get("/dri-my-order", function(req, res) {
             try {
                 let pool = await sql.connect(config);
                 let result = await pool.query(
-                    `select MaDH, HoTen,  TongTien,HTThanhToan, DiaChiGiaoHang 
-                    from DonHang DH join KhachHang KH on DH.MaKH = KH.MaKH
-                    where DH.MaTX='${req.session.user}' AND DH.TinhTrang != N'Đã Giao'`)
+                        `select MaDH, HoTen,  TongTien,HTThanhToan, DiaChiGiaoHang 
+                        from DonHang DH join KhachHang KH on DH.MaKH = KH.MaKH
+                        where DH.MaTX='${req.session.user}' AND DH.TinhTrang != N'Đã Giao'`)
                 pool.close()
                 res.send(result.recordset)
                 //console.log(result)

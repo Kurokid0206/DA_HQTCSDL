@@ -45,9 +45,9 @@ function dri_update_order(){
 }
 
 function render_order(orders){
-    // if(orders){
-    //     return `<tr><p>Không có đơn hàng phù hợp</p></tr>`
-    // }
+    if(orders.length<1){
+       return  'No result'
+    }
     
     var tr=''
     orders.forEach(order=>{
@@ -120,7 +120,7 @@ function render_my_order(orders){
         <td scope="col"><h6 style="margin:5px 0 0 0;">${order.TongTien}</h6></td>
         <td scope="col"><h6 style="margin:5px 0 0 0;">${order.DiaChiGiaoHang}</h6></td>
         <td scope="col">
-        <button class="btn-primary" onclick="dri_confirm('${order.MaDH},0')">
+        <button class="btn-primary" onclick="dri_confirm('${order.MaDH}',0)">
         <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Đã giao</h6></button></td></tr>`
     })
     return tr

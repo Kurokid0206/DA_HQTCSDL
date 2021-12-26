@@ -2,6 +2,7 @@
 go
 
 --drop proc sp_Insert_KhackHang
+
 create procedure sp_Insert_KhackHang 
 	@MaKH char(10) output,
 	@HoTen nvarchar(50), 
@@ -320,14 +321,14 @@ if @@trancount > 0
     commit tran;
 
 go
-
+--drop proc sp_TX_Update_TinhTrang
 create procedure sp_TX_Update_TinhTrang 
 	@MaDH char(10), 
 	@Option int
 as
 begin tran
 	begin try
-		declare @TinhTrang varchar(50)
+		declare @TinhTrang nvarchar(50)
 		if @Option = 1	set @TinhTrang = N'Chưa Giao'
 		else if @Option = 2 set @TinhTrang = N'Đang Giao'
 		else set @TinhTrang = N'Đã Giao'
