@@ -102,17 +102,18 @@ app.get("/registration", function(req, res) {
 })
 
 app.post("/log-in", function(req, res) {
-    //console.log(req.body)
+    console.log(req.body)
     Promise.resolve('success')
         .then(async function() {
             try {
                 let pool = await sql.connect(config);
                 let result = await pool.request()
-                    .input('tk', sql.VARCHAR(10), `${req.body.username}`)
-                    .input('mk', sql.VarChar(10), `${req.body.password}`)
+                    .input('tk', sql.VARCHAR(50), `${req.body.username}`)
+                    .input('mk', sql.VarChar(20), `${req.body.password}`)
                     .output('ma', sql.Char(10))
                     .execute('sp_TK_Login')
                 pool.close()
+                console.log(result)
                 req.session.user = result.output.ma
                 res.redirect("/")
                     //console.log(result.output.ma)
@@ -537,7 +538,7 @@ app.post("/add-KH", function(req, res) {
                     .input('SDT', sql.Char(10), req.body.phone)
                     .input('Email', sql.VarChar(50), req.body.email)
                     .input('TK', sql.VarChar(50), req.body.username)
-                    .input('MK', sql.VarChar(50), req.body.pass)
+                    .input('MK', sql.VarChar(20), req.body.pass)
                     .output('MaKH', sql.VarChar(10))
                     .execute('sp_Insert_KhackHang')
                 pool.close()
@@ -658,6 +659,26 @@ app.post("/confirm-contract", function(req, res) {
                 pool.close()
                 res.send(result.recordset)
                     //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message;
+            }
+        })
+})
+
+
+app.get("/dri_income", function(req, res) {
+    let MaNV = req.session.user; //thay bang sesstion
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool
+                .query(`select *from DonHang where MaTX ='${req.session.user}' and TinhTrang=N'Đã Giao'`)
+                pool.close()
+                res.send(result.recordset)
+                    console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);

@@ -10,7 +10,7 @@ create procedure sp_Insert_KhackHang
 	@DiaChi nvarchar(100), 
 	@Email varchar(50),
 	@TK varchar(50),
-	@MK varchar(50)
+	@MK varchar(20)
 as	
 begin tran
 	begin try

@@ -138,3 +138,16 @@ function dri_confirm(MaDH,opt){
     xhtml.send(`MaDH=${MaDH}&opt=${opt}`);
 
 }
+
+function dri_income(){
+    //dri_show('driver-confirm-section')
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+
+    }
+
+    xhtml.open("get", "dri_income");
+    //xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send();
+
+}

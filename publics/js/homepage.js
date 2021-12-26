@@ -28,10 +28,7 @@ function add_KH() {
     xhtml.open("POST", "add-KH");
     xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhtml.send(
-        `name=${name.value}
-        &addr=${DiaChi2.value}, ${DiaChi1.value}&phone=${SDT.value}&email=${email.value}
-        &username=${username.value}
-        &pass=${password.value}`
+        `name=${name.value}&addr=${DiaChi2.value}, ${DiaChi1.value}&phone=${SDT.value}&email=${email.value}&username=${username.value}&pass=${password.value}`
     );
 }
 
