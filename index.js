@@ -677,7 +677,7 @@ app.get("/dri_income", function(req, res) {
                 .query(`select *from DonHang where MaTX ='${req.session.user}' and TinhTrang=N'Đã Giao'`)
                 pool.close()
                 res.send(result.recordset)
-                    console.log(result)
+                    //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
