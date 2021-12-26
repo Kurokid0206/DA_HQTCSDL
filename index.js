@@ -432,7 +432,7 @@ app.get("/driver-view-order", function(req, res) {
 })
 
 app.post("/dri-update-order-stat", function(req, res) {
-    //console.log(req.session.user)
+    console.log(req.body)
     Promise.resolve('success')
         .then(async function() {
             try {
@@ -463,8 +463,7 @@ app.post("/dri-recv-order", function(req, res) {
                     .execute('sp_TX_NhanDH')
                 pool.close()
                 res.send(result.recordset)
-                    // console.log(req.session.user)
-                    // console.log(result)
+                    //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -628,7 +627,7 @@ app.post("/add-DT", function(req, res) {
                     .execute('sp_Insert_DoiTac')
                 pool.close()
                 res.send(result.recordset)
-                console.log(result)
+                    //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -719,7 +718,7 @@ app.get("/supp-get-orders", function(req, res) {
                     .query(`select *from DonHang where MaDT ='${req.session.user}'`)
                 pool.close()
                 res.send(result.recordset)
-                    console.log(result)
+                    //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -804,4 +803,26 @@ app.post("/supp-add-old-product", function(req, res) {
             }
         })
 
+})
+
+app.post("/add-new-product-to-branch", function(req, res) {
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool.request()
+                    .input('TenSP', sql.NVarChar(50), req.body.TenSP)
+                    .input('GiaBan', sql.Int, parseInt(req.body.GiaBan))
+
+                .output('MaSP', sql.VarChar(10))
+                    .execute('sp_CN_ThemSP')
+                pool.close()
+                MaSP = result.output.MaSP;
+
+
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        })
 })

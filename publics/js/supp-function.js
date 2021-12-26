@@ -143,6 +143,20 @@ function get_branches_for_add_old() {
     xhtml.send();
 }
 
+function get_branches_for_add_new() {
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+
+        document.querySelector("#select-branch-for-add-new-product").innerHTML =
+            render_branches_for_products(JSON.parse(this.responseText));
+
+    }
+
+    xhtml.open("GET", "get-branches");
+    //xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send();
+}
+
 function render_products_for_add_old(branches) {
     if (branches.length < 1) {
         return 'No Result'
@@ -209,6 +223,7 @@ function show_oldproduct_form() {
 function show_newproduct_form() {
     document.getElementById('add-new-product-form').style.display = "block"
     document.getElementById('add-old-product-form').style.display = "none"
+    get_branches_for_add_new()
 }
 
 function add_old_product_tobranch() {
@@ -224,6 +239,25 @@ function add_old_product_tobranch() {
     }
 
     xhtml.open("POST", "/supp-add-old-product");
+    xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send(data);
+    return false;
+}
+
+function add_new_product_tobranch() {
+    var form = document.getElementById('add-new-product-form');
+    var TenSP = form[0].value;
+    var GianBan = parseInt(form[1].value);
+    var MaCN = form[2].value;
+    var SLTon = parseInt(form[3].value);
+    var data = `TenSP=` + TenSP + `&MaCN=${MaCN}&SLTon=${SLTon}&GiaBan=${GianBan}`;
+
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+        get_branches_for_manager_pro();
+    }
+
+    xhtml.open("POST", "/add-new-product-to-branch");
     xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhtml.send(data);
     return false;
