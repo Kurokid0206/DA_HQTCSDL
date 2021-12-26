@@ -718,7 +718,7 @@ app.get("/supp-get-orders",function(req,res){
                     .query(`select *from DonHang where MaDT ='${req.session.user}'`)
                 pool.close()
                 res.send(result.recordset)
-                    console.log(result)
+                    //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
