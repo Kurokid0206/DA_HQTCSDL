@@ -191,15 +191,16 @@ if @@trancount > 0
 go
 
 create procedure sp_Insert_CT_DonHang 
-	@MaDH char(10), 
-	@MaSP char(10), 
-	@SoLuong int, 
-	@GiaBan int
+	@MaDH varchar(10), 
+	@MaSP varchar(10), 
+	@SoLuong int
+
 as
 begin tran
 	begin try
-		insert into CT_DonHang(MaDH,MaSP,SoLuong,GiaBan)
-		values(@MaDH, @MaSP, @SoLuong, @GiaBan)
+		declare @gia as int = (select GiaBan from SanPham where MaSP = @MaSP)
+		insert into CT_DonHang (MaDH,MaSP,SoLuong,GiaBan)
+		values(@MaDH, @MaSP, @SoLuong, @gia)
 	end try
 	begin catch
 		select  error_number() as errornumber,
@@ -212,7 +213,7 @@ begin tran
 			rollback tran
 	end catch
 if @@trancount > 0  
-    commit tran; 
+    commit tran;
 
 go
 

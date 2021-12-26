@@ -64,23 +64,35 @@ function customer_view_order_detail(MaDH) {
 
 
 function insert_order() {
+    var products = document.querySelectorAll('.CT_donhang');
+    var data = [];
+    products.forEach(product => {
+        let temp = { MaSP: "", SoLuong: 0 };
+        temp.MaSP = product.querySelector('#select-product').value
+        temp.SoLuong = parseInt(product.querySelector('input').value)
+        data.push(temp);
+        temp = { MaSP: "", SoLuong: 0 };
+    })
+    data = JSON.stringify(data);
     let supp = document.getElementById("select-partner")
     let addr = document.getElementById("address")
     let pay = document.getElementById("type-payment")
+    let CT_DHs = document.querySelectorAll(".CT_donhang")
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
-        console.log(`Httt=${pay.value}&DiaChi=${addr.value}&MaDT=${supp.value}`)
+        cus_show(`view-order-section`);
     }
 
     xhtml.open("POST", "insert-order");
     xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhtml.send(`Httt=${pay.value}&DiaChi=${addr.value}&MaDT=${supp.value}`);
+    xhtml.send(`Httt=${pay.value}&DiaChi=${addr.value}&MaDT=${supp.value}&data=${data}`);
 
     return false;
 }
 
 function insert_order_detail() {
     var xhtml = new XMLHttpRequest();
+
     xhtml.onload = function() {
 
         // input.value="";
@@ -91,7 +103,7 @@ function insert_order_detail() {
 
     xhtml.open("POST", "insert-order");
     xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhtml.send();
+    xhtml.send(JSON.parse);
 
     return false;
 }
@@ -166,18 +178,18 @@ function render_view_order_detail(data) {
 }
 
 
-function get_supplier(CTDH) {
+function get_supplier() {
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
-        render_supplier(JSON.parse(this.responseText), CTDH)
+        render_supplier(JSON.parse(this.responseText))
     }
 
     xhtml.open("GET", "supplier-data");
     xhtml.send();
 }
 
-function render_supplier(data, CTDH) {
-    var supplier = document.querySelector(`#${CTDH} #select-partner`)
+function render_supplier(data) {
+    var supplier = document.querySelector(`#select-partner`)
     var opt = `<option selected>Chọn đối tác</option>`
     data.forEach(element => {
         opt = opt + `<option value='${element.MaDT}'>${element.TenDT}</option>`
@@ -185,8 +197,23 @@ function render_supplier(data, CTDH) {
     supplier.innerHTML = opt
 }
 
+function get_product_forAll() {
+    let MaDT = document.querySelector(`#select-partner`).value
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+        var CTDHs = document.querySelectorAll(".CT_donhang")
+        for (i = 0; i < CTDHs.length; i++) {
+            render_product(JSON.parse(this.responseText), `CTDH${i}`)
+        }
+
+    }
+    xhtml.open("POST", "product-data");
+    xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send("MaDT=" + MaDT);
+}
+
 function get_product(CTDH) {
-    let MaDT = document.querySelector(`#${CTDH} #select-partner`).value
+    let MaDT = document.querySelector(`#select-partner`).value
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
         render_product(JSON.parse(this.responseText), CTDH)
@@ -221,20 +248,17 @@ function add_order_detail() {
         <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Xóa</h6>
     </button>
     <br><br>
-    <h6 style="margin:5px 0 0 0;">Đối tác:</h6>
-    <select name="partner" id="select-partner" placeholder="Chọn đối tác" onchange="get_product('CTDH${CTDHs.length}')">
-        <option selected>Chọn đối tác</option>
-    </select>
+
     <h6 style="margin:5px 0 0 0;">Sản phẩm:</h6>
-    <select name="product" id="select-product" placeholder="Chọn đối tác">
+    <select name="product" id="select-product" placeholder="Chọn đối tác" required>
         <option selected>Chọn sản phẩm</option>
         <option value="Mã sp">Tên sản phẩm</option>
     </select>
     <h6 style="margin:5px 0 0 0;">Số lượng:</h6>
-    <input type="number" name="quantity" placeholder="Số lượng" />
+    <input type="number" name="quantity" placeholder="Số lượng" required/>
     <br><br>`
     container.appendChild(temp);
-    get_supplier(`CTDH${CTDHs.length}`)
+    get_product(`CTDH${CTDHs.length}`)
 
 }
 

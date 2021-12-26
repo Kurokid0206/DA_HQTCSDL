@@ -113,7 +113,7 @@ app.post("/log-in", function(req, res) {
                     .output('ma', sql.Char(10))
                     .execute('sp_TK_Login')
                 pool.close()
-                //console.log(result)
+                    //console.log(result)
                 req.session.user = result.output.ma
                 res.redirect("/")
                     //console.log(result.output.ma)
@@ -147,10 +147,12 @@ app.get("/log-out", function(req, res) {
 
 app.post("/insert-order", function(req, res) {
     //console.log(req.session.user)
+    var data = JSON.parse(req.body.data)
     Promise.resolve('success')
         .then(async function() {
             try {
                 let pool = await sql.connect(config);
+
                 let result = await pool.request()
                     .input('HTThanhToan', sql.NVarChar(50), req.body.Httt)
                     .input('DiaChiGiaoHang', sql.NVarChar(50), req.body.DiaChi)
@@ -159,6 +161,27 @@ app.post("/insert-order", function(req, res) {
                     .output('MaDH', sql.Char(10))
                     .execute('sp_Insert_DonHang')
                 pool.close()
+                var MaDH = result.output.MaDH;
+                console.log(MaDH)
+                console.log(data)
+
+                async function add_detail(elements, i) {
+                    if (i >= elements.length) return;
+                    let element = elements[i];
+                    console.log(element.MaSP)
+                    console.log(element.SoLuong)
+                    let pool = await sql.connect(config);
+                    var result2 = await pool.request()
+                        .input('MaDH', sql.VARCHAR(10), MaDH)
+                        .input('MaSP', sql.VARCHAR(10), element.MaSP)
+                        .input('SoLuong', sql.Int, element.SoLuong)
+                        .execute('sp_Insert_CT_DonHang')
+                    console.log("Xong " + element.MaSP)
+                    pool.close();
+                    return add_detail(data, i + 1);
+                }
+                add_detail(data, 0);
+
                 res.send(result.recordset)
                     //console.log(result)
                 return
@@ -421,7 +444,7 @@ app.post("/dri-update-order-stat", function(req, res) {
                     .execute('sp_TX_Update_TinhTrang')
                 pool.close()
                 res.send(result.recordset)
-                //console.log(result)
+                    //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -441,7 +464,7 @@ app.post("/dri-recv-order", function(req, res) {
                     .execute('sp_TX_NhanDH')
                 pool.close()
                 res.send(result.recordset)
-                //console.log(result)
+                    //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -455,12 +478,12 @@ app.get("/dri-my-order", function(req, res) {
             try {
                 let pool = await sql.connect(config);
                 let result = await pool.query(
-                        `select MaDH, HoTen,  TongTien,HTThanhToan, DiaChiGiaoHang 
+                    `select MaDH, HoTen,  TongTien,HTThanhToan, DiaChiGiaoHang 
                         from DonHang DH join KhachHang KH on DH.MaKH = KH.MaKH
                         where DH.MaTX='${req.session.user}' AND DH.TinhTrang != N'Đã Giao'`)
                 pool.close()
                 res.send(result.recordset)
-                //console.log(result)
+                    //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -674,7 +697,7 @@ app.get("/dri_income", function(req, res) {
             try {
                 let pool = await sql.connect(config);
                 let result = await pool
-                .query(`select *from DonHang where MaTX ='${req.session.user}' and TinhTrang=N'Đã Giao'`)
+                    .query(`select *from DonHang where MaTX ='${req.session.user}' and TinhTrang=N'Đã Giao'`)
                 pool.close()
                 res.send(result.recordset)
                     //console.log(result)
@@ -693,7 +716,7 @@ app.get("/supp-get-orders",function(req,res){
             try {
                 let pool = await sql.connect(config);
                 let result = await pool
-                .query(`select *from DonHang where MaDT ='${req.session.user}'`)
+                    .query(`select *from DonHang where MaDT ='${req.session.user}'`)
                 pool.close()
                 res.send(result.recordset)
                     console.log(result)
