@@ -175,7 +175,7 @@ app.post("/insert-order", function(req, res) {
                         .input('MaSP', sql.VARCHAR(10), element.MaSP)
                         .input('SoLuong', sql.Int, element.SoLuong)
                         .execute('sp_Insert_CT_DonHang')
-                    //console.log("Xong " + element.MaSP)
+                        //console.log("Xong " + element.MaSP)
                     pool.close();
                     return add_detail(data, i + 1);
                 }
@@ -357,7 +357,7 @@ app.get("/get-branches", function(req, res) {
             try {
                 let pool = await sql.connect(config);
                 let result = await pool
-                    .query("SELECT * FROM CHINHANH WHERE MADT='DT00000000'")
+                    .query(`SELECT * FROM CHINHANH WHERE MADT='${req.session.user}'`)
                 pool.close()
 
                 res.send(result.recordset)
@@ -708,7 +708,7 @@ app.get("/dri_income", function(req, res) {
         })
 })
 
-app.get("/supp-get-orders",function(req,res){
+app.get("/supp-get-orders", function(req, res) {
 
     Promise.resolve('success')
         .then(async function() {
@@ -716,6 +716,83 @@ app.get("/supp-get-orders",function(req,res){
                 let pool = await sql.connect(config);
                 let result = await pool
                     .query(`select *from DonHang where MaDT ='${req.session.user}'`)
+                pool.close()
+                res.send(result.recordset)
+                    //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message;
+            }
+        })
+
+})
+app.post("/supp-get-products", function(req, res) {
+
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool
+                    .query(`select sp.*, ct.SLTon from SanPhamChiNhanh ct join SanPham sp on ct.MaSP = sp.MaSP  where MaDT ='${req.session.user}' and MaCN = '${req.body.MaCN}'`)
+                pool.close()
+                res.send(result.recordset)
+                    //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message;
+            }
+        })
+
+})
+app.get("/supp-get-products", function(req, res) {
+
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool
+                    .query(`select *from SanPham sp`)
+                pool.close()
+                res.send(result.recordset)
+                    //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message;
+            }
+        })
+
+})
+app.post("/supp-delete-products-frombranchs", function(req, res) {
+
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool
+                    .query(`delete  from SanPhamChiNhanh  where MaDT ='${req.session.user}' and MaCN = '${req.body.MaCN}' and MaSP = '${req.body.MaSP}'`)
+                pool.close()
+                res.send(result.recordset)
+                    //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message;
+            }
+        })
+
+})
+app.post("/supp-add-old-product", function(req, res) {
+
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool
+                    .query(`insert into SanPhamChiNhanh(MaDT,MaCN,MaSP,SLTon) 
+                    values('${req.session.user}','${req.body.MaCN}','${req.body.MaSP}','${req.body.SLTon}')`)
                 pool.close()
                 res.send(result.recordset)
                     //console.log(result)
