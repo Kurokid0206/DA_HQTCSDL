@@ -818,7 +818,7 @@ app.post("/add-new-product-to-branch", function(req, res) {
                 .output('MaSP', sql.Char(10))
                     .execute('sp_Insert_SanPham')
                 pool.close()
-                console.log(result.output.MaSP)
+                    //console.log(result.output.MaSP)
                 return result.output.MaSP
 
             } catch (error) {
@@ -834,8 +834,8 @@ app.post("/add-new-product-to-branch", function(req, res) {
                     .input('MaCN', sql.Char(10), req.body.MaCN)
                     .input('SLTon', sql.Int, parseInt(req.body.SLTon))
 
-                .output('MaSP', sql.Char(10))
-                    .execute('sp_Insert_SP_CN')
+
+                .execute('sp_Insert_SP_CN')
                 pool2.close()
                 res.send(result2.recordset)
 
