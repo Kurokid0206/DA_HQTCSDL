@@ -250,8 +250,7 @@ app.get("/supplier-data", function(req, res) {
         .then(async function() {
             try {
                 let pool = await sql.connect(config);
-                let result = await pool.request()
-                    .execute('sp_get_DT')
+                let result = await pool.query(`select* from doitac`)
                 pool.close()
                 res.send(result.recordset)
                     //console.log(result)
@@ -273,7 +272,7 @@ app.post("/product-data", function(req, res) {
                     .execute('sp_KH_XemSP')
                 pool.close()
                 res.send(result.recordset)
-                    //console.log(result)
+                    console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);

@@ -473,13 +473,12 @@ if @@trancount > 0
     commit tran;
 
 go
-
+--drop proc sp_KH_XemSP
 create procedure sp_KH_XemSP 
-	@TenDT nvarchar(50)
+	@MaDT char(10)
 as
 begin tran
 	begin try
-		declare @MaDT as char(10) = (select MaDT from DoiTac where TenDT like '%' + @TenDT + '%')
 		select SP.MaSP, TenSP, GiaBan 
 		from SanPham SP join SanPhamChiNhanh SPCN on SP.MaSP = SPCN.MaSP
 		where MaDT = @MaDT
@@ -595,9 +594,10 @@ begin tran
 if @@trancount > 0  
     commit tran; 
 
-go
+go 
+
 --drop proc sp_TK_Login
-create procedure sp_TK_Login @TK varchar(50), @MK varchar(30), @Ma char(10) output
+create procedure sp_TK_Login @TK varchar(50), @MK varchar(20), @Ma char(10) output
 as
 begin tran
 	begin try
