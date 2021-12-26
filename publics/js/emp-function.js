@@ -47,7 +47,9 @@ function emp_view_contract() {
 }
 
 function render_contract_for_confirm(contracts) {
-
+    if(contracts.length<1){
+        return  'No result'
+     }
     var tr = ''
     contracts.forEach(contract => {
         tr = tr + `
@@ -80,7 +82,9 @@ function render_contract_for_confirm(contracts) {
 }
 
 function render_contract_for_view(contracts) {
-
+    if(contracts.length<1){
+        return  'No result'
+     }
     var tr = ''
     contracts.forEach(contract => {
         var date_plus = new Date(contract.ThoiHan);

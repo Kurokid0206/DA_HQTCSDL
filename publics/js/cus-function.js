@@ -1,4 +1,4 @@
-const ids=["new-order-section","view-order-section","view-order-detail-section"]
+var ids=["new-order-section","view-order-section","view-order-detail-section"]
 
 function cus_show(id){
     

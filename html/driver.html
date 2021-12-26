@@ -71,7 +71,7 @@
                                         <ul class="navbar-nav dropdown">
                                             <li><a onclick="driver_view_order();">Nhận đơn hàng</a></li>
                                             <li><a onclick="dri_my_order();">Xác nhận giao hàng</a></li>
-                                            <li><a onclick="dri_show('driver-salary-section')">Theo dõi thu nhập</a></li>
+                                            <li><a onclick="dri_income();">Theo dõi thu nhập</a></li>
                                             <li><a href="/log-out">Đăng xuất</a></li>
                                             <li>
                                                 <a href="javascript:viod(0)" class="dropdown-toggle" data-toggle="dropdown" title="Show contact">
@@ -203,7 +203,7 @@
                             <form class="custom-input">
 
                                 <br>
-                                <table class="table " id="driver-salary-table">
+                                <table class="table ">
                                     <thead>
                                         <tr>
                                             <th scope="col" style="width: 100px;">
@@ -215,34 +215,13 @@
                                             <th scope="col" style="width: 200px;">
                                                 <h6 style="margin:5px 0 0 0;">Phí thu được</h6>
                                             </th>
-
                                         </tr>
-
-
                                     </thead>
-
                                     <tbody>
-
-                                        <tr>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">#123456</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">277, Hai Bà Trưng, Q1, TPHCM</h6>
-                                            </td>
-                                            <td scope="col">
-                                                <h6 style="margin:5px 0 0 0;">50,000 vnd</h6>
-                                            </td>
-                                        </tr>
-
-
                                     </tbody>
-
                                 </table>
-                                <table class="table ">
+                                <table class="table "  id="driver-salary-table">
                                     <thead>
-
-
                                     </thead>
                                     <tbody>
                                         <tr>
@@ -253,12 +232,9 @@
                                             <th scope="col" style="width: 200px;">
                                                 <h6 style="margin:5px 0 0 0; font-weight: bold;" id="total-salary">123456789 vnd</h6>
                                             </th>
-
                                         </tr>
-
                                     </tbody>
                                 </table>
-
                             </form>
                         </div>
                     </div>

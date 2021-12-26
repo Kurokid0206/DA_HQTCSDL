@@ -113,7 +113,7 @@ app.post("/log-in", function(req, res) {
                     .output('ma', sql.Char(10))
                     .execute('sp_TK_Login')
                 pool.close()
-                console.log(result)
+                //console.log(result)
                 req.session.user = result.output.ma
                 res.redirect("/")
                     //console.log(result.output.ma)
@@ -250,8 +250,7 @@ app.get("/supplier-data", function(req, res) {
         .then(async function() {
             try {
                 let pool = await sql.connect(config);
-                let result = await pool.request()
-                    .execute('sp_get_DT')
+                let result = await pool.query(`select* from doitac`)
                 pool.close()
                 res.send(result.recordset)
                     //console.log(result)
@@ -678,7 +677,7 @@ app.get("/dri_income", function(req, res) {
                 .query(`select *from DonHang where MaTX ='${req.session.user}' and TinhTrang=N'Đã Giao'`)
                 pool.close()
                 res.send(result.recordset)
-                    console.log(result)
+                    //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
