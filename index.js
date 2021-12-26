@@ -113,7 +113,7 @@ app.post("/log-in", function(req, res) {
                     .output('ma', sql.Char(10))
                     .execute('sp_TK_Login')
                 pool.close()
-                console.log(result)
+                //console.log(result)
                 req.session.user = result.output.ma
                 res.redirect("/")
                     //console.log(result.output.ma)
@@ -272,7 +272,7 @@ app.post("/product-data", function(req, res) {
                     .execute('sp_KH_XemSP')
                 pool.close()
                 res.send(result.recordset)
-                    console.log(result)
+                    //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);

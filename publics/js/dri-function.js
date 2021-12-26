@@ -112,6 +112,9 @@ function dri_my_order(){
 
 
 function render_my_order(orders){
+    if(orders.length<1){
+        return  'No result'
+     }
     tr=``
     orders.forEach(order=>{
         tr+=
@@ -143,11 +146,17 @@ function dri_income(){
     //dri_show('driver-confirm-section')
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
-
+        let data = JSON.parse(this.responseText)
+        document.getElementById("driver-salary-table")
+        .innerHTML= render_income(data)
     }
 
     xhtml.open("get", "dri_income");
     //xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhtml.send();
 
+}
+
+function render_income(orders){
+    
 }
