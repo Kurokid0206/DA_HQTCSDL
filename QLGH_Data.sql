@@ -134,6 +134,7 @@ GO
 -- Inserting data into table dbo.TaiKhoan
 --
 INSERT dbo.TaiKhoan(TaiKhoan, MatKhau, NguoiDung, VaiTro, TrangThai) VALUES (N'Kuro', '123', N'Phạm Tân Tị', N'Quản Trị Viên', 'Enabled')
+INSERT dbo.TaiKhoan(TaiKhoan, MatKhau, NguoiDung, VaiTro, TrangThai) VALUES (N'MeanSun', '123', N'Trần Minh Sơn', N'Quản Trị Viên', 'Enabled')
 INSERT dbo.TaiKhoan(TaiKhoan, MatKhau, NguoiDung, VaiTro, TrangThai) VALUES (N'KHE', '76P31D', N'Lê Gia Hân', N'Khách Hàng', 'Enabled')
 INSERT dbo.TaiKhoan(TaiKhoan, MatKhau, NguoiDung, VaiTro, TrangThai) VALUES (N'XLF', 'IVNELE', N'Đặng Anh Minh', N'Đối Tác', 'Disabled')
 INSERT dbo.TaiKhoan(TaiKhoan, MatKhau, NguoiDung, VaiTro, TrangThai) VALUES (N'BAD', '0HXG93E', N'Đỗ Đức Tài', N'Tài Xế', 'Disabled')
