@@ -13,7 +13,7 @@ create procedure sp_Insert_KhackHang
 as	
 begin tran
 	begin try
-		insert into TaiKhoan values(@TK,@MK,@HoTen,'Khách Hàng','Enabled')
+		insert into TaiKhoan values(@TK,@MK,@HoTen,N'Khách Hàng','Enabled')
 		set @MaKH = dbo.f_Auto_MaKH()
 		insert into KhachHang
 		values (@MaKH, @HoTen, @SDT, @DiaChi, @Email, @TK)
@@ -41,7 +41,7 @@ create procedure sp_Insert_NhanVien
 as	
 begin tran
 	begin try
-		insert into TaiKhoan values(@TK,@MK,@TenNV,'Nhân Viên','Enabled')
+		insert into TaiKhoan values(@TK,@MK,@TenNV,N'Nhân Viên','Enabled')
 		set @MaNV = dbo.f_Auto_MaNV()
 		insert into NhanVien
 		values (@MaNV, @TenNV, @TK)
@@ -76,7 +76,7 @@ create procedure sp_Insert_TaiXe
 as	
 begin tran
 	begin try
-		insert into TaiKhoan values(@TK, @MK, @HoTen,'Tài Xế','Enabled')
+		insert into TaiKhoan values(@TK, @MK, @HoTen,N'Tài Xế','Enabled')
 		set @MaTX = dbo.f_Auto_MaTX()
 		insert into TaiXe
 		values (@MaTX, @HoTen, @CMND, @SDT, @DiaChi, @BienSoXe, @KhuVucHD, @Email, @TKNganHang, @TK)
@@ -112,7 +112,7 @@ create procedure sp_Insert_DoiTac
 as	
 begin tran
 	begin try
-		insert into TaiKhoan values(@TK,@MK,@TenDT,'Đối Tác','Enabled')
+		insert into TaiKhoan values(@TK,@MK,@TenDT,N'Đối Tác','Enabled')
 		set @MaDT = dbo.f_Auto_MaDT()
 		insert into DoiTac(MaDT, TenDT, NguoiDaiDien, ThanhPho, Quan,
 							SoLuongDonMoiNgay, LoaiHangVanChuyen, SoDienThoai, 
