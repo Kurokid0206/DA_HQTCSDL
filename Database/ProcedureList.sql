@@ -164,6 +164,7 @@ go
 --drop proc sp_Insert_DonHang
 
 create procedure sp_Insert_DonHang
+
 	@MaDH char(10) output,
 	@HTThanhToan nvarchar(50),    
 	@DiaChiGiaoHang nvarchar(100), 
@@ -171,6 +172,7 @@ create procedure sp_Insert_DonHang
 	@MaDT char(10)
 as
 begin tran
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
 	begin try
 		set @MaDH = dbo.f_Auto_MaDH()
 		insert into DonHang(MaDH,HTThanhToan,DiaChiGiaoHang,MaKH,TinhTrang,MaDT,NgayLap)
@@ -304,6 +306,8 @@ create procedure sp_Insert_SP_CN
     @SLTon int
 as
 begin tran
+SET TRANSACTION ISOLATION
+LEVEL REPEATEABLE READ
 	begin try
 		insert into SanPhamChiNhanh
 		values(@MaDT, @MaCN, @MaSP, @SLTon)
@@ -355,10 +359,12 @@ create procedure sp_TX_NhanDH
 	@MaTX char(10), 
 	@MaDH char(10)
 as
+SET TRANSACTION ISOLATION LEVEL READ COMMITED
 begin tran
 	begin try
 		if ((select MaTX from DonHang where MaDH = @MaDH) is NULL)
 		begin
+		--waitfor delay '00:00:10'
 			update DonHang
 			set MaTX = @MaTX where MaDH = @MaDH
 			exec sp_TX_Update_TinhTrang @MaDH, 2
@@ -409,6 +415,8 @@ create procedure sp_TX_XemDH
 	@MaTX char(10)
 as
 begin tran
+SET TRANSACTION ISOLATION
+LEVEL SERIALIZABLE
 	begin try
 		declare @KhuVuc as nvarchar(50) = (select KhuVucHoatDong from TaiXe where MaTX = @MaTX)
 		select MaDH, HoTen,  TongTien,HTThanhToan, DiaChiGiaoHang from DonHang DH join KhachHang KH on DH.MaKH = KH.MaKH
@@ -572,7 +580,7 @@ if @@trancount > 0
 go
 
 create procedure sp_CN_ThemSP 
-	@TenSP varchar(10), 
+	@TenSP nvarchar(50), 
 	@GiaBan int, 
 	@MaCN varchar(10), 
 	@MaDT varchar(10),
@@ -582,7 +590,7 @@ begin tran
 	begin try
 		declare @MaSP as char(10)
 		exec sp_Insert_SanPham @MaSP, @TenSP, @GiaBan
-		exec sp_Insert_SP_CN @MaDT, @MaCN, @MaSP, @SLuong
+		exec sp_Insert_SP_CN @MaDT, @MaSP, @MaCN, @SLuong
 	end try
 	begin catch
 		select  error_number() as errornumber,
@@ -602,6 +610,7 @@ go
 --drop proc sp_TK_Login
 create procedure sp_TK_Login @TK varchar(50), @MK varchar(20), @Ma char(10) output
 as
+set tran isolation level repeatable read
 begin tran
 	begin try
 		if exists(select * from TaiKhoan where @TK = TaiKhoan and @MK = MatKhau and TrangThai = 'Enabled')
