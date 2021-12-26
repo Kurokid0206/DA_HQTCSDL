@@ -152,7 +152,6 @@ app.post("/insert-order", function(req, res) {
         .then(async function() {
             try {
                 let pool = await sql.connect(config);
-
                 let result = await pool.request()
                     .input('HTThanhToan', sql.NVarChar(50), req.body.Httt)
                     .input('DiaChiGiaoHang', sql.NVarChar(50), req.body.DiaChi)
@@ -162,21 +161,21 @@ app.post("/insert-order", function(req, res) {
                     .execute('sp_Insert_DonHang')
                 pool.close()
                 var MaDH = result.output.MaDH;
-                console.log(MaDH)
-                console.log(data)
+                // console.log(MaDH)
+                // console.log(data)
 
                 async function add_detail(elements, i) {
                     if (i >= elements.length) return;
                     let element = elements[i];
-                    console.log(element.MaSP)
-                    console.log(element.SoLuong)
+                    // console.log(element.MaSP)
+                    // console.log(element.SoLuong)
                     let pool = await sql.connect(config);
                     var result2 = await pool.request()
                         .input('MaDH', sql.VARCHAR(10), MaDH)
                         .input('MaSP', sql.VARCHAR(10), element.MaSP)
                         .input('SoLuong', sql.Int, element.SoLuong)
                         .execute('sp_Insert_CT_DonHang')
-                    console.log("Xong " + element.MaSP)
+                    //console.log("Xong " + element.MaSP)
                     pool.close();
                     return add_detail(data, i + 1);
                 }
@@ -192,23 +191,23 @@ app.post("/insert-order", function(req, res) {
         })
 })
 
-async function insert_order_detail(data) {
-    try {
-        let pool = await sql.connect(config);
-        let result = await pool.request()
-            .input('MaDH', sql.VARCHAR(10), data.MaDH)
-            .input('MaSP', sql.VARCHAR(10), data.MaSP)
-            .input('SoLuong', sql.Int, data.SoLuong)
-            .execute('sp_Insert_CT_DonHang')
-        pool.close()
-        res.send(result.recordset)
-            //console.log(result)
-        return
-    } catch (error) {
-        console.log(error.message);
-        return error.message
-    }
-}
+// async function insert_order_detail(data) {
+//     try {
+//         let pool = await sql.connect(config);
+//         let result = await pool.request()
+//             .input('MaDH', sql.VARCHAR(10), data.MaDH)
+//             .input('MaSP', sql.VARCHAR(10), data.MaSP)
+//             .input('SoLuong', sql.Int, data.SoLuong)
+//             .execute('sp_Insert_CT_DonHang')
+//         pool.close()
+//         res.send(result.recordset)
+//             //console.log(result)
+//         return
+//     } catch (error) {
+//         console.log(error.message);
+//         return error.message
+//     }
+// }
 
 app.get("/cus-view-order", function(req, res) {
     Promise.resolve('success')
@@ -230,7 +229,7 @@ app.get("/cus-view-order", function(req, res) {
 })
 
 app.post("/cus-view-order-detail", function(req, res) {
-    console.log(req.body.MaDH)
+    //console.log(req.body.MaDH)
     Promise.resolve('success')
         .then(async function() {
             try {

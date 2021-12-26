@@ -80,7 +80,7 @@ function insert_order() {
     let CT_DHs = document.querySelectorAll(".CT_donhang")
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
-        cus_show(`view-order-section`);
+        customer_view_order();
     }
 
     xhtml.open("POST", "insert-order");

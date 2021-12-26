@@ -428,14 +428,15 @@ if @@trancount > 0
     commit tran;
 
 go
-
+--drop proc sp_KH_XemDH
 create procedure sp_KH_XemDH 
-	@MaDH char(10)
+	@MaKH char(10)
 as
 begin tran
 	begin try
-		select MaDH, HTThanhToan, DiaChiGiaoHang, TongTien, NgayLap, TinhTrang from DonHang where MaDH = @MaDH
-		select * from CT_DonHang where MaDH = @MaDH
+		select MaDH, HTThanhToan, DiaChiGiaoHang, TongTien, NgayLap, TinhTrang 
+		from DonHang where MaKH = @MaKH
+		
 	end try
 	begin catch
 		select  error_number() as errornumber,
