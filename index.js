@@ -805,6 +805,7 @@ app.post("/supp-add-old-product", function(req, res) {
 
 })
 
+
 app.post("/add-new-product-to-branch", function(req, res) {
     Promise.resolve('success')
         .then(async function() {
@@ -814,11 +815,29 @@ app.post("/add-new-product-to-branch", function(req, res) {
                     .input('TenSP', sql.NVarChar(50), req.body.TenSP)
                     .input('GiaBan', sql.Int, parseInt(req.body.GiaBan))
 
-                .output('MaSP', sql.VarChar(10))
-                    .execute('sp_CN_ThemSP')
+                .output('MaSP', sql.Char(10))
+                    .execute('sp_Insert_SanPham')
                 pool.close()
-                MaSP = result.output.MaSP;
+                console.log(result.output.MaSP)
+                return result.output.MaSP
 
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        }).then(async function(MaSP) {
+            try {
+                let pool2 = await sql.connect(config);
+                let result2 = await pool2.request()
+                    .input('MaSP', sql.Char(10), MaSP)
+                    .input('MaDT', sql.Char(10), req.session.user)
+                    .input('MaCN', sql.Char(10), req.body.MaCN)
+                    .input('SLTon', sql.Int, parseInt(req.body.SLTon))
+
+                .output('MaSP', sql.Char(10))
+                    .execute('sp_Insert_SP_CN')
+                pool2.close()
+                res.send(result2.recordset)
 
             } catch (error) {
                 console.log(error.message);
