@@ -687,6 +687,7 @@ app.get("/dri_income", function(req, res) {
 })
 
 app.get("/supp-get-orders",function(req,res){
+
     Promise.resolve('success')
         .then(async function() {
             try {
@@ -695,26 +696,7 @@ app.get("/supp-get-orders",function(req,res){
                 .query(`select *from DonHang where MaDT ='${req.session.user}'`)
                 pool.close()
                 res.send(result.recordset)
-                    //console.log(result)
-                return
-            } catch (error) {
-                console.log(error.message);
-                return error.message;
-            }
-        })
-
-})
-
-app.get("/supp-get-products",function(req,res){
-    Promise.resolve('success')
-        .then(async function() {
-            try {
-                let pool = await sql.connect(config);
-                let result = await pool
-                .query(`select *from DonHang where MaDT ='${req.session.user}'`)
-                pool.close()
-                res.send(result.recordset)
-                    //console.log(result)
+                    console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
