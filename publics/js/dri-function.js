@@ -143,12 +143,11 @@ function dri_confirm(MaDH,opt){
 }
 
 function dri_income(){
-    //dri_show('driver-confirm-section')
+    dri_show('driver-salary-section')
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
         let data = JSON.parse(this.responseText)
-        document.getElementById("driver-salary-table")
-        .innerHTML= render_income(data)
+        render_income(data)
     }
 
     xhtml.open("get", "dri_income");
@@ -158,5 +157,25 @@ function dri_income(){
 }
 
 function render_income(orders){
-    
+    var tr=``
+    var tt=0
+    orders.forEach(order=>{
+        tr+=`<tr><td scope="col">
+        <h6 style="margin:5px 0 0 0;">${order.MaDH}</h6></td>
+        <td scope="col"><h6 style="margin:5px 0 0 0;">${order.DiaChiGiaoHang}</h6>
+        </td>
+        <td scope="col">
+        <h6 style="margin:5px 0 0 0;">${(order.TongTien*0.05).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} VND</h6>
+        </td>
+        </tr>`
+        tt+=order.TongTien*0.05
+    })
+
+    document.querySelector("#driver-salary-section tbody").innerHTML=tr
+    document.getElementById("driver-salary-table").innerHTML= 
+    `<tr><th scope="col" style="width: 400px;">
+    <h4 style="margin:5px 0 0 0; margin-left: 138px; font-weight: bold;">Tổng tiền</h4>
+    </th><th scope="col" style="width: 200px;">
+    <h6 style="margin:5px 0 0 0; font-weight: bold;" id="total-salary">${(tt).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} VND</h6>
+    </th></tr>`
 }
