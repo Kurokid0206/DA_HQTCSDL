@@ -189,7 +189,7 @@ begin tran
 if @@trancount > 0  
     commit tran
 go
-drop proc sp_Insert_CT_DonHang
+--drop proc sp_Insert_CT_DonHang
 create procedure sp_Insert_CT_DonHang 
 	@MaDH varchar(10), 
 	@MaSP varchar(10), 

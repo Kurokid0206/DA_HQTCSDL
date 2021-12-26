@@ -432,7 +432,7 @@ app.get("/driver-view-order", function(req, res) {
 })
 
 app.post("/dri-update-order-stat", function(req, res) {
-    console.log(req.body)
+    //console.log(req.session.user)
     Promise.resolve('success')
         .then(async function() {
             try {
@@ -463,7 +463,8 @@ app.post("/dri-recv-order", function(req, res) {
                     .execute('sp_TX_NhanDH')
                 pool.close()
                 res.send(result.recordset)
-                    //console.log(result)
+                    // console.log(req.session.user)
+                    // console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -718,7 +719,7 @@ app.get("/supp-get-orders", function(req, res) {
                     .query(`select *from DonHang where MaDT ='${req.session.user}'`)
                 pool.close()
                 res.send(result.recordset)
-                    //console.log(result)
+                    console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
