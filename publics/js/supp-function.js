@@ -1,4 +1,4 @@
-const ids=["add-product-container","add-branchs-container","create-contract-section","manager-product-section","manager-branchs-section","manager-order-section"]
+var ids=["add-product-container","add-branchs-container","create-contract-section","manager-product-section","manager-branchs-section","manager-order-section"]
 
 function supp_show(id){
     
@@ -45,4 +45,32 @@ function get_branches_for_contract(){
     xhtml.open("GET", "get-branches");
     //xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhtml.send();
+}
+
+function get_orders(){
+    supp_show('manager-order-section')
+    var xhtml = new XMLHttpRequest();
+    xhtml.onload = function() {
+        let data = JSON.parse(this.responseText)
+        document.querySelector("#manager-order-section tbody").innerHTML
+        =render_orders(data)
+    }
+
+    xhtml.open("GET", "supp-get-orders");
+    //xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhtml.send();
+}
+function render_orders(orders){
+    if(orders.length<1){
+        return 'No Result'
+    }
+    tr=``
+    orders.forEach(order=>{
+        tr+=`
+        <tr><td scope="col"><h6 style="margin:5px 0 0 0;">${order.MaDH}</h6></td>
+        <td scope="col"><h6 style="margin:5px 0 0 0;">${order.DiaChiGiaoHang}</h6></td>
+        <td scope="col"><h6 style="margin:5px 0 0 0;">${order.TongTien}</h6></td>
+        <td scope="col"><h6 style="margin:5px 0 0 0;">${order.TinhTrang}</h6></td></tr>`
+    })
+    return tr
 }
