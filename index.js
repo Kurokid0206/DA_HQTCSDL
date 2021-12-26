@@ -102,7 +102,7 @@ app.get("/registration", function(req, res) {
 })
 
 app.post("/log-in", function(req, res) {
-    console.log(req.body)
+    //console.log(req.body)
     Promise.resolve('success')
         .then(async function() {
             try {
