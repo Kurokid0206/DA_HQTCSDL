@@ -1,32 +1,34 @@
-var ids=["new-order-section","view-order-section","view-order-detail-section"]
+var ids = ["new-order-section", "view-order-section", "view-order-detail-section"]
 
-function cus_show(id){
-    
-    ids.forEach(id=>{
-        var div = document.querySelector("#"+id);
+function cus_show(id) {
+
+    ids.forEach(id => {
+        var div = document.querySelector("#" + id);
         div.style.display = "none";
     })
-    var div = document.querySelector("#"+id);
-        div.style.display = "block";
+    var div = document.querySelector("#" + id);
+    div.style.display = "block";
 }
 
-function sign_up(){
-
-}
-
-function insert_product(){
-
-}
-function delete_product(){
-
-}
-function update_product(){
+function sign_up() {
 
 }
 
+function insert_product() {
+
+}
+
+function delete_product() {
+
+}
+
+function update_product() {
+
+}
 
 
-function customer_view_order(){
+
+function customer_view_order() {
     cus_show('view-order-section');
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
@@ -42,29 +44,29 @@ function customer_view_order(){
     return false;
 }
 
-function customer_view_order_detail(MaDH){
+function customer_view_order_detail(MaDH) {
     cus_show('view-order-detail-section')
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
         render_view_order_detail(JSON.parse(this.responseText))
-        // input.value="";
-        // var data=JSON.parse(this.responseText)
-        // console.log(data)
+            // input.value="";
+            // var data=JSON.parse(this.responseText)
+            // console.log(data)
 
     }
 
     xhtml.open("POST", "cus-view-order-detail");
     xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhtml.send('MaDH='+MaDH);
+    xhtml.send('MaDH=' + MaDH);
 
     return false;
 }
 
 
-function insert_order(){
-    let supp=document.getElementById("select-partner")
-    let addr=document.getElementById("address")
-    let pay=document.getElementById("type-payment")
+function insert_order() {
+    let supp = document.getElementById("select-partner")
+    let addr = document.getElementById("address")
+    let pay = document.getElementById("type-payment")
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
         console.log(`Httt=${pay.value}&DiaChi=${addr.value}&MaDT=${supp.value}`)
@@ -77,7 +79,7 @@ function insert_order(){
     return false;
 }
 
-function insert_order_detail(){
+function insert_order_detail() {
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
 
@@ -94,7 +96,7 @@ function insert_order_detail(){
     return false;
 }
 
-function insert_contract(){
+function insert_contract() {
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
 
@@ -112,11 +114,11 @@ function insert_contract(){
 }
 
 
-function render_view_order(data){
+function render_view_order(data) {
     var bill = document.querySelector("#bill tbody")
-    var tr=``
+    var tr = ``
     data.forEach(element => {
-        tr=tr+`<tr><td scope="col" style="width: 100px;">
+        tr = tr + `<tr><td scope="col" style="width: 100px;">
         <h6 style="margin:5px 0 0 0;">${element.MaDH}</h6>
         </td>
         <td scope="col" style="width: 200px;">
@@ -134,15 +136,15 @@ function render_view_order(data){
         <h6 style="margin:5px 0 0 0; color: aliceblue;">Hủy đơn</h6>
         </button></td></tr>`
     });
-    bill.innerHTML=tr
+    bill.innerHTML = tr
 }
 
 
-function render_view_order_detail(data){
+function render_view_order_detail(data) {
     var bill = document.querySelector("#bill-detail tbody")
-    var tr=``
+    var tr = ``
     data.forEach(element => {
-        tr=tr+`<tr>
+        tr = tr + `<tr>
         <th scope="col" style="width: 120px;">
             <h6 style="margin:5px 0 0 0;">${element.MaSP}</h6>
         </th>
@@ -160,52 +162,83 @@ function render_view_order_detail(data){
         </th>
     </tr>`
     });
-    bill.innerHTML=tr
+    bill.innerHTML = tr
 }
 
 
-function get_supplier(){
+function get_supplier(CTDH) {
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
-        render_supplier(JSON.parse(this.responseText))
+        render_supplier(JSON.parse(this.responseText), CTDH)
     }
 
     xhtml.open("GET", "supplier-data");
     xhtml.send();
 }
 
-function render_supplier(data){
-    var supplier = document.querySelector("#select-partner")
-    var opt=`<option selected>Chọn đối tác</option>`
+function render_supplier(data, CTDH) {
+    var supplier = document.querySelector(`#${CTDH} #select-partner`)
+    var opt = `<option selected>Chọn đối tác</option>`
     data.forEach(element => {
-        opt=opt+`<option value='${element.MaDT}'>${element.TenDT}</option>`
+        opt = opt + `<option value='${element.MaDT}'>${element.TenDT}</option>`
     });
-    supplier.innerHTML=opt
+    supplier.innerHTML = opt
 }
 
-function get_product(){
-    let MaDT=document.querySelector("#select-partner").value
+function get_product(CTDH) {
+    let MaDT = document.querySelector(`#${CTDH} #select-partner`).value
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
-        render_product(JSON.parse(this.responseText))
+        render_product(JSON.parse(this.responseText), CTDH)
     }
     xhtml.open("POST", "product-data");
     xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhtml.send("MaDT="+MaDT);
+    xhtml.send("MaDT=" + MaDT);
 }
 
-function render_product(data){
-    var product = document.querySelector("#select-product")
-    var opt=`<option selected>Chọn Sản Phẩm</option>`
+function render_product(data, CTDH) {
+    var product = document.querySelector(`#${CTDH} #select-product`)
+    var opt = `<option selected>Chọn Sản Phẩm</option>`
     data.forEach(element => {
-        opt=opt+`<option value="${element.MaSP}">${element.TenSP}-
+        opt = opt + `<option value="${element.MaSP}">${element.TenSP}-
         ${(element.GiaBan)
             .toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}(vnd)</option>`
     });
-    product.innerHTML=opt
+    product.innerHTML = opt
 }
 
-function insert_product_branch(){
+function add_order_detail() {
+    var container = document.querySelector(`#order_detail-container`);
+    var CTDHs = document.querySelectorAll('.CT_donhang');
+
+    var temp = document.createElement('div');
+    temp.setAttribute('id', `CTDH${CTDHs.length}`)
+    temp.classList.add('CT_donhang')
+    temp.classList.add('enter-box')
+    temp.innerHTML = `
+    <h4 style="margin:5px 0 0 0; display: inline-block;">Sản phẩm ${CTDHs.length+1}:</h4>
+    <button class="btn-danger" type="button" onclick="delete_componentbyID('CTDH${CTDHs.length}')" style="display: inline-block; margin-left: 50%;">
+        <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Xóa</h6>
+    </button>
+    <br><br>
+    <h6 style="margin:5px 0 0 0;">Đối tác:</h6>
+    <select name="partner" id="select-partner" placeholder="Chọn đối tác" onchange="get_product('CTDH${CTDHs.length}')">
+        <option selected>Chọn đối tác</option>
+    </select>
+    <h6 style="margin:5px 0 0 0;">Sản phẩm:</h6>
+    <select name="product" id="select-product" placeholder="Chọn đối tác">
+        <option selected>Chọn sản phẩm</option>
+        <option value="Mã sp">Tên sản phẩm</option>
+    </select>
+    <h6 style="margin:5px 0 0 0;">Số lượng:</h6>
+    <input type="number" name="quantity" placeholder="Số lượng" />
+    <br><br>`
+    container.appendChild(temp);
+    get_supplier(`CTDH${CTDHs.length}`)
+
+}
+
+function insert_product_branch() {
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
 
@@ -223,7 +256,7 @@ function insert_product_branch(){
 }
 
 
-function cancel_order(MaDH){
+function cancel_order(MaDH) {
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
 
@@ -233,7 +266,11 @@ function cancel_order(MaDH){
 
     xhtml.open("POST", "cancel-order");
     xhtml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhtml.send("MaDH="+MaDH);
+    xhtml.send("MaDH=" + MaDH);
 
     return false;
+}
+
+function delete_componentbyID(CTDH) {
+    document.getElementById(CTDH).remove();
 }
