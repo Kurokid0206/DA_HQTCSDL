@@ -71,8 +71,8 @@
                                         <ul class="navbar-nav dropdown">
 
                                             <li><a onclick="get_orders();">Quản lý đơn hàng</a></li>
-                                            <li><a onclick="supp_show('manager-product-section')">Quản lý sản phẩm</a></li>
-                                            <li><a onclick="supp_show('manager-branchs-section')">Quản lý chi nhánh</a></li>
+                                            <li><a onclick="get_branches_for_manager_pro()">Quản lý sản phẩm</a></li>
+                                            <li><a onclick=";">Quản lý chi nhánh</a></li>
                                             <li><a onclick="get_branches_for_contract()">Lập hợp đồng</a></li>
                                             <li><a href="/log-out">Đăng xuất</a></li>
 
@@ -215,7 +215,7 @@
                             <h3 class="mb-35">Quản lý sản phẩm</h3>
                             <form class="custom-input">
                                 <h4 style="margin:5px 0 0 0;">Chọn chi nhánh:</h4>
-                                <select name="branch" id="select-branch-for-edit-product" onchange="do_something_like_oẳng()" style="max-width: 50%;">
+                                <select name="branch" id="select-branch-for-edit-product" onchange="get_products()" style="max-width: 50%;">
                                     <option selected>Chọn chi nhánh</option>
                                 </select>
 
@@ -226,7 +226,7 @@
                                             <th scope="col" style="width: 100px;">
                                                 <h6 style="margin:5px 0 0 0;">Mã sản phẩm</h6>
                                             </th>
-                                            <th scope="col" style="width: 300px;">
+                                            <th scope="col" style="width: 200px;">
                                                 <h6 style="margin:5px 0 0 0;">Tên sản phẩm</h6>
                                             </th>
                                             <th scope="col" style="width: 100px;">
@@ -246,66 +246,6 @@
 
                                     <tbody>
 
-                                        <tr id="12345">
-                                            <td scope="col">
-                                                <input type="text" name="productID" value="#12345" disabled style="margin:0;" />
-                                            </td>
-                                            <td scope="col">
-                                                <input type="text" name="productName" value="Dê dừa" disabled style="margin:0;" />
-                                            </td>
-                                            <td scope="col">
-                                                <input type="number" name="productPrice" value="500000" disabled style="margin:0;" />
-                                            </td>
-                                            <td scope="col">
-                                                <input type="number" name="productRemaining" value="30" disabled style="margin:0;" />
-                                            </td>
-                                            <td scope="col" style=" padding-top: 15px;">
-
-                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)">
-                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Xóa</h6>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr id="12345">
-                                            <td scope="col">
-                                                <input type="text" name="productID" value="#12345" disabled style="margin:0;" />
-                                            </td>
-                                            <td scope="col">
-                                                <input type="text" name="productName" value="Dê dừa" disabled style="margin:0;" />
-                                            </td>
-                                            <td scope="col">
-                                                <input type="number" name="productPrice" value="500000" disabled style="margin:0;" />
-                                            </td>
-                                            <td scope="col">
-                                                <input type="number" name="productRemaining" value="30" disabled style="margin:0;" />
-                                            </td>
-                                            <td scope="col" style=" padding-top: 15px;">
-
-                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)">
-                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Xóa</h6>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr id="12345">
-                                            <td scope="col">
-                                                <input type="text" name="productID" value="#12345" disabled style="margin:0;" />
-                                            </td>
-                                            <td scope="col">
-                                                <input type="text" name="productName" value="Dê dừa" disabled style="margin:0;" />
-                                            </td>
-                                            <td scope="col">
-                                                <input type="number" name="productPrice" value="500000" disabled style="margin:0;" />
-                                            </td>
-                                            <td scope="col">
-                                                <input type="number" name="productRemaining" value="30" disabled style="margin:0;" />
-                                            </td>
-                                            <td scope="col" style=" padding-top: 15px;">
-
-                                                <button class="btn-danger" onclick="do_sthing_like_oẳng(#id_sp)">
-                                                    <h6 style=" margin:5px 0 0 0; color: aliceblue; ">Xóa</h6>
-                                                </button>
-                                            </td>
-                                        </tr>
 
                                     </tbody>
                                 </table>
@@ -315,42 +255,25 @@
 
                             </form>
                             <div id="add-product-container" class="enter-box" style="display: none;">
-                                <!-- <form>
+                                <form>
 
                                     <h4>Sản phẩm này đã tồn tại chưa?</h4>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked onclick="show_customer_form();">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked onclick="show_oldproduct_form();">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             <h6>Sản phẩm đã có lưu thông tin</h6>
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onclick="show_partner_form();">
-                                        <label class="form-check-label" for="flexRadioDefault1">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onclick="show_newproduct_form();">
+                                        <label class="form-check-label" for="flexRadioDefault2">
                                             <h6>Thêm sản một phẩm mới</h6>
                                         </label>
                                     </div>
                                 </form>
                                 <br>
-                                <form action="" class="custom-input" id="add-new-product-form">
-                                    <h4>Khai báo sản phẩm mới và thêm vào chi nhánh</h4>
-
-                                    <h6 style="margin:5px 0 0 0;">Tên sản phẩm:</h6>
-                                    <input type="text" name="productName" placeholder="Tên sản phẩm" style="max-width: 50%;" />
-                                    <h6 style="margin:5px 0 0 0;">Giá bán:</h6>
-                                    <input type="number" name="productPrice" placeholder="Giá bán" style="max-width: 50%;" />
-                                    <h6 style="margin:5px 0 0 0;">Chọn chi nhánh:</h6>
-                                    <select name="branch" id="select-branch-for-add-product" style="max-width: 50%;">
-                                        <option selected>Chọn chi nhánh</option>
-                                    </select>
-                                    <h6 style="margin:5px 0 0 0;">Số lượng tồn:</h6>
-                                    <input type="number" name="productRemaining" placeholder="Số lượng tồn" style="max-width: 50%;" />
-                                    <br>
-                                    <button class="btn " name="submit" type="submit">Lưu</button>
-                                </form>
-                                <br> -->
-                                <form action="" class="custom-input" id="add-old-product-form">
-                                    <h4>Thêm sản phẩm đã được lưu thông tin vào chi nhánh</h4>
+                                <form class="custom-input" id="add-old-product-form" onsubmit="return false;">
+                                    <h4>Thêm sản phẩm vào chi nhánh</h4>
                                     <br>
                                     <h6 style="margin:5px 0 0 0;">Chọn sản phẩm:</h6>
                                     <select name="productID" id="select-add-old-product" style="max-width: 50%;">
@@ -358,15 +281,32 @@
                                     </select>
 
                                     <h6 style="margin:5px 0 0 0;">Chọn chi nhánh:</h6>
-                                    <select name="branch" id="select-branch-for-add-product" style="max-width: 50%;">
+                                    <select name="branch" id="select-branch-for-add-old-product" style="max-width: 50%;">
                                         <option selected>Chọn chi nhánh</option>
                                     </select>
                                     <h6 style="margin:5px 0 0 0;">Số lượng tồn:</h6>
                                     <input type="number" name="productRemaining" placeholder="Số lượng tồn" style="max-width: 50%;" />
                                     <br>
-                                    <button class="btn " name="submit" type="submit">Lưu</button>
+                                    <button class="btn" name="submit" type="button" onclick="add_old_product_tobranch()">Lưu</button>
                                 </form>
+                                <br>
 
+                                <form class="custom-input" id="add-new-product-form" onsubmit="return false;">
+                                    <h4>Khai báo sản phẩm mới và thêm vào chi nhánh</h4>
+
+                                    <h6 style="margin:5px 0 0 0;">Tên sản phẩm:</h6>
+                                    <input type="text" name="productName" placeholder="Tên sản phẩm" style="max-width: 50%;" />
+                                    <h6 style="margin:5px 0 0 0;">Giá bán:</h6>
+                                    <input type="number" name="productPrice" placeholder="Giá bán" style="max-width: 50%;" />
+                                    <h6 style="margin:5px 0 0 0;">Chọn chi nhánh:</h6>
+                                    <select name="branch" id="select-branch-for-add-new-product" style="max-width: 50%;">
+                                        <option selected>Chọn chi nhánh</option>
+                                    </select>
+                                    <h6 style="margin:5px 0 0 0;">Số lượng tồn:</h6>
+                                    <input type="number" name="productRemaining" placeholder="Số lượng tồn" style="max-width: 50%;" />
+                                    <br>
+                                    <button class="btn " name="submit" type="button" onclick="add_new_product_tobranch()">Lưu</button>
+                                </form>
                             </div>
                         </div>
                     </div>

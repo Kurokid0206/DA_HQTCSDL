@@ -175,7 +175,7 @@ app.post("/insert-order", function(req, res) {
                         .input('MaSP', sql.VARCHAR(10), element.MaSP)
                         .input('SoLuong', sql.Int, element.SoLuong)
                         .execute('sp_Insert_CT_DonHang')
-                    //console.log("Xong " + element.MaSP)
+                        //console.log("Xong " + element.MaSP)
                     pool.close();
                     return add_detail(data, i + 1);
                 }
@@ -357,7 +357,7 @@ app.get("/get-branches", function(req, res) {
             try {
                 let pool = await sql.connect(config);
                 let result = await pool
-                    .query("SELECT * FROM CHINHANH WHERE MADT='DT00000000'")
+                    .query(`SELECT * FROM CHINHANH WHERE MADT='${req.session.user}'`)
                 pool.close()
 
                 res.send(result.recordset)
@@ -432,7 +432,7 @@ app.get("/driver-view-order", function(req, res) {
 })
 
 app.post("/dri-update-order-stat", function(req, res) {
-    //console.log(req.session.user)
+    console.log(req.body)
     Promise.resolve('success')
         .then(async function() {
             try {
@@ -463,8 +463,7 @@ app.post("/dri-recv-order", function(req, res) {
                     .execute('sp_TX_NhanDH')
                 pool.close()
                 res.send(result.recordset)
-                    // console.log(req.session.user)
-                    // console.log(result)
+                    //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -628,7 +627,7 @@ app.post("/add-DT", function(req, res) {
                     .execute('sp_Insert_DoiTac')
                 pool.close()
                 res.send(result.recordset)
-                console.log(result)
+                    //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -709,7 +708,7 @@ app.get("/dri_income", function(req, res) {
         })
 })
 
-app.get("/supp-get-orders",function(req,res){
+app.get("/supp-get-orders", function(req, res) {
 
     Promise.resolve('success')
         .then(async function() {
@@ -719,7 +718,7 @@ app.get("/supp-get-orders",function(req,res){
                     .query(`select *from DonHang where MaDT ='${req.session.user}'`)
                 pool.close()
                 res.send(result.recordset)
-                    console.log(result)
+                    //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -727,4 +726,122 @@ app.get("/supp-get-orders",function(req,res){
             }
         })
 
+})
+app.post("/supp-get-products", function(req, res) {
+
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool
+                    .query(`select sp.*, ct.SLTon from SanPhamChiNhanh ct join SanPham sp on ct.MaSP = sp.MaSP  where MaDT ='${req.session.user}' and MaCN = '${req.body.MaCN}'`)
+                pool.close()
+                res.send(result.recordset)
+                    //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message;
+            }
+        })
+
+})
+app.get("/supp-get-products", function(req, res) {
+
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool
+                    .query(`select *from SanPham sp`)
+                pool.close()
+                res.send(result.recordset)
+                    //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message;
+            }
+        })
+
+})
+app.post("/supp-delete-products-frombranchs", function(req, res) {
+
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool
+                    .query(`delete  from SanPhamChiNhanh  where MaDT ='${req.session.user}' and MaCN = '${req.body.MaCN}' and MaSP = '${req.body.MaSP}'`)
+                pool.close()
+                res.send(result.recordset)
+                    //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message;
+            }
+        })
+
+})
+app.post("/supp-add-old-product", function(req, res) {
+
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool
+                    .query(`insert into SanPhamChiNhanh(MaDT,MaCN,MaSP,SLTon) 
+                    values('${req.session.user}','${req.body.MaCN}','${req.body.MaSP}','${req.body.SLTon}')`)
+                pool.close()
+                res.send(result.recordset)
+                    //console.log(result)
+                return
+            } catch (error) {
+                console.log(error.message);
+                return error.message;
+            }
+        })
+
+})
+
+
+app.post("/add-new-product-to-branch", function(req, res) {
+    Promise.resolve('success')
+        .then(async function() {
+            try {
+                let pool = await sql.connect(config);
+                let result = await pool.request()
+                    .input('TenSP', sql.NVarChar(50), req.body.TenSP)
+                    .input('GiaBan', sql.Int, parseInt(req.body.GiaBan))
+
+                .output('MaSP', sql.Char(10))
+                    .execute('sp_Insert_SanPham')
+                pool.close()
+                console.log(result.output.MaSP)
+                return result.output.MaSP
+
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        }).then(async function(MaSP) {
+            try {
+                let pool2 = await sql.connect(config);
+                let result2 = await pool2.request()
+                    .input('MaSP', sql.Char(10), MaSP)
+                    .input('MaDT', sql.Char(10), req.session.user)
+                    .input('MaCN', sql.Char(10), req.body.MaCN)
+                    .input('SLTon', sql.Int, parseInt(req.body.SLTon))
+
+                .output('MaSP', sql.Char(10))
+                    .execute('sp_Insert_SP_CN')
+                pool2.close()
+                res.send(result2.recordset)
+
+            } catch (error) {
+                console.log(error.message);
+                return error.message
+            }
+        })
 })
