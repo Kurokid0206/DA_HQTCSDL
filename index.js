@@ -152,38 +152,70 @@ app.post("/insert-order", function(req, res) {
         .then(async function() {
             try {
                 let pool = await sql.connect(config);
-                let result = await pool.request()
-                    .input('HTThanhToan', sql.NVarChar(50), req.body.Httt)
-                    .input('DiaChiGiaoHang', sql.NVarChar(50), req.body.DiaChi)
-                    .input('MaKH', sql.NVarChar(10), req.session.user)
-                    .input('MaDT', sql.NVarChar(10), req.body.MaDT)
-                    .output('MaDH', sql.Char(10))
-                    .execute('sp_Insert_DonHang')
-                pool.close()
-                var MaDH = result.output.MaDH;
-                // console.log(MaDH)
-                // console.log(data)
+                const transaction = new sql.Transaction(pool)
+                transaction.begin(err => {
+                    // ... error checks
 
-                async function add_detail(elements, i) {
-                    if (i >= elements.length) return;
-                    let element = elements[i];
-                    // console.log(element.MaSP)
-                    // console.log(element.SoLuong)
-                    let pool = await sql.connect(config);
-                    var result2 = await pool.request()
-                        .input('MaDH', sql.VARCHAR(10), MaDH)
-                        .input('MaSP', sql.VARCHAR(10), element.MaSP)
-                        .input('SoLuong', sql.Int, element.SoLuong)
-                        .execute('sp_Insert_CT_DonHang')
-                        //console.log("Xong " + element.MaSP)
-                    pool.close();
-                    return add_detail(data, i + 1);
-                }
-                add_detail(data, 0);
+                    let request = new sql.Request(transaction)
+                    request.input('HTThanhToan', sql.NVarChar(50), req.body.Httt)
+                        .input('DiaChiGiaoHang', sql.NVarChar(50), req.body.DiaChi)
+                        .input('MaKH', sql.NVarChar(10), req.session.user)
+                        .input('MaDT', sql.NVarChar(10), req.body.MaDT)
+                        .output('MaDH', sql.Char(10))
+                        .execute('sp_Insert_DonHang', (err, result) => {
+                            if (err) {
+                                transaction.rollback(err => {
+                                    // ... error checks
 
-                res.send(result.recordset)
-                    //console.log(result)
-                return
+                                    //console.log("Transaction rollback")
+                                })
+                                return
+                            } else {
+
+                                function add_detail(elements, i) {
+                                    if (i >= elements.length) {
+                                        transaction.commit(err => {
+                                            // ... error checks
+
+                                            //console.log("Transaction commit ket thuc de quy.")
+
+                                        })
+                                        return
+                                    }
+                                    let element = elements[i];
+                                    // console.log(element.MaSP)
+                                    // console.log(element.SoLuong)
+                                    let request = new sql.Request(transaction)
+                                    request.input('MaDH', sql.VarChar(10), result.output.MaDH)
+                                        .input('MaSP', sql.VarChar(10), element.MaSP)
+                                        .input('SoLuong', sql.Int, element.SoLuong)
+                                        .execute('sp_Insert_CT_DonHang', (err, result) => {
+                                            // ... error checks
+                                            if (err) {
+                                                transaction.rollback(err => {
+                                                        // ... error checks
+
+
+                                                        //console.log("Transaction rollback trong de quy.")
+                                                        //console.log(element.MaSP)
+                                                    })
+                                                    //console.log(err)
+                                                return
+                                            } else {
+
+                                                return add_detail(data, i + 1);
+                                            }
+
+                                        })
+
+                                }
+                                add_detail(data, 0);
+                            }
+                            // ... error checks
+
+                        })
+
+                })
             } catch (error) {
                 console.log(error.message);
                 return error.message
