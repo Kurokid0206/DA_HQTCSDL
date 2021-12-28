@@ -306,8 +306,7 @@ create procedure sp_Insert_SP_CN
     @SLTon int
 as
 begin tran
-SET TRANSACTION ISOLATION
-LEVEL REPEATEABLE READ
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
 	begin try
 		insert into SanPhamChiNhanh
 		values(@MaDT, @MaCN, @MaSP, @SLTon)
@@ -359,7 +358,7 @@ create procedure sp_TX_NhanDH
 	@MaTX char(10), 
 	@MaDH char(10)
 as
-SET TRANSACTION ISOLATION LEVEL READ COMMITED
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 begin tran
 	begin try
 		if ((select MaTX from DonHang where MaDH = @MaDH) is NULL)
