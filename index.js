@@ -24,6 +24,7 @@ app.use(session({
 
 const sql = require('mssql');
 const { json, redirect } = require("express/lib/response");
+const { syncBuiltinESMExports } = require("module");
 //const { config } = require("nodemon");
 
 
@@ -153,7 +154,7 @@ app.post("/insert-order", function(req, res) {
             try {
                 let pool = await sql.connect(config);
                 const transaction = new sql.Transaction(pool)
-                transaction.begin(sql.ISOLATION_LEVEL.REPEATABLE_READ, err => {
+                transaction.begin(err => {
                     // ... error checks
 
                     const request = new sql.Request(transaction)
@@ -165,19 +166,19 @@ app.post("/insert-order", function(req, res) {
                         .execute('sp_Insert_DonHang', (err, result) => {
                             if (err) {
                                 transaction.rollback(err => {
-                                    // ... error checks
+                                        // ... error checks
 
-                                    console.log("Transaction rollback")
-                                })
-                                console.log(err)
+                                        console.log("Transaction rollback")
+                                    })
+                                    //console.log(err)
                                 res.send(err)
                                 return
                             } else {
 
-                                console.log(result)
+                                //console.log(result)
 
                                 function add_detail(elements, i) {
-                                    console.log("de quy lan ", i)
+                                    //console.log("de quy lan ", i)
                                     if (i >= elements.length) {
                                         transaction.commit(err => {
                                             // ... error checks
@@ -189,8 +190,8 @@ app.post("/insert-order", function(req, res) {
                                         return
                                     }
                                     let element = elements[i];
-                                    console.log(element.MaSP)
-                                    console.log(element.SoLuong)
+                                    //console.log(element.MaSP)
+                                    //console.log(element.SoLuong)
                                     const request = new sql.Request(transaction)
                                     request.input('MaDH', sql.VarChar(10), result.output.MaDH)
                                         .input('MaSP', sql.VarChar(10), element.MaSP)
@@ -199,13 +200,13 @@ app.post("/insert-order", function(req, res) {
                                             // ... error checks
                                             if (err) {
                                                 transaction.rollback(err => {
-                                                    // ... error checks
+                                                        // ... error checks
 
 
-                                                    console.log("Transaction rollback trong de quy. cua san pham")
-                                                    console.log(element.MaSP)
-                                                })
-                                                console.log(err)
+                                                        console.log("Transaction rollback trong de quy. cua san pham")
+                                                            //console.log(element.MaSP)
+                                                    })
+                                                    //console.log(err)
                                                 res.send(err)
                                                 return
                                             } else {
@@ -216,6 +217,7 @@ app.post("/insert-order", function(req, res) {
                                         })
 
                                 }
+
                                 add_detail(data, 0);
                             }
                             // ... error checks
