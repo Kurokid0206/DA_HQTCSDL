@@ -146,46 +146,52 @@ app.get("/log-out", function(req, res) {
 })
 
 app.post("/insert-order", function(req, res) {
-    //console.log(req.session.user)
+    console.log(req.body)
     var data = JSON.parse(req.body.data)
     Promise.resolve('success')
         .then(async function() {
             try {
                 let pool = await sql.connect(config);
                 const transaction = new sql.Transaction(pool)
-                transaction.begin(err => {
+                transaction.begin(sql.ISOLATION_LEVEL.REPEATABLE_READ, err => {
                     // ... error checks
 
-                    let request = new sql.Request(transaction)
+                    const request = new sql.Request(transaction)
                     request.input('HTThanhToan', sql.NVarChar(50), req.body.Httt)
                         .input('DiaChiGiaoHang', sql.NVarChar(50), req.body.DiaChi)
-                        .input('MaKH', sql.NVarChar(10), req.session.user)
-                        .input('MaDT', sql.NVarChar(10), req.body.MaDT)
+                        .input('MaKH', sql.VarChar(10), req.session.user)
+                        .input('MaDT', sql.VarChar(10), req.body.MaDT)
                         .output('MaDH', sql.Char(10))
                         .execute('sp_Insert_DonHang', (err, result) => {
                             if (err) {
                                 transaction.rollback(err => {
                                     // ... error checks
 
-                                    //console.log("Transaction rollback")
+                                    console.log("Transaction rollback")
                                 })
+                                console.log(err)
+                                res.send(err)
                                 return
                             } else {
 
+                                console.log(result)
+
                                 function add_detail(elements, i) {
+                                    console.log("de quy lan ", i)
                                     if (i >= elements.length) {
                                         transaction.commit(err => {
                                             // ... error checks
 
-                                            //console.log("Transaction commit ket thuc de quy.")
+                                            console.log("Transaction commit ket thuc de quy.")
 
                                         })
+                                        res.send("Thanh cong")
                                         return
                                     }
                                     let element = elements[i];
-                                    // console.log(element.MaSP)
-                                    // console.log(element.SoLuong)
-                                    let request = new sql.Request(transaction)
+                                    console.log(element.MaSP)
+                                    console.log(element.SoLuong)
+                                    const request = new sql.Request(transaction)
                                     request.input('MaDH', sql.VarChar(10), result.output.MaDH)
                                         .input('MaSP', sql.VarChar(10), element.MaSP)
                                         .input('SoLuong', sql.Int, element.SoLuong)
@@ -193,13 +199,14 @@ app.post("/insert-order", function(req, res) {
                                             // ... error checks
                                             if (err) {
                                                 transaction.rollback(err => {
-                                                        // ... error checks
+                                                    // ... error checks
 
 
-                                                        //console.log("Transaction rollback trong de quy.")
-                                                        //console.log(element.MaSP)
-                                                    })
-                                                    //console.log(err)
+                                                    console.log("Transaction rollback trong de quy. cua san pham")
+                                                    console.log(element.MaSP)
+                                                })
+                                                console.log(err)
+                                                res.send(err)
                                                 return
                                             } else {
 
@@ -414,7 +421,7 @@ app.post("/insert-product", function(req, res) {
                     .execute('sp_Insert_SanPham')
                 pool.close()
                 res.send(result.recordset)
-                //console.log(result)
+                    //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -435,7 +442,7 @@ app.post("/insert-product_branch", function(req, res) {
                     .execute('sp_Insert_SP_CN')
                 pool.close()
                 res.send(result.recordset)
-                //console.log(result)
+                    //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
