@@ -200,6 +200,9 @@ create procedure sp_Insert_CT_DonHang
 as
 begin tran
 	begin try
+		declare @DoiTac as char(10) = (select MaDT from DonHang where MaDH = @MaDH)
+		declare @SLTon as int = (select SLTon from SanPhamChiNhanh where MaDT = @DoiTac and MaSP = @MaSP)
+		if @SLuong > @SLTon raiserror(N'Không đủ hàng', 16, 1)
 		declare @gia as int = (select GiaBan from SanPham where MaSP = @MaSP)
 		insert into CT_DonHang (MaDH,MaSP,SoLuong,GiaBan)
 		values(@MaDH, @MaSP, @SoLuong, @gia)
@@ -415,7 +418,8 @@ create procedure sp_TX_XemDH
 as
 begin tran
 SET TRANSACTION ISOLATION
-LEVEL SERIALIZABLE
+LEVEL SERIALIZABLE
+
 	begin try
 		declare @KhuVuc as nvarchar(50) = (select KhuVucHoatDong from TaiXe where MaTX = @MaTX)
 		select MaDH, HoTen,  TongTien,HTThanhToan, DiaChiGiaoHang from DonHang DH join KhachHang KH on DH.MaKH = KH.MaKH
