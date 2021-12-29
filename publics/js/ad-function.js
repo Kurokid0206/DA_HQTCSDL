@@ -43,13 +43,13 @@ function render_user(users){
     <h6 style="margin:5px 0 0 0;">${user.TrangThai}</h6></td>`
     if(user.TrangThai=='Disabled'){
         tr+=
-        `<td scope="col" id="btn-${user.TaiKhoan}"><button class="btn-primary" onclick="Enable('${user.TaiKhoan}')">
+        `<td scope="col" id="btn-${user.TaiKhoan}"><button type="button" class="btn-primary" onclick="Enable('${user.TaiKhoan}')">
         <h6 style="width:100px; margin:5px 0 0 0; color: aliceblue; ">Mở khóa</h6>
         </button></td></tr>`
     }
     else{
         tr+=
-        `<td scope="col" id="btn-${user.TaiKhoan}"><button class="btn-danger" onclick="Disable('${user.TaiKhoan}')">
+        `<td scope="col" id="btn-${user.TaiKhoan}"><button type="button" class="btn-danger" onclick="Disable('${user.TaiKhoan}')">
         <h6 style="width:100px; margin:5px 0 0 0; color: aliceblue; ">Khóa</h6>
         </button></td></tr>`
     }
@@ -61,12 +61,12 @@ function Enable(TK){
     var xhtml = new XMLHttpRequest();
     xhtml.onload = function() {
 
-    let data = JSON.parse(this.responseText)
+    let data = JSON.parse(this.responseText).then(
     document.querySelector(`#btn-${TK}`).innerHTML=
     `<td scope="col" id="btn-${TK}">
-    <button class="btn-danger" onclick="Disable('${TK}')">
+    <button type="button" class="btn-danger" onclick="Disable('${TK}')">
     <h6 style="width:100px; margin:5px 0 0 0; color: aliceblue; ">Khóa</h6>
-    </button></td></tr>`
+    </button></td></tr>`)
     }
 
     xhtml.open("POST", "manage-user");
@@ -81,7 +81,7 @@ function Disable(TK){
     let data = JSON.parse(this.responseText)
     document.querySelector(`#btn-${TK}`).innerHTML=
     `<td scope="col" id="btn-${TK}">
-    <button class="btn-danger" onclick="Enable('${TK}')">
+    <button type="button" class="btn-primary" onclick="Enable('${TK}')">
     <h6 style="width:100px; margin:5px 0 0 0; color: aliceblue; ">Mở khóa</h6>
     </button></td></tr>`
     }

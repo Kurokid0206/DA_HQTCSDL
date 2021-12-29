@@ -414,7 +414,7 @@ app.post("/insert-product", function(req, res) {
                     .execute('sp_Insert_SanPham')
                 pool.close()
                 res.send(result.recordset)
-                console.log(result)
+                //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
@@ -435,7 +435,7 @@ app.post("/insert-product_branch", function(req, res) {
                     .execute('sp_Insert_SP_CN')
                 pool.close()
                 res.send(result.recordset)
-                console.log(result)
+                //console.log(result)
                 return
             } catch (error) {
                 console.log(error.message);
